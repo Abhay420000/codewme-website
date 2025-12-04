@@ -1,0 +1,157 @@
+{% extends 'article_layout.html' %}
+
+<!-- SEO METADATA -->
+{% block title %}How to Manage Transactions in Salesforce Apex? - CodeWme{% endblock %}
+{% block meta_description %}Learn in-depth strategies for managing Salesforce Apex transactions, including Try-Catch blocks, sObjects, Database methods, and Savepoints.{% endblock %}
+
+<!-- PAGE CONTENT -->
+
+<!-- 1. Title -->
+{% block article_header %}How to Manage Transactions in Salesforce Apex?{% endblock %}
+
+<!-- 2. Video ID -->
+{% block video_id %}YnmR3lIAR2Q{% endblock %}
+
+<!-- 3. Article Body -->
+{% block article_body %}
+    
+    <p class="article-text">
+        Managing transactions in Salesforce Apex is crucial for maintaining data integrity, error handling, and system reliability. Apex executes code in a single transaction by default, meaning all operations succeed or fail together. However, Salesforce provides several mechanisms to control transaction behavior.
+    </p>
+    <p class="article-text">Now let’s learn them one by one.</p>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">1. Default Behavior</h2>
+    <ul class="article-list">
+        <li>Salesforce automatically rolls back all database operations in the transaction in case of an unhandled exception.</li>
+        <li>If any DML operation fails (due to validation rules, triggers, or other errors), the entire transaction is rolled back.</li>
+    </ul>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">2. Using Try-Catch Blocks</h2>
+    <ul class="article-list">
+        <li>By catching exceptions, we can decide whether to roll back a transaction, log errors, or take alternative actions, ensuring data integrity and robust error handling.</li>
+        <li>It can be combined with savepoints and database methods or normal DML operations.</li>
+        <li>Use specific exception types (e.g., <code>DmlException</code>, <code>QueryException</code>) for precise handling, rather than the generic Exception class, to differentiate between error types.</li>
+        <li>Be careful of DML and SOQL limits within try-catch blocks, as each operation counts toward the 150 DML statements or 100 SOQL query limits.</li>
+    </ul>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">3. Using sObjects</h2>
+    <ul class="article-list">
+        <li>You can use this to avoid partial success in try catch.</li>
+        <li>Perform common DML operations in one go to multiple objects.</li>
+        <li>Help reduce DML count.</li>
+        <li>Automatically Rolls back all database operations in the transaction in case of an unhandled exception.</li>
+    </ul>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">4. Using Database Methods with Partial Success</h2>
+    <ul class="article-list">
+        <li>Apex provides Database class methods (e.g., <code>Database.insert</code>, <code>Database.update</code>, <code>Database.delete</code>) that offer fine-grained control over DML operations.</li>
+        <li>Setting the <code>allOrNone</code> parameter to <strong>false</strong> allows partial success, where valid records are committed even if some fail.</li>
+        <li>This approach is useful for bulk operations where you want to process as many records as possible, even if some fail.</li>
+    </ul>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">5. Using Savepoints and Rollbacks</h2>
+    <ul class="article-list">
+        <li> developers to set a point in a transaction to which they can revert if an error occurs.</li>
+        <li>The <code>Database.setSavepoint()</code> method creates a savepoint, and <code>Database.rollback(savepoint)</code> reverts the database to that point.</li>
+        <li>It is ideal for scenarios where you need to undo specific operations while keeping earlier changes intact or for complex logic requiring partial rollbacks.</li>
+    </ul>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">Example Code</h2>
+    <p class="article-text">Create a class named “TranManage”.</p>
+
+    <pre class="code-block language-apex"><code>public class TranManage {
+    // 1. Default Behavior
+    public static void defaultBehaviour(){
+        Account acc = new Account(Name = 'Default Behavior');
+        Contact con = new Contact(LastName = 'Test-0');
+        insert acc;
+        insert con;
+    }
+    
+    // 2. Using Try-Catch Blocks
+    public static void tryCatchBlocks(){
+        Account acc = new Account(Name = 'Using Try-Catch Blocks');
+        Contact con = new Contact( FirstName = 'Test-1');
+        try{
+            insert acc;
+            insert con;
+        } catch (Exception ex){
+            system.debug('Baby Chicken!');
+        }
+    }
+    
+    // 3. Using sObjects
+    public static void usingSObjects(){
+        List&lt;Sobject&gt; objList = new List&lt;sobject&gt;();
+        Account acc = new Account(Name = 'Using sObjects');
+        Contact con = new Contact( FirstName = 'Test-2');
+        objList.add(acc);
+        objlist.add(con);
+        insert objList;
+    }
+    
+    // 4. Using Database Methods with Partial Success
+    public static void databaseMethods(){
+        List&lt;Sobject&gt; records  = new List&lt;Sobject&gt;();
+        records.add(new Account(Name = 'Using Database Methods with Partial Success'));
+        records.add(new Contact(LastName = 'Test-3'));
+        Database.SaveResult[] saveResultList = Database.insert(records, true);
+    }    
+
+    // 5. Using Savepoints and Rollbacks
+    public static void savepointsAndRollbacks(){
+        Account acc = new Account(Name = 'Using Savepoints and Rollbacks');
+        Contact con = new Contact( FirstName = 'Test-4');
+        
+        SavePoint sp = Database.setSavePoint();
+        try{
+            insert acc;
+            insert con;
+        } catch (Exception ex){
+            Database.rollback(sp);
+            system.debug('Baby Chicken!');
+        }
+    }
+}</code></pre>
+
+<br/>
+    <h3 class="article-text">Now, Test it in anonymous window</h3>
+    <pre class="code-block language-apex"><code>insert new Account(Name = 'Welcome 0!');
+TranManage.defaultBehaviour();
+
+insert new Account(Name = 'Welcome 1!');
+TranManage.tryCatchBlocks();
+
+insert new Account(Name = 'Welcome 2!');
+TranManage.usingSObjects();
+
+insert new Account(Name = 'Welcome 3!');
+TranManage.databaseMethods();
+
+insert new Account(Name = 'Welcome 4!');
+TranManage.savepointsAndRollbacks();</code></pre>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">Best Practices</h2>
+    <div class="callout success">
+        <ul class="article-list" style="margin-bottom: 0;">
+            <li>Always handle exceptions gracefully to avoid unexpected rollbacks.</li>
+            <li>Use Database methods with partial success for bulk operations.</li>
+            <li>Implement savepoints for complex transactions requiring selective rollback.</li>
+            <li>Monitor governor limits when using multiple DML or SOQL operations.</li>
+        </ul>
+    </div>
+
+    <!-- H2 Heading -->
+    <h2 class="article-h2">Conclusion</h2>
+    <p class="article-text">
+        Managing transactions in Apex ensures data consistency and error resilience. By leveraging try-catch blocks, Database methods, savepoints, and bulk DML strategies, developers can build robust and scalable Salesforce applications.
+    </p>
+
+{% endblock %}

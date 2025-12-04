@@ -6,7 +6,9 @@
     --bg-body: #f8fafc;       /* Light Grey Background */
     --bg-nav: #ffffff;        /* White Navbar */
     --bg-card: #ffffff;       /* White Cards */
-    --bg-code: #1e293b;       /* Keep code blocks dark always */
+    
+    /* Code blocks usually look best dark, even in light mode */
+    --bg-code: #1e293b;       /* Dark Slate */
     
     --text-main: #334155;     /* Dark Grey Text */
     --text-header: #0f172a;   /* Black/Navy Headers */
@@ -96,7 +98,7 @@ img { max-width: 100%; display: block; }
     font-weight: 800;
     color: var(--text-header);
     letter-spacing: -0.05em;
-    flex-shrink: 0; /* Prevents logo from squishing */
+    flex-shrink: 0; 
 }
 .brand-accent { color: var(--primary); }
 
@@ -108,7 +110,7 @@ img { max-width: 100%; display: block; }
     color: var(--accent-red);
     font-size: 0.95rem;
     font-weight: 600;
-    white-space: nowrap; /* Prevents text wrap */
+    white-space: nowrap; 
 }
 .btn-youtube:hover { opacity: 0.8; }
 
@@ -133,25 +135,21 @@ img { max-width: 100%; display: block; }
 /* --- MOBILE HEADER FIXES --- */
 @media (max-width: 640px) {
     .nav-brand {
-        font-size: 1.25rem; /* Slightly smaller logo */
+        font-size: 1.25rem;
     }
     
-    /* Hide the "Tutorials" text link on mobile to save space */
     .nav-link {
         display: none;
     }
 
-    /* Reduce gap between items */
     .nav-links {
         gap: 0.75rem;
     }
 
-    /* Make YouTube text smaller */
     .btn-youtube {
         font-size: 0.9rem;
     }
 
-    /* Adjust toggle size */
     .theme-toggle-btn {
         width: 34px;
         height: 34px;
@@ -162,13 +160,12 @@ img { max-width: 100%; display: block; }
 .footer {
     background-color: var(--bg-nav);
     border-top: 1px solid var(--border-color);
-    padding: 1rem 0; /* Reduced from 2rem to make footer thinner */
+    padding: 1rem 0;
     margin-top: auto;
     color: var(--text-muted);
     font-size: 0.9rem;
 }
 
-/* Flexbox Layout for Footer Content */
 .footer .container {
     display: flex;
     flex-direction: column;
@@ -176,16 +173,14 @@ img { max-width: 100%; display: block; }
     gap: 1rem;
 }
 
-/* Footer Social Icons */
 .footer-socials {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    margin-top: 0 !important; /* Override inline styles to fix alignment */
+    margin-top: 0 !important;
 }
 
-/* Desktop Footer: Single Line with Separator */
 @media (min-width: 768px) {
     .footer .container {
         flex-direction: row;
@@ -193,7 +188,6 @@ img { max-width: 100%; display: block; }
         gap: 1.5rem;
     }
 
-    /* Add the pipe separator after the copyright text */
     .footer p {
         margin: 0;
         display: flex;
@@ -203,7 +197,7 @@ img { max-width: 100%; display: block; }
     .footer p::after {
         content: "|";
         margin-left: 1.5rem;
-        color: var(--border-color); /* Subtle color for separator */
+        color: var(--border-color);
     }
 }
 
@@ -235,7 +229,6 @@ img { max-width: 100%; display: block; }
     .sidebar-col { width: 30%; }
 }
 
-/* Home Grid */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -323,19 +316,6 @@ img { max-width: 100%; display: block; }
 .article-h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 0.75rem; }
 .article-list { list-style: disc inside; margin-bottom: 1.5rem; color: var(--text-main); padding-left: 1rem; }
 .article-list li { margin-bottom: 0.5rem; }
-
-/* Code Blocks */
-.code-block {
-    background-color: var(--bg-code);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
-    color: var(--text-code);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
-    overflow-x: auto;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border-color);
-}
 
 /* Sidebar Links */
 .sidebar-box {

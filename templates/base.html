@@ -7,15 +7,17 @@
     <title>{% block title %}CodeWme{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Coding tutorials.{% endblock %}">
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- PRISM CSS (Syntax Highlighting) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-content">
-            <!-- Brand Text Only (No Logo Image) -->
             <a href="/" class="nav-brand">
                 Code<span class="brand-accent">W</span>me
             </a>
@@ -24,7 +26,6 @@
                 <a href="/" class="nav-link">Tutorials</a>
                 <a href="https://youtube.com/@codewme" target="_blank" class="btn-youtube">YouTube</a>
                 
-                <!-- THEME TOGGLE BUTTON -->
                 <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
                     <span id="theme-icon">☀️</span>
                 </button>
@@ -40,31 +41,15 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            
-            <!-- Copyright Text (Now on Top) -->
             <p style="opacity: 0.6; font-size: 0.85rem;">&copy; 2025 CodeWme.dev</p>
 
-            <!-- SOCIAL ICONS (Now Below) -->
             <div class="footer-socials" style="margin-top: 1rem;">
-                <!-- Replace '#' with your actual profile links -->
-                <!-- Ensure you have these images in static/images/ folder -->
-                <a href="#" class="social-link" target="_blank" aria-label="X (Twitter)">
-                    <img src="{{ url_for('static', filename='images/x.svg') }}" alt="X">
-                </a>
-                <a href="#" class="social-link" target="_blank" aria-label="Instagram">
-                    <img src="{{ url_for('static', filename='images/instagram.svg') }}" alt="Instagram">
-                </a>
-                <a href="#" class="social-link" target="_blank" aria-label="Facebook">
-                    <img src="{{ url_for('static', filename='images/facebook.svg') }}" alt="Facebook">
-                </a>
-                <a href="#" class="social-link" target="_blank" aria-label="Telegram">
-                    <img src="{{ url_for('static', filename='images/telegram.svg') }}" alt="Telegram">
-                </a>
-                <a href="https://youtube.com/@codewme" class="social-link" target="_blank" aria-label="YouTube">
-                    <img src="{{ url_for('static', filename='images/youtube.svg') }}" alt="YouTube">
-                </a>
+                <a href="#" class="social-link" target="_blank" aria-label="X"><img src="{{ url_for('static', filename='images/x.svg') }}" alt="X"></a>
+                <a href="#" class="social-link" target="_blank" aria-label="Instagram"><img src="{{ url_for('static', filename='images/instagram.svg') }}" alt="Instagram"></a>
+                <a href="#" class="social-link" target="_blank" aria-label="Facebook"><img src="{{ url_for('static', filename='images/facebook.svg') }}" alt="Facebook"></a>
+                <a href="#" class="social-link" target="_blank" aria-label="Telegram"><img src="{{ url_for('static', filename='images/telegram.svg') }}" alt="Telegram"></a>
+                <a href="https://youtube.com/@codewme" class="social-link" target="_blank" aria-label="YouTube"><img src="{{ url_for('static', filename='images/youtube.svg') }}" alt="YouTube"></a>
             </div>
-
         </div>
     </footer>
 
@@ -74,25 +59,26 @@
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
 
-        // 1. Check for saved user preference, default to 'light'
         const savedTheme = localStorage.getItem('theme') || 'light';
         htmlElement.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
 
-        // 2. Toggle on click
         toggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
         });
 
-        // 3. Update the icon
         function updateIcon(theme) {
             themeIcon.textContent = theme === 'light' ? '☀️' : '🌙';
         }
     </script>
+
+    <!-- PRISM JS (Autoloader loads languages like Python/Bash automatically) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
 </body>
 </html>
