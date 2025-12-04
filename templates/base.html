@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- DYNAMIC SEO TAGS (Future Proofing) -->
-    <!-- These blocks allow each page to inject its own title and description -->
     <title>{% block title %}CodeWme{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Learn to code with practical video tutorials.{% endblock %}">
 
-    <!-- Tailwind CSS (Styling) -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         body { background-color: #0f172a; color: #e2e8f0; }
         
-        /* Ad Slot Styling (So you can see where ads go) */
+        /* Ad Styles - Commented out for now or set to display:none */
         .ad-placeholder {
+            /* display: none;  <-- Uncomment this to hide completely if you use the div */
             background-color: #1e293b;
             border: 2px dashed #334155;
             display: flex; justify-content: center; align-items: center;
@@ -26,12 +26,16 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- NAVBAR -->
     <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-white tracking-tighter">
-                Code<span class="text-blue-500">W</span>me
+            
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
+                <span class="text-2xl font-bold text-white tracking-tighter">
+                    Code<span class="text-blue-500">W</span>me
+                </span>
             </a>
+
             <div class="space-x-4 text-sm font-medium">
                 <a href="/" class="text-slate-300 hover:text-white transition">All Tutorials</a>
                 <a href="https://youtube.com/@codewme" target="_blank" class="text-red-500 hover:text-red-400">YouTube Channel</a>
@@ -39,21 +43,10 @@
         </div>
     </nav>
 
-    <!-- HEADER AD SLOT (Future Proofing) -->
-    <div class="max-w-7xl mx-auto w-full px-4 mt-6">
-        <!-- In future, replace this div with Google AdSense Code -->
-        <div class="ad-placeholder h-24 w-full rounded-lg">
-            Header Banner Ad (728x90)
-        </div>
-    </div>
-
-    <!-- MAIN CONTENT INJECTION POINT -->
-    <!-- This is where the specific page content will be inserted -->
     <main class="flex-grow">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-slate-950 border-t border-slate-900 mt-12 py-8 text-center text-slate-500 text-sm">
         <p>&copy; 2025 CodeWme.dev | Built with Python Flask</p>
     </footer>

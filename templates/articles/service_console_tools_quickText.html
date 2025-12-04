@@ -1,0 +1,94 @@
+{% extends 'article_layout.html' %}
+
+<!-- SEO METADATA -->
+{% block title %}Salesforce Quick Text - CodeWme{% endblock %}
+{% block meta_description %}Learn how to use Quick Text in Salesforce Service Console to standardize responses and boost productivity.{% endblock %}
+
+<!-- PAGE CONTENT -->
+
+<!-- 1. Title -->
+{% block article_header %}Service Console Productivity Tools: Quick Text{% endblock %}
+
+<!-- 2. Video ID (Extracted from your embed code) -->
+{% block video_id %}ysEf4FBqktI{% endblock %}
+
+<!-- 3. Article Body -->
+{% block article_body %}
+    <p class="lead">
+        In the fast-paced world of customer service, every second counts. <strong>Quick Text</strong> is a powerful Salesforce Service Console productivity tool designed to save your agents time and ensure consistent communication.
+    </p>
+
+    <h2>What is Quick Text?</h2>
+    <p>
+        Quick Text allows users to predefined messages—like greetings, common notes, standard phrases, or answers to frequently asked questions. instead of typing the same response fifty times a day, users can insert these messages into emails, chats, and other channels with a simple button click or keyboard shortcut.
+    </p>
+
+    <!-- Callout Box for Benefits -->
+    <div class="bg-slate-800 border-l-4 border-green-500 p-4 my-6 rounded-r-md">
+        <h4 class="text-green-400 font-bold m-0 mb-2">Why use Quick Text?</h4>
+        <ul class="m-0 text-slate-300">
+            <li><strong>Standardization:</strong> Ensure every agent uses the comprehensive, approved branding and language.</li>
+            <li><strong>Efficiency:</strong> The ultimate replacement for manual copy/pasting from external documents.</li>
+        </ul>
+    </div>
+
+    <h2>Designing Your Strategy</h2>
+    <p>
+        Before you toggle the switch in Setup, it is crucial to plan your implementation. Quick Text works best when it is organized. Consider these questions:
+    </p>
+    <ul>
+        <li><strong>Channel Strategy:</strong> Who should be able to use Quick Text? Does this apply to Email, Chat, messaging, or internal notes?</li>
+        <li><strong>Creation Rights:</strong> Who should be able to <em>create</em> messages? Should every agent make their own, or should it be restricted to managers?</li>
+        <li><strong>Sharing Logic:</strong> Who needs access to which messages? Do you want unique sets of messages for different business units (e.g., Sales vs. Support)?</li>
+        <li><strong>Use Cases:</strong> In which specific scenarios does your team struggle with repetitive typing?</li>
+    </ul>
+
+    <h2>How to Enable & Configure</h2>
+    <p>
+        Setting up Quick Text is straightforward:
+    </p>
+    <ol>
+        <li>Go to <strong>Setup</strong>.</li>
+        <li>In the Quick Find box, type <strong>"Quick Text Settings"</strong>.</li>
+        <li>Enable the feature.</li>
+    </ol>
+
+    <h3>Understanding Permissions</h3>
+    <p>
+        Simply enabling the feature doesn't always grant full access. Here is how the permissions break down:
+    </p>
+    <ul>
+        <li><strong>Read Access (Default):</strong> Most standard user profiles have default <em>Read</em> permission. This means they can view and insert existing Quick Text messages without additional setup.</li>
+        <li><strong>Create/Edit Access:</strong> To allow users (like Team Leads or Senior Agents) to create their own messages, you must update their <strong>User Profile</strong> or assign a <strong>Permission Set</strong> with "Create" and "Edit" permissions on the Quick Text object.</li>
+    </ul>
+
+    <h2>Real-World Scenarios</h2>
+    <p>Here are two common examples of how Quick Text transforms workflows.</p>
+
+    <h3>Scenario 1: Standardizing Customer Support</h3>
+    <p>
+        <strong>The Problem:</strong> Service reps frequently close cases where customers need instructions on how to open a specific product package. Typing this out manually leads to errors.
+    </p>
+    <p><strong>The Solution:</strong> Create a Quick Text record with the following body:</p>
+    
+    <!-- Code block for the message template -->
+    <pre class="bg-slate-900 border border-slate-700 rounded p-4 text-slate-300">
+"Follow these initial steps to open the packaging:
+1. Open the lock from the 4 corners.
+2. Carefully remove the protective wrapper."</pre>
+
+    <h3>Scenario 2: Internal Manager Tasks</h3>
+    <p>
+        <strong>The Problem:</strong> Managers often need to assign similar tasks to multiple service reps regarding customer satisfaction checks.
+    </p>
+    <p><strong>The Solution:</strong> A Manager (with Create permissions) creates a standard task description:</p>
+    <pre class="bg-slate-900 border border-slate-700 rounded p-4 text-slate-300">
+"Please check on the last customer’s feedback and update the record."</pre>
+
+    <hr class="border-slate-700 my-8">
+
+    <p>
+        For a deep dive into the technical setup steps, refer to the official 
+        <a href="https://help.salesforce.com/s/articleView?id=service.quick_text_setting_up.htm&type=5" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Salesforce Documentation</a>.
+    </p>
+{% endblock %}
