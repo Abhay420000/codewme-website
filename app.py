@@ -11,15 +11,10 @@ def home():
 # EVERY TIME you make a new video, you will add a new block here.
 # The string inside @app.route('...') is what appears in the browser URL.
 
-@app.route('/how-to-deploy-flask')
-def article_deploy_flask():
-    # This points to the file inside templates/articles/ folder
-    return render_template('articles/deploy_flask.html')
-
 # Add this to app.py
 @app.route('/service-console-tools')
 def article_service_console():
-    return render_template('articles/service_console_tools.html')
+    return render_template('articles/service_console_tools_quickText.html')
 
 # Example for your next video (Uncomment when needed):
 # @app.route('/python-variables-tutorial')

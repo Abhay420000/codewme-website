@@ -7,7 +7,7 @@
     <title>{% block title %}CodeWme{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Learn to code with practical video tutorials.{% endblock %}">
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -30,7 +30,7 @@
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             
             <a href="/" class="flex items-center gap-3 group">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
+                <img src="{{ url_for('static', filename='icon.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
                 <span class="text-2xl font-bold text-white tracking-tighter">
                     Code<span class="text-blue-500">W</span>me
                 </span>
