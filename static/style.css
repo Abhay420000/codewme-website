@@ -1,0 +1,129 @@
+/* =========================================
+   1. VARIABLES (The Color Palette)
+   Change colors here to update the whole site
+   ========================================= */
+:root {
+    --bg-dark: #0f172a;       /* Slate 950 */
+    --bg-card: #1e293b;       /* Slate 800 */
+    --border-color: #334155;  /* Slate 700 */
+    
+    --text-main: #cbd5e1;     /* Slate 300 */
+    --text-muted: #64748b;    /* Slate 500 */
+    --text-white: #f8fafc;    /* Slate 50 */
+    
+    --primary: #3b82f6;       /* Blue 500 */
+    --primary-dim: rgba(59, 130, 246, 0.1);
+    
+    --accent-green: #22c55e;
+    --accent-red: #ef4444;
+}
+
+/* =========================================
+   2. ARTICLE TYPOGRAPHY
+   Use these classes in your articles
+   ========================================= */
+
+/* Main Article Body Text */
+.article-text {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+}
+
+/* Big Page Title (H1) */
+.article-title-main {
+    font-size: 3rem; /* 48px */
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+/* Section Header (H2) */
+.article-h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: var(--text-white);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Sub-header (H3) */
+.article-h3 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Lists */
+.article-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* =========================================
+   3. COMPONENTS (Copy/Paste these)
+   ========================================= */
+
+/* Code Blocks */
+.code-block {
+    background-color: #020617; /* Very dark slate */
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: #60a5fa; /* Light Blue */
+    overflow-x: auto; /* Scroll if text is too long */
+    margin-bottom: 1.5rem;
+}
+
+/* Callout Boxes (Notes/Warnings) */
+.callout {
+    padding: 1rem;
+    border-left-width: 4px;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.callout.info {
+    background-color: var(--primary-dim);
+    border-left-color: var(--primary);
+}
+
+.callout.success {
+    background-color: rgba(34, 197, 94, 0.1);
+    border-left-color: var(--accent-green);
+}
+
+.callout-title {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: block;
+    color: var(--text-white);
+}
+
+/* Images */
+.article-img {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.img-caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+}

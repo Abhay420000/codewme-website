@@ -7,30 +7,44 @@
     <title>{% block title %}CodeWme{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Learn to code with practical video tutorials.{% endblock %}">
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <!-- LINK TO YOUR ICON -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
 
+    <!-- 1. LINK TO YOUR NEW UNIVERSAL CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- 2. TAILWIND (Keeping for Grid/Layout only) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        body { background-color: #0f172a; color: #e2e8f0; }
+        /* We use the variables defined in style.css (:root) 
+           to keep colors consistent across the whole site.
+        */
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+        }
         
-        /* Ad Styles - Commented out for now or set to display:none */
+        /* Ad Styles */
         .ad-placeholder {
-            /* display: none;  <-- Uncomment this to hide completely if you use the div */
-            background-color: #1e293b;
-            border: 2px dashed #334155;
+            /* display: none; <-- Uncomment to hide ads globally */
+            background-color: var(--bg-card);
+            border: 2px dashed var(--border-color);
             display: flex; justify-content: center; align-items: center;
-            color: #64748b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
+    <!-- NAVBAR -->
     <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             
+            <!-- LOGO + BRAND NAME -->
             <a href="/" class="flex items-center gap-3 group">
-                <img src="{{ url_for('static', filename='icon.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
+                <!-- Nav Icon -->
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
                 <span class="text-2xl font-bold text-white tracking-tighter">
                     Code<span class="text-blue-500">W</span>me
                 </span>
@@ -42,6 +56,15 @@
             </div>
         </div>
     </nav>
+
+    <!-- HEADER AD SLOT (Currently Hidden/Commented Out) -->
+    <!-- 
+    <div class="max-w-7xl mx-auto w-full px-4 mt-6">
+        <div class="ad-placeholder h-24 w-full rounded-lg">
+            Header Banner Ad (728x90)
+        </div>
+    </div>
+    -->
 
     <main class="flex-grow">
         {% block content %}{% endblock %}
