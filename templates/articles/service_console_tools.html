@@ -1,0 +1,63 @@
+{% extends 'article_layout.html' %}
+
+<!-- SEO METADATA -->
+{% block title %}Service Console Productivity Tools - CodeWme{% endblock %}
+{% block meta_description %}Learn how to use Quick Text in Salesforce Service Console to standardize responses and boost productivity.{% endblock %}
+
+<!-- PAGE CONTENT -->
+
+<!-- 1. Title -->
+{% block article_header %}Service Console Productivity Tools: Quick Text{% endblock %}
+
+<!-- 2. Video ID (Extracted from your embed code) -->
+{% block video_id %}ysEf4FBqktI{% endblock %}
+
+<!-- 3. Article Body -->
+{% block article_body %}
+    
+    <p class="lead">
+        Quick text is a predefined message, like a greeting, note, phrase, or answer to a common question. 
+        Users can insert quick text in their emails, chats, and more with the click of a button or a keyboard shortcut.
+    </p>
+
+    <div class="bg-slate-800 border-l-4 border-green-500 p-4 my-6">
+        <strong>Great For:</strong> Standardization and replacing repetitive copy/paste tasks.
+    </div>
+
+    <h2>Designing Your Quick Text Strategy</h2>
+    <p>Before implementing, consider these questions:</p>
+    <ul>
+        <li>Who should be able to use quick text in their communications with customers, and on which channels?</li>
+        <li>Who should be able to create quick text messages for themselves?</li>
+        <li>Who should be able to create quick text messages for multiple users?</li>
+        <li>Do you want to create unique sets of quick text messages for different business units?</li>
+        <li>In which scenarios does your team need quick text messages?</li>
+    </ul>
+
+    <h2>How to Enable</h2>
+    <p>
+        Go to <strong>Setup</strong> &rarr; <strong>Quick Text Settings</strong>.
+    </p>
+    <p>
+        <em>Note on Permissions:</em> A user’s profile typically has default read permission, meaning users can insert quick text without additional setup. 
+        To give users more permission (like the ability to create quick text), you update their user profile or use a permission set.
+    </p>
+
+    <h2>Real World Scenarios</h2>
+
+    <h3>Scenario 1: Closing Cases</h3>
+    <p>Service reps need to send emails to their customers before closing the case.</p>
+    <pre><code>“Follow these initial steps to open the packaging:
+1. Open the lock from 4 corners
+2. Carefully remove the wrapper”</code></pre>
+
+    <h3>Scenario 2: Manager Tasks</h3>
+    <p>Managers need to assign similar multiple tasks to service reps.</p>
+    <pre><code>“Please check on the last customer’s feedback.”</code></pre>
+
+    <hr>
+    <p>
+        For more details, check the <a href="https://help.salesforce.com/s/articleView?id=service.quick_text_setting_up.htm&type=5" target="_blank">official Salesforce documentation</a>.
+    </p>
+
+{% endblock %}
