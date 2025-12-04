@@ -1,78 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>{% block title %}CodeWme{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Learn to code with practical video tutorials.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Coding tutorials.{% endblock %}">
 
-    <!-- LINK TO YOUR ICON -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
-
-    <!-- 1. LINK TO YOUR NEW UNIVERSAL CSS -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <!-- 2. TAILWIND (Keeping for Grid/Layout only) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        /* We use the variables defined in style.css (:root) 
-           to keep colors consistent across the whole site.
-        */
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-        }
-        
-        /* Ad Styles */
-        .ad-placeholder {
-            /* display: none; <-- Uncomment to hide ads globally */
-            background-color: var(--bg-card);
-            border: 2px dashed var(--border-color);
-            display: flex; justify-content: center; align-items: center;
-            color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
-        }
-    </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body>
 
     <!-- NAVBAR -->
-    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-            
-            <!-- LOGO + BRAND NAME -->
-            <a href="/" class="flex items-center gap-3 group">
-                <!-- Nav Icon -->
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="CodeWme Logo" class="h-8 w-8 rounded-md group-hover:opacity-80 transition">
-                <span class="text-2xl font-bold text-white tracking-tighter">
-                    Code<span class="text-blue-500">W</span>me
-                </span>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <!-- Brand Text Only (No Logo Image) -->
+            <a href="/" class="nav-brand">
+                Code<span class="brand-accent">W</span>me
             </a>
 
-            <div class="space-x-4 text-sm font-medium">
-                <a href="/" class="text-slate-300 hover:text-white transition">All Tutorials</a>
-                <a href="https://youtube.com/@codewme" target="_blank" class="text-red-500 hover:text-red-400">YouTube Channel</a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Tutorials</a>
+                <a href="https://youtube.com/@codewme" target="_blank" class="btn-youtube">YouTube</a>
+                
+                <!-- THEME TOGGLE BUTTON -->
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <span id="theme-icon">☀️</span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- HEADER AD SLOT (Currently Hidden/Commented Out) -->
-    <!-- 
-    <div class="max-w-7xl mx-auto w-full px-4 mt-6">
-        <div class="ad-placeholder h-24 w-full rounded-lg">
-            Header Banner Ad (728x90)
-        </div>
-    </div>
-    -->
-
-    <main class="flex-grow">
+    <!-- MAIN CONTENT -->
+    <main class="container">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-slate-950 border-t border-slate-900 mt-12 py-8 text-center text-slate-500 text-sm">
-        <p>&copy; 2025 CodeWme.dev | Built with Python Flask</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            
+            <!-- Copyright Text (Now on Top) -->
+            <p style="opacity: 0.6; font-size: 0.85rem;">&copy; 2025 CodeWme.dev</p>
+
+            <!-- SOCIAL ICONS (Now Below) -->
+            <div class="footer-socials" style="margin-top: 1rem;">
+                <!-- Replace '#' with your actual profile links -->
+                <!-- Ensure you have these images in static/images/ folder -->
+                <a href="#" class="social-link" target="_blank" aria-label="X (Twitter)">
+                    <img src="{{ url_for('static', filename='images/x.svg') }}" alt="X">
+                </a>
+                <a href="#" class="social-link" target="_blank" aria-label="Instagram">
+                    <img src="{{ url_for('static', filename='images/instagram.svg') }}" alt="Instagram">
+                </a>
+                <a href="#" class="social-link" target="_blank" aria-label="Facebook">
+                    <img src="{{ url_for('static', filename='images/facebook.svg') }}" alt="Facebook">
+                </a>
+                <a href="#" class="social-link" target="_blank" aria-label="Telegram">
+                    <img src="{{ url_for('static', filename='images/telegram.svg') }}" alt="Telegram">
+                </a>
+                <a href="https://youtube.com/@codewme" class="social-link" target="_blank" aria-label="YouTube">
+                    <img src="{{ url_for('static', filename='images/youtube.svg') }}" alt="YouTube">
+                </a>
+            </div>
+
+        </div>
     </footer>
 
+    <!-- THEME TOGGLE LOGIC -->
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // 1. Check for saved user preference, default to 'light'
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        // 2. Toggle on click
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        // 3. Update the icon
+        function updateIcon(theme) {
+            themeIcon.textContent = theme === 'light' ? '☀️' : '🌙';
+        }
+    </script>
 </body>
 </html>

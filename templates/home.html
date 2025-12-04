@@ -1,65 +1,45 @@
 {% extends 'base.html' %}
 
-{% block title %}CodeWme - Learn to Code{% endblock %}
-
 {% block content %}
-<div class="max-w-7xl mx-auto px-4 py-12">
-    
-    <!-- HERO SECTION -->
-    <div class="text-center mb-16 space-y-4">
-        <h1 class="text-5xl font-extrabold text-white tracking-tight">
-            Master Coding with <span class="text-blue-500">CodeWme</span>
-        </h1>
-        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
-            Practical tutorials, clean code, and deployment guides for developers.
-        </p>
-    </div>
+<!-- HERO SECTION -->
+<div class="hero-center">
+    <h1 class="hero-title">Master Coding with <span class="brand-accent">CodeWme</span></h1>
+    <p class="hero-sub">Practical tutorials and deployment guides.</p>
+</div>
 
-    <!-- VIDEO GRID HEADER -->
-    <h2 class="text-2xl font-bold text-white mb-8 border-l-4 border-blue-500 pl-4">Latest Tutorials</h2>
+<!-- LATEST TUTORIALS -->
+<div class="grid-cards">
 
-    <!-- GRID CONTAINER -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- CARD 1: Service Console Productivity Tools -->
-        <!-- notice the href points to the route name we made in app.py -->
-        <a href="/service-console-tools" class="group block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-blue-500 transition-all hover:shadow-2xl hover:-translate-y-1">
-            
-            <!-- Thumbnail Image -->
-            <div class="aspect-video bg-slate-800 relative overflow-hidden">
-                <!-- Using YouTube Thumbnail -->
-                <img src="https://img.youtube.com/vi/ysEf4FBqktI/maxresdefault.jpg" alt="Service Console Tools" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                
-                <!-- Play Icon Overlay -->
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
-                    <svg class="w-12 h-12 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-            </div>
-            
-            <!-- Card Content -->
-            <div class="p-6">
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="bg-blue-900/50 text-blue-300 text-xs font-bold px-2 py-1 rounded border border-blue-800">SALESFORCE</span>
-                    <span class="text-slate-500 text-xs">Dec 4, 2025</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2 leading-snug group-hover:text-blue-400 transition-colors">
-                    Service Console Productivity Tools
-                </h3>
-                <p class="text-slate-400 text-sm line-clamp-2">
-                    Learn how to use Quick Text to standardize responses and improve efficiency in Salesforce.
-                </p>
-            </div>
-        </a>
-
-        <!-- CARD 2: PLACEHOLDER (For future use) -->
-        <div class="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col items-center justify-center p-10 text-center opacity-60">
-            <div class="bg-slate-800 p-4 rounded-full mb-4">
-                <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-            </div>
-            <h3 class="text-slate-400 font-bold">More Coming Soon</h3>
+    <!-- CARD 1 -->
+    <a href="/service-console-tools" class="card">
+        <div class="card-img-wrapper">
+            <!-- Using YouTube Thumbnail -->
+            <img src="https://img.youtube.com/vi/ysEf4FBqktI/maxresdefault.jpg" class="card-img" alt="Salesforce">
         </div>
+        <div class="card-body">
+            <div class="card-meta">
+                <span class="card-tag">SALESFORCE</span>
+                <span>Dec 4, 2025</span>
+            </div>
+            <h3 class="card-title">Service Console Productivity Tools</h3>
+            <p class="card-desc">Learn how to use Quick Text to standardize responses and improve efficiency.</p>
+        </div>
+    </a>
 
-    </div>
+    <!-- CARD 2 (Placeholder Example) -->
+    <a href="/how-to-deploy-flask" class="card">
+        <div class="card-img-wrapper">
+             <img src="https://placehold.co/600x340/1e293b/FFF?text=Flask+Deploy" class="card-img" alt="Flask">
+        </div>
+        <div class="card-body">
+            <div class="card-meta">
+                <span class="card-tag">PYTHON</span>
+                <span>Dec 3, 2025</span>
+            </div>
+            <h3 class="card-title">How to Deploy Flask to Render</h3>
+            <p class="card-desc">A complete walkthrough for hosting Python apps for free.</p>
+        </div>
+    </a>
 
 </div>
 {% endblock %}
