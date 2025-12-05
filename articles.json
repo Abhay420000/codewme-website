@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Quick Text - Service Console Productivity Tools",
+    "slug": "quick-text-in-salesforce",
+    "video_id": "ysEf4FBqktI",
+    "date": "Dec 4, 2025",
+    "category": "SALESFORCE",
+    "description": "Learn how to use Quick Text to standardize responses and improve efficiency."
+  },
+  {
+    "title": "How to Manage Transactions in Salesforce Apex?",
+    "slug": "how-to-manage-transactions-in-salesforce-apex",
+    "video_id": "YnmR3lIAR2Q",
+    "date": "Dec 4, 2025",
+    "category": "SALESFORCE",
+    "description": "Learn about Try-Catch, Partial Success, Savepoints, and avoiding unhandled exceptions."
+  }
+]

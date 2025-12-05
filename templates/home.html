@@ -3,43 +3,30 @@
 {% block content %}
 <!-- HERO SECTION -->
 <div class="hero-center">
-    <h1 class="hero-title">Master Tech with <span class="brand-accent">CodeWme</span></h1>
+    <h1 class="hero-title">Master tech with <span class="brand-accent">CodeWme</span></h1>
     <p class="hero-sub">Practical tutorials and deployment guides.</p>
 </div>
 
-<!-- LATEST TUTORIALS -->
+<!-- DYNAMIC TUTORIALS GRID -->
 <div class="grid-cards">
 
-    <!-- CARD 1 -->
-    <a href="/quick-text-in-salesforce" class="card">
+    <!-- LOOP THROUGH ARTICLES FROM DATABASE -->
+    {% for article in articles %}
+    <a href="/{{ article.slug }}" class="card">
         <div class="card-img-wrapper">
-            <!-- Using YouTube Thumbnail -->
-            <img src="https://img.youtube.com/vi/ysEf4FBqktI/maxresdefault.jpg" class="card-img" alt="Salesforce">
+            <!-- Dynamic Video Thumbnail -->
+            <img src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg" class="card-img" alt="{{ article.title }}">
         </div>
         <div class="card-body">
             <div class="card-meta">
-                <span class="card-tag">SALESFORCE</span>
-                <span>Dec 4, 2025</span>
+                <span class="card-tag">{{ article.category }}</span>
+                <span>{{ article.date }}</span>
             </div>
-            <h3 class="card-title">Quick Text - Service Console Productivity Tools</h3>
-            <p class="card-desc">Learn how to use Quick Text to standardize responses and improve efficiency.</p>
+            <h3 class="card-title">{{ article.title }}</h3>
+            <p class="card-desc">{{ article.description }}</p>
         </div>
     </a>
-
-    <!-- CARD 2 (Placeholder Example) -->
-    <a href="/how-to-manage-transactions-in-salesforce-apex" class="card">
-        <div class="card-img-wrapper">
-            <img src="https://img.youtube.com/vi/YnmR3lIAR2Q/maxresdefault.jpg" class="card-img" alt="Apex Transactions">
-        </div>
-        <div class="card-body">
-            <div class="card-meta">
-                <span class="card-tag">SALESFORCE</span>
-                <span>Dec 4, 2025</span>
-            </div>
-            <h3 class="card-title">How to Manage Transactions in Salesforce Apex?</h3>
-            <p class="card-desc">Learn about Try-Catch, Partial Success, Savepoints, and avoiding unhandled exceptions.</p>
-        </div>
-    </a>
+    {% endfor %}
 
 </div>
 {% endblock %}
