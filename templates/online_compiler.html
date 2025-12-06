@@ -2,15 +2,26 @@
 
 {% block title %}Online Compiler - CodeWme{% endblock %}
 
-{% block content %}
-<div style="text-align: center; padding: 100px 20px;">
-    <div style="font-size: 4rem; margin-bottom: 1rem;">💻</div>
-    <h1 class="hero-title">Online Compiler</h1>
-    <p class="hero-sub">Run Python, Java, and Apex code directly in your browser.</p>
+<!-- Inject Compiler-Specific CSS -->
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/online_compiler.css') }}">
+{% endblock %}
 
-    <div style="margin-top: 3rem; padding: 3rem; border: 2px dashed var(--border-color); border-radius: 1rem; color: var(--text-muted);">
-        <h3>🚧 Feature Under Construction 🚧</h3>
-        <p>This feature will allow you to test code snippets live.</p>
+{% block content %}
+<div class="compiler-container">
+    
+    <div class="compiler-icon">💻</div>
+    
+    <h1 class="compiler-title">Online Compiler</h1>
+    <p class="compiler-sub">Run Python, Java, and Apex code directly in your browser without any setup.</p>
+
+    <div class="construction-card">
+        <h3 class="construction-heading">🚧 Feature Under Construction 🚧</h3>
+        <p class="construction-text">
+            We are integrating a powerful code execution engine. 
+            Check back soon to test your snippets live!
+        </p>
     </div>
+
 </div>
 {% endblock %}

@@ -1,0 +1,65 @@
+/* =========================================
+   ONLINE COMPILER STYLES
+   ========================================= */
+
+.compiler-container {
+    text-align: center;
+    padding: 6rem 1.5rem;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.compiler-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    /* Coding icon pulse animation */
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.compiler-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.compiler-sub {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+/* Construction Card */
+.construction-card {
+    margin-top: 2rem;
+    padding: 3rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    background-color: var(--ad-bg);
+    max-width: 500px;
+    width: 100%;
+}
+
+.construction-heading {
+    color: var(--text-header);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.construction-text {
+    color: var(--text-muted);
+    line-height: 1.6;
+}

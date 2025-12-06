@@ -1,0 +1,95 @@
+/* =========================================
+   CONTEST PAGE STYLES
+   ========================================= */
+
+.contest-container {
+    text-align: center;
+    padding: 6rem 1.5rem;
+    min-height: 60vh; /* Keeps footer at bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contest-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    /* Subtle floating animation */
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.contest-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.contest-sub {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+/* Coming Soon Card */
+.coming-soon-card {
+    background-color: var(--bg-card);
+    padding: 3rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative top bar */
+.coming-soon-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), #8b5cf6);
+}
+
+.card-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: var(--ad-bg);
+    color: var(--text-main);
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background-color: var(--border-color);
+    color: var(--text-header);
+    transform: translateY(-2px);
+}

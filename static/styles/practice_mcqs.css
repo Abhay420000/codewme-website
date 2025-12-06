@@ -1,0 +1,88 @@
+/* =========================================
+   PRACTICE PAGE STYLES
+   ========================================= */
+
+.practice-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2rem;
+}
+
+.practice-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.practice-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.practice-sub {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Section Heading with Underline */
+.section-heading-wrapper {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.section-underline {
+    height: 4px;
+    width: 60px;
+    background: var(--primary);
+    margin: 0 auto;
+    border-radius: 2px;
+    opacity: 0.8;
+}
+
+/* Grid Layout */
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Custom Card Content */
+.set-card-icon {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.set-card-icon span {
+    font-size: 3rem;
+}
+
+.coming-soon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
