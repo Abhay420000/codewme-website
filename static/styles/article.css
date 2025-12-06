@@ -1,0 +1,229 @@
+/* =========================================
+   ARTICLE TYPOGRAPHY & LAYOUT
+   ========================================= */
+
+.article-header {
+    margin-bottom: 2rem;
+}
+
+.article-h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-header);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+/* Article Body Text */
+.article-text {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.8;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+}
+
+/* Links inside articles */
+.article-link {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.article-link:hover {
+    color: var(--primary-hover);
+    text-decoration: none;
+}
+
+/* Headings */
+.article-h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-header);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.article-h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Lists */
+.article-list {
+    list-style: disc inside;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    padding-left: 1rem;
+}
+
+.article-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* Video Container */
+.video-container {
+    aspect-ratio: 16/9;
+    background-color: black;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+}
+
+.video-iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* Recommendation Box */
+.rec-box {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-left: 4px solid var(--primary);
+    padding: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+/* Callouts */
+.callout {
+    padding: 1rem;
+    border-left-width: 4px;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin-bottom: 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.callout.info {
+    border-left-color: var(--primary);
+}
+
+.callout.success {
+    border-left-color: var(--accent-red); /* Using theme red for consistency or keep green */
+}
+
+.callout-title {
+    display: block;
+    font-weight: 700;
+    color: var(--text-header);
+    margin-bottom: 0.25rem;
+}
+
+/* Images */
+.article-img {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.img-caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+/* Code Blocks (Prism Overrides) */
+pre[class*="language-"] {
+    background: var(--bg-code) !important;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    padding: 1.25rem !important;
+}
+
+code[class*="language-"], 
+pre[class*="language-"] code {
+    color: #e2e8f0; /* Force light text for code */
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 0.9rem !important;
+    text-shadow: none !important;
+}
+
+/* =========================================
+   LAYOUT UTILS (Split Screen)
+   ========================================= */
+.layout-split {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+
+.sidebar-box {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+}
+
+.sidebar-title {
+    font-weight: 700;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-list li a {
+    display: block;
+    padding: 0.5rem 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.sidebar-list li a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+}
+
+/* Desktop Split */
+@media (min-width: 1024px) {
+    .layout-split {
+        flex-direction: row;
+    }
+    .content-col {
+        width: 70%;
+    }
+    .sidebar-col {
+        width: 30%;
+    }
+}
+
+/* Ad Slots */
+.ad-slot {
+    background-color: var(--ad-bg);
+    border: 2px dashed var(--ad-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0.5rem;
+}
+
+.ad-header { height: 90px; width: 100%; margin-top: 1.5rem; }
+.ad-sidebar { aspect-ratio: 1/1; width: 100%; margin-bottom: 1.5rem; }
+.ad-bottom { height: 120px; width: 100%; margin-top: 2rem; }

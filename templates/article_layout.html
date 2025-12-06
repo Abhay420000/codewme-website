@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+<!-- Inject Article-Specific CSS -->
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/article.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="layout-split">
     

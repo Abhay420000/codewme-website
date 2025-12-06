@@ -1,0 +1,258 @@
+/* =========================================
+   HERO SECTION
+   ========================================= */
+.hero-center {
+    text-align: center;
+    padding: 4rem 0 2rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 1rem;
+}
+
+.hero-sub {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+/* Responsive Hero Text */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.25rem; }
+    .hero-sub { font-size: 1.1rem; }
+}
+
+/* =========================================
+   FEATURE NAVIGATION (New)
+   ========================================= */
+.feature-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+}
+
+.feature-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--primary);
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-header);
+}
+
+.feature-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+
+/* =========================================
+   GRID & CARDS
+   ========================================= */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 0 2rem 0;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; /* Hidden by default via JS if > 6 */
+    flex-direction: column;
+    height: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+/* Card Image Area */
+.card-img-wrapper {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-code);
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-img {
+    transform: scale(1.05);
+}
+
+/* Card Content Area */
+.card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    align-items: center;
+}
+
+.card-tag {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-header);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+/* =========================================
+   TEXT-ONLY CARD PLACEHOLDER
+   ========================================= */
+.card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg-body) 0%, var(--border-color) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.placeholder-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .card-placeholder {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #475569;
+}
+
+/* =========================================
+   LOAD MORE BUTTON
+   ========================================= */
+.load-more-container {
+    text-align: center;
+    padding: 2rem 0 4rem 0;
+}
+
+.btn-load-more {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 2.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.btn-load-more:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
+}

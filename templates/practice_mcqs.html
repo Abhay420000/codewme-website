@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Practice MCQs - CodeWme{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 4rem 20px 2rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">📝</div>
+    <h1 class="hero-title">Practice Questions</h1>
+    <p class="hero-sub" style="margin-bottom: 2rem;">Prepare for your certification exams with our curated sets.</p>
+</div>
+
+<!-- SECTION HEADING -->
+<div style="text-align: center; margin-bottom: 3rem;">
+    <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-header); margin-bottom: 0.75rem; letter-spacing: -0.02em;">
+        Latest Practice Sets
+    </h2>
+    <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; opacity: 0.8;"></div>
+</div>
+
+<!-- CARDS GRID -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; padding-bottom: 4rem; padding-left: 20px; padding-right: 20px;">
+    
+    <!-- Example Set Card -->
+    <a href="/mcqs/salesforce-admin/set-1" class="card" style="text-decoration: none; padding: 0;">
+        <div style="background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); padding: 1.5rem; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 3rem;">☁️</span>
+        </div>
+        <div class="card-body" style="text-align: left;">
+            <div class="card-meta">
+                <span class="card-tag">ADMIN</span>
+                <span>Set 1</span>
+            </div>
+            <h3 class="card-title">Salesforce Admin</h3>
+            <p class="card-desc">20 essential questions for the Administrator certification.</p>
+        </div>
+    </a>
+    
+    <!-- Placeholder Card -->
+    <div class="card" style="padding: 2rem; opacity: 0.6; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div>
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">More Coming Soon</h3>
+            <p class="card-desc">Stay tuned for Apex & LWC sets.</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

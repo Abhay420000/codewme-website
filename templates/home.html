@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+<!-- Inject Home-Specific CSS -->
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+{% endblock %}
+
 {% block content %}
 <!-- HERO SECTION -->
 <div class="hero-center">
@@ -7,12 +12,46 @@
     <p class="hero-sub">Practical tutorials and deployment guides.</p>
 </div>
 
+<!-- FEATURE NAVIGATION -->
+<div class="feature-nav">
+    <a href="/contest" class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-text">
+            <div class="feature-title">Contests</div>
+            <div class="feature-desc">Compete and win</div>
+        </div>
+    </a>
+    <a href="/practice-mcqs" class="feature-card">
+        <div class="feature-icon">📝</div>
+        <div class="feature-text">
+            <div class="feature-title">Practice MCQs</div>
+            <div class="feature-desc">Test your knowledge</div>
+        </div>
+    </a>
+    <a href="/online-compiler" class="feature-card">
+        <div class="feature-icon">💻</div>
+        <div class="feature-text">
+            <div class="feature-title">Online Compiler</div>
+            <div class="feature-desc">Run code instantly</div>
+        </div>
+    </a>
+</div>
+
+<!-- SECTION HEADING -->
+<div style="text-align: center; margin-bottom: 3rem; margin-top: 2rem;">
+    <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-header); margin-bottom: 0.75rem; letter-spacing: -0.02em;">
+        Latest Tutorials & Guides
+    </h2>
+    <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; opacity: 0.8;"></div>
+</div>
+
 <!-- DYNAMIC TUTORIALS GRID -->
-<div class="grid-cards">
+<div class="grid-cards" id="articlesGrid">
 
     <!-- LOOP THROUGH ARTICLES FROM DATABASE -->
     {% for article in articles %}
-    <a href="/{{ article.slug }}" class="card">
+    <!-- Added 'article-item' class and default display:none for JS handling -->
+    <a href="/{{ article.slug }}" class="card article-item" style="display: none;">
         
         <div class="card-img-wrapper">
             {% if article.video_id %}
@@ -22,7 +61,6 @@
                 <!-- TEXT-ONLY PLACEHOLDER (No Video) -->
                 <div class="card-placeholder">
                     <div class="placeholder-icon">📄</div>
-                    <!-- Uses custom placeholder text if set, else uses category -->
                     <div class="placeholder-text">{{ article.placeholder_text if article.placeholder_text else article.category }}</div>
                 </div>
             {% endif %}
@@ -40,4 +78,47 @@
     {% endfor %}
 
 </div>
+
+<!-- LOAD MORE BUTTON -->
+<div class="load-more-container">
+    <button id="loadMoreBtn" class="btn-load-more">Load More Articles</button>
+</div>
+
+<!-- JAVASCRIPT FOR LOAD MORE FUNCTIONALITY -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll('.article-item');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let visibleCount = 6;
+
+        // 1. Initially show the first 6 cards
+        for(let i=0; i<visibleCount && i<cards.length; i++) {
+            cards[i].style.display = 'flex';
+        }
+
+        // 2. Hide button if total articles are less than or equal to 6
+        if(cards.length <= visibleCount) {
+            loadMoreBtn.style.display = 'none';
+        }
+
+        // 3. Handle Click
+        loadMoreBtn.addEventListener('click', function() {
+            const nextCount = visibleCount + 6;
+            
+            // Show next batch
+            for(let i=visibleCount; i<nextCount && i<cards.length; i++) {
+                cards[i].style.display = 'flex';
+                // Optional: Add a fade-in animation class here if desired
+                cards[i].style.animation = "fadeIn 0.5s ease";
+            }
+            
+            visibleCount = nextCount;
+
+            // Hide button if we have shown all cards
+            if(visibleCount >= cards.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+    });
+</script>
 {% endblock %}

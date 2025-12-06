@@ -5,31 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>{% block title %}CodeWme{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Coding tutorials.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Coding tutorials, Salesforce guides, and tech resources.{% endblock %}">
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- PRESERVED: Your logo path for Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    
+    <!-- 1. GLOBAL STYLES -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/global.css') }}">
+    
+    <!-- 2. PAGE SPECIFIC STYLES -->
+    {% block custom_css %}{% endblock %}
 
-    <!-- PRISM CSS (Syntax Highlighting) -->
+    <!-- PRISM CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
+    <!-- PRESERVED: Your AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9432921037170876"
      crossorigin="anonymous"></script>
-
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
+    <!-- MODERN NAVBAR -->
     <nav class="navbar">
         <div class="container nav-content">
+            
+            <!-- 1. LEFT: Brand (Text Only) -->
             <a href="/" class="nav-brand">
-                Code<span class="brand-accent">W</span>me
+                <span>Code<span class="brand-accent">W</span>me</span>
             </a>
 
+            <!-- 2. CENTER: Search Bar -->
+            <div class="nav-search-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Search tutorials..." class="nav-search-input">
+                <div class="search-shortcut">/</div>
+            </div>
+
+            <!-- 3. RIGHT: Menu -->
             <div class="nav-links">
-                <a href="/" class="nav-link">Tutorials</a>
-                <a href="https://www.youtube.com/@codewme7144" target="_blank" class="btn-youtube">YouTube</a>
+                <a href="/practice-mcqs" class="nav-link">Practice</a>
+                <a href="/contest" class="nav-link">Contests</a>
+                <a href="/about" class="nav-link">About</a>
                 
+                <div style="width: 1px; height: 24px; background: var(--border-color); margin: 0 10px;"></div>
+
                 <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
                     <span id="theme-icon">☀️</span>
                 </button>
@@ -42,17 +62,70 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER -->
+    <!-- MODERN FOOTER (Multi-Column) -->
     <footer class="footer">
         <div class="container">
-            <p style="opacity: 0.6; font-size: 0.85rem;">&copy; 2025 CodeWme.dev</p>
+            <div class="footer-grid">
+                
+                <!-- Col 1: Brand & Socials -->
+                <div class="footer-col">
+                    <h4>CodeWme</h4>
+                    <p>Empowering developers with practical tutorials, Salesforce guides, and real-world coding scenarios.</p>
+                    
+                    <!-- PRESERVED: Your Specific Social Links & SVGs -->
+                    <div class="footer-socials">
+                        <a href="https://x.com/CSGroupno1" class="social-link" target="_blank" aria-label="X">
+                            <img src="{{ url_for('static', filename='images/x.svg') }}" alt="X">
+                        </a>
+                        <a href="https://www.instagram.com/code_w_me/" class="social-link" target="_blank" aria-label="Instagram">
+                            <img src="{{ url_for('static', filename='images/instagram.svg') }}" alt="Instagram">
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100077434400378" class="social-link" target="_blank" aria-label="Facebook">
+                            <img src="{{ url_for('static', filename='images/facebook.svg') }}" alt="Facebook">
+                        </a>
+                        <a href="https://t.me/+Q-W5bdRIH8IyOTc9" class="social-link" target="_blank" aria-label="Telegram">
+                            <img src="{{ url_for('static', filename='images/telegram.svg') }}" alt="Telegram">
+                        </a>
+                        <a href="https://www.youtube.com/@codewme7144" class="social-link" target="_blank" aria-label="YouTube">
+                            <img src="{{ url_for('static', filename='images/youtube.svg') }}" alt="YouTube">
+                        </a>
+                    </div>
+                </div>
 
-            <div class="footer-socials" style="margin-top: 1rem;">
-                <a href="https://x.com/CSGroupno1" class="social-link" target="_blank" aria-label="X"><img src="{{ url_for('static', filename='images/x.svg') }}" alt="X"></a>
-                <a href="https://www.instagram.com/code_w_me/" class="social-link" target="_blank" aria-label="Instagram"><img src="{{ url_for('static', filename='images/instagram.svg') }}" alt="Instagram"></a>
-                <a href="https://www.facebook.com/profile.php?id=100077434400378" class="social-link" target="_blank" aria-label="Facebook"><img src="{{ url_for('static', filename='images/facebook.svg') }}" alt="Facebook"></a>
-                <a href="https://t.me/+Q-W5bdRIH8IyOTc9" class="social-link" target="_blank" aria-label="Telegram"><img src="{{ url_for('static', filename='images/telegram.svg') }}" alt="Telegram"></a>
-                <a href="https://www.youtube.com/@codewme7144" class="social-link" target="_blank" aria-label="YouTube"><img src="{{ url_for('static', filename='images/youtube.svg') }}" alt="YouTube"></a>
+                <!-- Col 2: Explore -->
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Latest Articles</a></li>
+                        <li><a href="/practice-mcqs">Mock Exams</a></li>
+                        <li><a href="/contest">Contests</a></li>
+                        <li><a href="/online-compiler">Online IDE</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Legal -->
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service">Terms of Service</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Stay Updated -->
+                <div class="footer-col">
+                    <h4>Stay Updated</h4>
+                    <p>Get new tutorials delivered to your feed.</p>
+                    <a href="https://www.youtube.com/@codewme7144" target="_blank" style="color:var(--primary); font-weight:bold; font-size:0.9rem;">Subscribe on YouTube &rarr;</a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 CodeWme.dev. All rights reserved.</p>
+                <p>Made with 💙 and Python.</p>
             </div>
         </div>
     </footer>
@@ -78,9 +151,17 @@
         function updateIcon(theme) {
             themeIcon.textContent = theme === 'light' ? '☀️' : '🌙';
         }
+
+        // Search Shortcut Logic (Visual focus only)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && !e.target.matches('input, textarea')) {
+                e.preventDefault();
+                document.querySelector('.nav-search-input').focus();
+            }
+        });
     </script>
 
-    <!-- PRISM JS (Autoloader loads languages like Python/Bash automatically) -->
+    <!-- PRISM JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
