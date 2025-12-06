@@ -25,7 +25,7 @@
 }
 
 /* =========================================
-   FEATURE NAVIGATION (New)
+   FEATURE NAVIGATION
    ========================================= */
 .feature-nav {
     display: grid;
@@ -95,6 +95,32 @@
     color: var(--text-muted);
 }
 
+/* =========================================
+   SECTION HEADINGS
+   ========================================= */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-header);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.section-underline {
+    height: 4px;
+    width: 60px;
+    background: var(--primary);
+    margin: 0 auto;
+    border-radius: 2px;
+    opacity: 0.8;
+}
+
 
 /* =========================================
    GRID & CARDS
@@ -112,10 +138,16 @@
     border-radius: 0.75rem;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    display: flex; /* Hidden by default via JS if > 6 */
+    display: flex;
     flex-direction: column;
     height: 100%;
+    /* Fade-in animation */
     animation: fadeIn 0.5s ease;
+}
+
+/* Hidden by default for Load More logic */
+.article-item {
+    display: none;
 }
 
 @keyframes fadeIn {
@@ -129,7 +161,6 @@
     border-color: var(--primary);
 }
 
-/* Card Image Area */
 .card-img-wrapper {
     aspect-ratio: 16/9;
     overflow: hidden;
@@ -148,7 +179,6 @@
     transform: scale(1.05);
 }
 
-/* Card Content Area */
 .card-body {
     padding: 1.5rem;
     display: flex;
@@ -194,7 +224,7 @@
 }
 
 /* =========================================
-   TEXT-ONLY CARD PLACEHOLDER
+   TEXT-ONLY PLACEHOLDER
    ========================================= */
 .card-placeholder {
     width: 100%;

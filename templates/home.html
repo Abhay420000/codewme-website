@@ -38,11 +38,9 @@
 </div>
 
 <!-- SECTION HEADING -->
-<div style="text-align: center; margin-bottom: 3rem; margin-top: 2rem;">
-    <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-header); margin-bottom: 0.75rem; letter-spacing: -0.02em;">
-        Latest Tutorials & Guides
-    </h2>
-    <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; opacity: 0.8;"></div>
+<div class="section-header">
+    <h2 class="section-title">Latest Tutorials & Guides</h2>
+    <div class="section-underline"></div>
 </div>
 
 <!-- DYNAMIC TUTORIALS GRID -->
@@ -50,8 +48,8 @@
 
     <!-- LOOP THROUGH ARTICLES FROM DATABASE -->
     {% for article in articles %}
-    <!-- Added 'article-item' class and default display:none for JS handling -->
-    <a href="/{{ article.slug }}" class="card article-item" style="display: none;">
+    <!-- Added 'article-item' class (managed by JS) -->
+    <a href="/{{ article.slug }}" class="card article-item">
         
         <div class="card-img-wrapper">
             {% if article.video_id %}
@@ -91,17 +89,22 @@
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         let visibleCount = 6;
 
-        // 1. Initially show the first 6 cards
+        // 1. Hide all cards initially
+        cards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        // 2. Show the first batch
         for(let i=0; i<visibleCount && i<cards.length; i++) {
             cards[i].style.display = 'flex';
         }
 
-        // 2. Hide button if total articles are less than or equal to 6
+        // 3. Hide button if total articles are less than or equal to initial count
         if(cards.length <= visibleCount) {
             loadMoreBtn.style.display = 'none';
         }
 
-        // 3. Handle Click
+        // 4. Handle Click
         loadMoreBtn.addEventListener('click', function() {
             const nextCount = visibleCount + 6;
             

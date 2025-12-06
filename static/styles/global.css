@@ -4,9 +4,9 @@
 :root {
     /* Light Mode */
     --bg-body: #f8fafc;
-    --bg-nav: rgba(255, 255, 255, 0.85); /* Translucent for glassmorphism */
+    --bg-nav: rgba(255, 255, 255, 0.85);
     --bg-card: #ffffff;
-    --bg-footer: #e2e8f0; /* Light Footer for Light Mode */
+    --bg-footer: #e2e8f0;
     --bg-code: #1e293b;
     
     --text-main: #334155;
@@ -80,7 +80,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 
 /* =========================================
-   3. MODERN NAVBAR (Glassmorphism)
+   3. MODERN NAVBAR
    ========================================= */
 .navbar {
     background-color: var(--bg-nav);
@@ -113,7 +113,6 @@ ul { list-style: none; padding: 0; margin: 0; }
     flex-shrink: 0;
 }
 
-/* Added helper class for the 'W' accent color */
 .brand-accent {
     color: var(--primary);
 }
@@ -124,7 +123,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     border-radius: 6px;
 }
 
-/* --- SEARCH BAR (New) --- */
+/* Search Bar */
 .nav-search-wrapper {
     position: relative;
     width: 100%;
@@ -138,7 +137,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     width: 100%;
     background: var(--bg-body);
     border: 1px solid var(--border-color);
-    padding: 0.6rem 1rem 0.6rem 2.5rem; /* Space for icon */
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
     border-radius: 2rem;
     font-size: 0.9rem;
     color: var(--text-main);
@@ -174,7 +173,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     opacity: 0.8;
 }
 
-/* --- NAVIGATION LINKS --- */
+/* Nav Links & Utils */
 .nav-links { display: flex; gap: 1.5rem; align-items: center; }
 
 .nav-link { 
@@ -187,7 +186,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 .nav-link:hover { color: var(--primary); }
 
-.divider-vertical {
+.nav-divider {
     width: 1px;
     height: 24px;
     background: var(--border-color);
@@ -259,9 +258,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     opacity: 0.9;
 }
 
-[data-theme="dark"] .footer-col h4 {
-    color: var(--text-white);
-}
+[data-theme="dark"] .footer-col h4 { color: var(--text-white); }
 
 .footer-col p {
     font-size: 0.9rem;
@@ -270,6 +267,7 @@ ul { list-style: none; padding: 0; margin: 0; }
     max-width: 300px;
 }
 
+/* Footer Links */
 .footer-links li { margin-bottom: 0.8rem; }
 .footer-links a { 
     font-size: 0.9rem; 
@@ -282,10 +280,17 @@ ul { list-style: none; padding: 0; margin: 0; }
     padding-left: 5px;
 }
 
-/* Socials in Footer */
+.footer-cta {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Socials */
 .footer-socials {
     display: flex;
     gap: 1rem;
+    margin-top: 1rem;
 }
 .social-link img {
     width: 24px;
@@ -293,17 +298,14 @@ ul { list-style: none; padding: 0; margin: 0; }
     opacity: 0.7;
     transition: all 0.3s ease;
 }
-
-[data-theme="dark"] .social-link img {
-    filter: invert(1);
-}
+[data-theme="dark"] .social-link img { filter: invert(1); }
 
 .social-link:hover img {
     opacity: 1;
     transform: translateY(-2px);
 }
 
-/* Footer Bottom Bar */
+/* Bottom Bar */
 .footer-bottom {
     border-top: 1px solid var(--border-color);
     padding-top: 2rem;
@@ -318,14 +320,12 @@ ul { list-style: none; padding: 0; margin: 0; }
    RESPONSIVE
    ========================================= */
 @media (max-width: 768px) {
-    /* Stack Header */
     .nav-content { flex-wrap: wrap; gap: 1rem; }
     .nav-search-wrapper { order: 3; margin: 0; max-width: 100%; }
     .nav-links { gap: 1rem; }
-    .nav-link { display: none; } /* Hide text links on mobile */
-    .divider-vertical { display: none; }
+    .nav-link { display: none; }
+    .nav-divider { display: none; }
 
-    /* Stack Footer */
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
     .footer-col { display: flex; flex-direction: column; align-items: center; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
