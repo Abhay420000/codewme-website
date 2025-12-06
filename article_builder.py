@@ -12,12 +12,9 @@ TEMPLATE_DIR = os.path.join('templates', 'articles')
 
 # --- TOOLTIP CLASS ---
 class CreateToolTip(object):
-    """
-    create a tooltip for a given widget
-    """
     def __init__(self, widget, text='widget info'):
-        self.waittime = 500     #miliseconds
-        self.wraplength = 180   #pixels
+        self.waittime = 500     
+        self.wraplength = 180   
         self.widget = widget
         self.text = text
         self.widget.bind("<Enter>", self.enter)
@@ -48,9 +45,7 @@ class CreateToolTip(object):
         x, y, cx, cy = self.widget.bbox("insert")
         x += self.widget.winfo_rootx() + 25
         y += self.widget.winfo_rooty() + 20
-        # creates a toplevel window
         self.tw = tk.Toplevel(self.widget)
-        # Leaves only the label and removes the app window
         self.tw.wm_overrideredirect(True)
         self.tw.wm_geometry("+%d+%d" % (x, y))
         label = tk.Label(self.tw, text=self.text, justify='left',
@@ -64,142 +59,170 @@ class CreateToolTip(object):
         if tw:
             tw.destroy()
 
+# --- SCROLLABLE FRAME CLASS ---
+class ScrollableFrame(ttk.Frame):
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+        self.canvas = tk.Canvas(self, borderwidth=0, highlightthickness=0, bg="#f0f2f5")
+        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = tk.Frame(self.canvas, bg="#f0f2f5", padx=15, pady=15)
+
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+
+        self.window_id = self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        
+        # Ensure the inner frame resizes with the canvas
+        self.canvas.bind("<Configure>", self._on_canvas_configure)
+
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.scrollbar.pack(side="right", fill="y")
+        
+        # Mousewheel binding
+        self.scrollable_frame.bind('<Enter>', lambda _: self.canvas.bind_all("<MouseWheel>", self._on_mousewheel))
+        self.scrollable_frame.bind('<Leave>', lambda _: self.canvas.unbind_all("<MouseWheel>"))
+
+    def _on_canvas_configure(self, event):
+        self.canvas.itemconfig(self.window_id, width=event.width)
+
+    def _on_mousewheel(self, event):
+        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
 class ArticleAutomator:
     def __init__(self, root):
         self.root = root
         self.root.title("CodeWme CMS & Builder")
         self.root.geometry("1200x850")
-        self.root.configure(bg="#f0f2f5")
         
-        # Style
         style = ttk.Style()
         style.theme_use('clam')
         style.configure("TLabel", background="#f0f2f5", font=("Segoe UI", 10))
-        style.configure("Header.TLabel", font=("Segoe UI", 16, "bold"), foreground="#1e293b")
+        style.configure("Header.TLabel", font=("Segoe UI", 14, "bold"), foreground="#1e293b", background="#f0f2f5")
+        style.configure("Card.TFrame", background="white", relief="raised")
 
         # --- TABS ---
         self.notebook = ttk.Notebook(root)
         self.notebook.pack(fill=tk.BOTH, expand=True)
 
         # Tab 1: Editor
-        self.tab_editor = tk.Frame(self.notebook, bg="#f0f2f5")
-        self.notebook.add(self.tab_editor, text=" 📝 Editor (Create/Update) ")
+        self.tab_editor = tk.Frame(self.notebook, bg="#e2e8f0")
+        self.notebook.add(self.tab_editor, text="  📝 Editor  ")
         self._init_editor_tab()
 
         # Tab 2: Manager
         self.tab_manage = tk.Frame(self.notebook, bg="white")
-        self.notebook.add(self.tab_manage, text=" 📂 Manage Articles ")
+        self.notebook.add(self.tab_manage, text="  📂 Manage Articles  ")
         self._init_manage_tab()
 
     # ==========================================
-    # TAB 1: EDITOR UI
+    # TAB 1: EDITOR UI (Responsive Split)
     # ==========================================
     def _init_editor_tab(self):
-        # Left Panel (Metadata)
-        left_frame = tk.Frame(self.tab_editor, bg="#f0f2f5", width=350, padx=20, pady=20)
-        left_frame.pack(side=tk.LEFT, fill=tk.Y)
+        # Main Splitter
+        paned = tk.PanedWindow(self.tab_editor, orient=tk.HORIZONTAL, sashwidth=4, bg="#cbd5e1")
+        paned.pack(fill=tk.BOTH, expand=True)
+
+        # --- LEFT PANEL CONTAINER ---
+        left_main = tk.Frame(paned, bg="#f0f2f5", width=400)
         
-        # Right Panel (Content)
-        right_frame = tk.Frame(self.tab_editor, bg="white", padx=20, pady=20)
-        right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+        # 1. Scrollable Form Area
+        form_wrapper = ScrollableFrame(left_main)
+        form_wrapper.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        left_content = form_wrapper.scrollable_frame # We add widgets here
 
-        # --- LEFT PANEL CONTENT ---
-        ttk.Label(left_frame, text="Article Metadata", style="Header.TLabel").pack(anchor="w", pady=(0, 20))
+        # 2. Fixed Bottom Area (Publish Button)
+        bottom_bar = tk.Frame(left_main, bg="#e2e8f0", padx=15, pady=15, borderwidth=1, relief="solid")
+        bottom_bar.pack(side=tk.BOTTOM, fill=tk.X)
 
-        # Buttons
-        tk.Button(left_frame, text="Clear Form / New Article", bg="#64748b", fg="white", command=self.clear_form).pack(fill=tk.X, pady=(0,15))
+        # --- RIGHT PANEL CONTAINER ---
+        right_main = tk.Frame(paned, bg="white", padx=20, pady=20)
 
-        # Fields
+        paned.add(left_main, minsize=350)
+        paned.add(right_main, minsize=400)
+
+        # === FILL LEFT PANEL (Form) ===
+        ttk.Label(left_content, text="Article Metadata", style="Header.TLabel").pack(anchor="w", pady=(0, 15))
         
-        # 1. YouTube Iframe
-        yt_label_frame = tk.Frame(left_frame, bg="#f0f2f5")
-        yt_label_frame.pack(anchor="w", fill=tk.X)
-        ttk.Label(yt_label_frame, text="Paste YouTube Iframe:").pack(side=tk.LEFT)
-        lbl_help_yt = tk.Label(yt_label_frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 12), cursor="hand2")
-        lbl_help_yt.pack(side=tk.LEFT, padx=5)
-        CreateToolTip(lbl_help_yt, "Go to YouTube video -> Share -> Embed. Copy the full <iframe> code and paste it here. Or simply paste the video URL.")
+        tk.Button(left_content, text="Reset Form / New Article", bg="#64748b", fg="white", relief="flat", padx=10, pady=5, command=self.clear_form).pack(fill=tk.X, pady=(0,20))
 
-        self.txt_youtube = tk.Text(left_frame, height=4, font=("Consolas", 9), wrap=tk.WORD)
-        self.txt_youtube.pack(fill=tk.X, pady=(5, 10))
+        def add_field(label, tooltip):
+            frame = tk.Frame(left_content, bg="#f0f2f5")
+            frame.pack(anchor="w", fill=tk.X, pady=(5, 0))
+            ttk.Label(frame, text=label).pack(side=tk.LEFT)
+            lbl = tk.Label(frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 10), cursor="hand2")
+            lbl.pack(side=tk.LEFT, padx=5)
+            CreateToolTip(lbl, tooltip)
+            return frame
+
+        # Inputs
+        add_field("Paste YouTube Iframe (Optional):", "Copy embed code from YouTube. Leave blank for text-only articles.")
+        self.txt_youtube = tk.Text(left_content, height=3, font=("Consolas", 9), wrap=tk.WORD, borderwidth=1, relief="solid")
+        self.txt_youtube.pack(fill=tk.X, pady=(2, 10))
         self.txt_youtube.bind('<KeyRelease>', self.parse_video_id)
 
         self.var_video_id = tk.StringVar()
-        tk.Entry(left_frame, textvariable=self.var_video_id, state="readonly", bg="#e2e8f0").pack(fill=tk.X, pady=(0, 15))
+        tk.Entry(left_content, textvariable=self.var_video_id, state="readonly", bg="#e2e8f0", font=("Consolas", 9)).pack(fill=tk.X, pady=(0, 15))
 
-        # 2. Article Title
-        title_label_frame = tk.Frame(left_frame, bg="#f0f2f5")
-        title_label_frame.pack(anchor="w", fill=tk.X)
-        ttk.Label(title_label_frame, text="Article Title:").pack(side=tk.LEFT)
-        lbl_help_title = tk.Label(title_label_frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 12), cursor="hand2")
-        lbl_help_title.pack(side=tk.LEFT, padx=5)
-        CreateToolTip(lbl_help_title, "The main headline of your article. This will appear as H1 on the page and in the browser tab.")
-
+        add_field("Article Title:", "Main H1 title.")
         self.var_title = tk.StringVar()
-        tk.Entry(left_frame, textvariable=self.var_title, font=("Segoe UI", 11)).pack(fill=tk.X, pady=(5, 15))
+        tk.Entry(left_content, textvariable=self.var_title, font=("Segoe UI", 10), borderwidth=1, relief="solid").pack(fill=tk.X, pady=(2, 15), ipady=3)
 
-        # 3. URL Slug
-        slug_label_frame = tk.Frame(left_frame, bg="#f0f2f5")
-        slug_label_frame.pack(anchor="w", fill=tk.X)
-        ttk.Label(slug_label_frame, text="URL Slug (Unique ID):").pack(side=tk.LEFT)
-        lbl_help_slug = tk.Label(slug_label_frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 12), cursor="hand2")
-        lbl_help_slug.pack(side=tk.LEFT, padx=5)
-        CreateToolTip(lbl_help_slug, "The URL path for this article (e.g., 'my-article-name'). Must be unique and URL-friendly (lowercase, hyphens).")
-
+        add_field("URL Slug (Unique ID):", "e.g. my-article-name")
         self.var_slug = tk.StringVar()
-        self.entry_slug = tk.Entry(left_frame, textvariable=self.var_slug, font=("Consolas", 10, "bold"))
-        self.entry_slug.pack(fill=tk.X, pady=(5, 15))
+        self.entry_slug = tk.Entry(left_content, textvariable=self.var_slug, font=("Consolas", 10, "bold"), borderwidth=1, relief="solid")
+        self.entry_slug.pack(fill=tk.X, pady=(2, 15), ipady=3)
 
-        # 4. Category
-        cat_label_frame = tk.Frame(left_frame, bg="#f0f2f5")
-        cat_label_frame.pack(anchor="w", fill=tk.X)
-        ttk.Label(cat_label_frame, text="Category:").pack(side=tk.LEFT)
-        lbl_help_cat = tk.Label(cat_label_frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 12), cursor="hand2")
-        lbl_help_cat.pack(side=tk.LEFT, padx=5)
-        CreateToolTip(lbl_help_cat, "The tag displayed on the article card (e.g., 'PYTHON', 'SALESFORCE'). Useful for grouping content.")
-
+        add_field("Category:", "e.g. SALESFORCE, PYTHON")
         self.var_category = tk.StringVar(value="SALESFORCE")
-        tk.Entry(left_frame, textvariable=self.var_category).pack(fill=tk.X, pady=(5, 15))
+        tk.Entry(left_content, textvariable=self.var_category, font=("Segoe UI", 10), borderwidth=1, relief="solid").pack(fill=tk.X, pady=(2, 15), ipady=3)
 
-        # 5. Description
-        desc_label_frame = tk.Frame(left_frame, bg="#f0f2f5")
-        desc_label_frame.pack(anchor="w", fill=tk.X)
-        ttk.Label(desc_label_frame, text="Short Description:").pack(side=tk.LEFT)
-        lbl_help_desc = tk.Label(desc_label_frame, text="ⓘ", bg="#f0f2f5", fg="#3b82f6", font=("Segoe UI", 12), cursor="hand2")
-        lbl_help_desc.pack(side=tk.LEFT, padx=5)
-        CreateToolTip(lbl_help_desc, "A brief summary shown on the homepage card to entice users to click.")
+        add_field("Placeholder Text (Optional):", "Custom text shown on card if no video/image exists.")
+        self.var_placeholder = tk.StringVar()
+        tk.Entry(left_content, textvariable=self.var_placeholder, font=("Segoe UI", 10), borderwidth=1, relief="solid").pack(fill=tk.X, pady=(2, 15), ipady=3)
 
-        self.txt_desc = tk.Text(left_frame, height=4, font=("Segoe UI", 10), wrap=tk.WORD)
-        self.txt_desc.pack(fill=tk.X, pady=(5, 20))
+        add_field("Short Description:", "Summary for the homepage card.")
+        self.txt_desc = tk.Text(left_content, height=4, font=("Segoe UI", 10), wrap=tk.WORD, borderwidth=1, relief="solid")
+        self.txt_desc.pack(fill=tk.X, pady=(2, 20))
 
-        tk.Button(left_frame, text="💾 SAVE / PUBLISH", bg="#22c55e", fg="white", font=("Segoe UI", 12, "bold"), pady=10, relief=tk.FLAT, command=self.publish_article).pack(fill=tk.X, side=tk.BOTTOM)
+        # === FILL BOTTOM BAR (Fixed Publish Button) ===
+        tk.Button(bottom_bar, text="💾 PUBLISH ARTICLE", bg="#22c55e", fg="white", font=("Segoe UI", 11, "bold"), pady=8, relief="flat", cursor="hand2", command=self.publish_article).pack(fill=tk.X)
 
-        # --- RIGHT PANEL CONTENT ---
-        ttk.Label(right_frame, text="Content Editor", style="Header.TLabel", background="white").pack(anchor="w", pady=(0, 10))
+        # === FILL RIGHT PANEL (Editor) ===
+        ttk.Label(right_main, text="Content Editor", style="Header.TLabel", background="white").pack(anchor="w", pady=(0, 10))
         
-        # Toolbar
-        toolbar = tk.Frame(right_frame, bg="#f8fafc", padx=5, pady=5, relief=tk.RIDGE, bd=1)
-        toolbar.pack(fill=tk.X, pady=(0, 10))
+        # Toolbar Container
+        toolbar_frame = tk.Frame(right_main, bg="#f1f5f9", padx=5, pady=5, relief="flat")
+        toolbar_frame.pack(fill=tk.X, pady=(0, 10))
 
         def make_btn(parent, text, cmd, bg="#3b82f6", fg="white", tip=None):
-            btn = tk.Button(parent, text=text, command=cmd, bg=bg, fg=fg, relief=tk.FLAT, padx=8, pady=2, font=("Segoe UI", 9))
-            btn.pack(side=tk.LEFT, padx=2)
-            if tip:
-                CreateToolTip(btn, tip)
+            btn = tk.Button(parent, text=text, command=cmd, bg=bg, fg=fg, relief="flat", padx=10, pady=4, font=("Segoe UI", 9))
+            btn.pack(side=tk.LEFT, padx=3, pady=2)
+            if tip: CreateToolTip(btn, tip)
 
-        make_btn(toolbar, "H2", lambda: self.wrap_text('<h2 class="article-h2">', '</h2>'), tip="Insert a Level 2 Heading")
-        make_btn(toolbar, "H3", lambda: self.wrap_text('<h3 class="article-h3">', '</h3>'), tip="Insert a Level 3 Heading")
-        make_btn(toolbar, "Para", lambda: self.wrap_text('<p class="article-text">', '</p>'), tip="Wrap text in a Paragraph")
-        make_btn(toolbar, "List", self.insert_list, tip="Insert a bullet list")
-        make_btn(toolbar, "{ } Code", self.insert_code_block, bg="#1e293b", tip="Insert a code block with syntax highlighting")
-        make_btn(toolbar, "ℹ️ Info", self.insert_callout, bg="#0ea5e9", tip="Insert a blue Info/Note box")
-        make_btn(toolbar, "🖼️ Image", self.prompt_image_source, bg="#8b5cf6", tip="Upload and insert an image from your computer")
+        # Formatting Buttons
+        make_btn(toolbar_frame, "H2", lambda: self.wrap_text('<h2 class="article-h2">', '</h2>'), tip="Insert Heading 2")
+        make_btn(toolbar_frame, "H3", lambda: self.wrap_text('<h3 class="article-h3">', '</h3>'), tip="Insert Heading 3")
+        make_btn(toolbar_frame, "¶", lambda: self.wrap_text('<p class="article-text">', '</p>'), tip="Paragraph")
+        make_btn(toolbar_frame, "• List", self.insert_list, tip="Insert List")
         
-        tk.Label(toolbar, text="|", bg="#f8fafc").pack(side=tk.LEFT, padx=5)
-        make_btn(toolbar, "Left", lambda: self.wrap_alignment('left'), bg="#64748b", tip="Align text Left")
-        make_btn(toolbar, "Center", lambda: self.wrap_alignment('center'), bg="#64748b", tip="Align text Center")
-        make_btn(toolbar, "Right", lambda: self.wrap_alignment('right'), bg="#64748b", tip="Align text Right")
+        # Special Blocks
+        tk.Frame(toolbar_frame, width=1, bg="#cbd5e1").pack(side=tk.LEFT, fill=tk.Y, padx=5) # Spacer
+        make_btn(toolbar_frame, "{ } Code", self.insert_code_block, bg="#1e293b", tip="Code Block")
+        make_btn(toolbar_frame, "ℹ️ Info", self.insert_callout, bg="#0ea5e9", tip="Info Box")
+        make_btn(toolbar_frame, "🖼️ Image", self.prompt_image_source, bg="#8b5cf6", tip="Insert Image")
+        
+        # Alignment
+        tk.Frame(toolbar_frame, width=1, bg="#cbd5e1").pack(side=tk.LEFT, fill=tk.Y, padx=5) # Spacer
+        make_btn(toolbar_frame, "L", lambda: self.wrap_alignment('left'), bg="#64748b", tip="Align Left")
+        make_btn(toolbar_frame, "C", lambda: self.wrap_alignment('center'), bg="#64748b", tip="Align Center")
+        make_btn(toolbar_frame, "R", lambda: self.wrap_alignment('right'), bg="#64748b", tip="Align Right")
 
-        self.editor = scrolledtext.ScrolledText(right_frame, font=("Consolas", 11), wrap=tk.WORD, undo=True, padx=10, pady=10)
+        # Main Text Editor
+        self.editor = scrolledtext.ScrolledText(right_main, font=("Consolas", 11), wrap=tk.WORD, undo=True, padx=15, pady=15, borderwidth=1, relief="solid")
         self.editor.pack(fill=tk.BOTH, expand=True)
         self.editor.insert(tk.END, "<!-- Content goes here -->\n")
 
@@ -207,39 +230,45 @@ class ArticleAutomator:
     # TAB 2: MANAGE UI
     # ==========================================
     def _init_manage_tab(self):
-        # Header
+        # 1. Header (Top)
         top_frame = tk.Frame(self.tab_manage, bg="white", pady=20, padx=20)
-        top_frame.pack(fill=tk.X)
-        
-        ttk.Label(top_frame, text="Existing Articles", style="Header.TLabel", background="white").pack(side=tk.LEFT)
-        tk.Button(top_frame, text="🔄 Refresh List", command=self.load_articles_list).pack(side=tk.RIGHT)
+        top_frame.pack(side=tk.TOP, fill=tk.X)
+        ttk.Label(top_frame, text="Manage Articles", style="Header.TLabel", background="white").pack(side=tk.LEFT)
+        tk.Button(top_frame, text="🔄 Refresh", command=self.load_articles_list, relief="flat", bg="#e2e8f0", padx=10).pack(side=tk.RIGHT)
 
-        # Listbox
-        self.tree = ttk.Treeview(self.tab_manage, columns=("Date", "Title", "Slug"), show='headings', height=20)
+        # 2. Buttons (Bottom) - Pack FIRST to ensure visibility
+        btn_frame = tk.Frame(self.tab_manage, bg="white", pady=20, padx=20)
+        btn_frame.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        tk.Button(btn_frame, text="✏️ EDIT SELECTED", bg="#2563eb", fg="white", font=("Segoe UI", 10, "bold"), padx=20, pady=10, relief="flat", command=self.edit_selected).pack(side=tk.LEFT, padx=5)
+        tk.Button(btn_frame, text="🗑️ DELETE SELECTED", bg="#ef4444", fg="white", font=("Segoe UI", 10, "bold"), padx=20, pady=10, relief="flat", command=self.delete_selected).pack(side=tk.LEFT, padx=5)
+
+        # 3. Listbox (Middle)
+        list_frame = tk.Frame(self.tab_manage, bg="white")
+        list_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+        style = ttk.Style()
+        style.configure("Treeview", rowheight=30, font=("Segoe UI", 10))
+        style.configure("Treeview.Heading", font=("Segoe UI", 10, "bold"))
+
+        self.tree = ttk.Treeview(list_frame, columns=("Date", "Title", "Slug"), show='headings', height=20)
         self.tree.heading("Date", text="Date")
         self.tree.heading("Title", text="Title")
         self.tree.heading("Slug", text="Slug (ID)")
-        
         self.tree.column("Date", width=120)
         self.tree.column("Title", width=400)
         self.tree.column("Slug", width=300)
         
-        self.tree.pack(fill=tk.BOTH, expand=True, padx=20)
-
-        # Actions
-        btn_frame = tk.Frame(self.tab_manage, bg="white", pady=20, padx=20)
-        btn_frame.pack(fill=tk.X)
+        # Add scrollbar
+        scrollbar = ttk.Scrollbar(list_frame, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=scrollbar.set)
         
-        tk.Button(btn_frame, text="✏️ EDIT SELECTED", bg="#2563eb", fg="white", font=("Segoe UI", 10, "bold"), padx=20, pady=10, command=self.edit_selected).pack(side=tk.LEFT, padx=5)
-        tk.Button(btn_frame, text="🗑️ DELETE SELECTED", bg="#ef4444", fg="white", font=("Segoe UI", 10, "bold"), padx=20, pady=10, command=self.delete_selected).pack(side=tk.LEFT, padx=5)
+        self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        # Initial Load
         self.load_articles_list()
 
-    # ==========================================
-    # LOGIC METHODS
-    # ==========================================
-
+    # --- LOGIC METHODS ---
     def parse_video_id(self, event=None):
         text = self.txt_youtube.get("1.0", tk.END)
         match = re.search(r'(?:v=|\/|embed\/)([0-9A-Za-z_-]{11})', text)
@@ -325,6 +354,7 @@ class ArticleAutomator:
         self.var_slug.set("")
         self.var_video_id.set("")
         self.var_category.set("SALESFORCE")
+        self.var_placeholder.set("") # Clear placeholder
         self.txt_youtube.delete("1.0", tk.END)
         self.txt_desc.delete("1.0", tk.END)
         self.editor.delete("1.0", tk.END)
@@ -344,6 +374,7 @@ class ArticleAutomator:
         self.var_slug.set(article['slug'])
         self.var_video_id.set(article['video_id'])
         self.var_category.set(article['category'])
+        self.var_placeholder.set(article.get('placeholder_text', '')) # Load placeholder
         self.txt_desc.insert("1.0", article['description'])
         html_path = os.path.join(TEMPLATE_DIR, f"{slug}.html")
         if os.path.exists(html_path):
@@ -362,16 +393,30 @@ class ArticleAutomator:
         slug, title = item[2], item[1]
         if not messagebox.askyesno("Confirm", f"Delete '{title}'?"): return
         
-        # Update JSON
-        with open(ARTICLES_DB, 'r') as f: articles = json.load(f)
-        articles = [a for a in articles if a['slug'] != slug]
-        with open(ARTICLES_DB, 'w') as f: json.dump(articles, f, indent=2)
+        # 1. Update JSON
+        if os.path.exists(ARTICLES_DB):
+            with open(ARTICLES_DB, 'r') as f: articles = json.load(f)
+            articles = [a for a in articles if a['slug'] != slug]
+            with open(ARTICLES_DB, 'w') as f: json.dump(articles, f, indent=2)
         
-        # Delete HTML File
+        # 2. Delete HTML & IMAGES (The Fix)
         html_path = os.path.join(TEMPLATE_DIR, f"{slug}.html")
         if os.path.exists(html_path):
             try:
+                # Read content to find and delete images first
+                with open(html_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Regex matches filename='images/xyz.png'
+                images = re.findall(r"filename='images/([^']+)'", content)
+                for img in images:
+                    img_path = os.path.join('static', 'images', img)
+                    if os.path.exists(img_path):
+                        os.remove(img_path)
+                        print(f"Deleted image: {img_path}")
+
                 os.remove(html_path)
+                print(f"Deleted file: {html_path}")
             except Exception as e:
                 messagebox.showerror("Error", f"Could not delete file: {e}")
         
@@ -379,18 +424,23 @@ class ArticleAutomator:
         messagebox.showinfo("Deleted", "Article removed successfully.")
 
     def publish_article(self):
-        if not self.var_title.get() or not self.var_slug.get() or not self.var_video_id.get():
-            messagebox.showerror("Error", "Required fields missing!")
+        if not self.var_title.get() or not self.var_slug.get():
+            messagebox.showerror("Error", "Title and Slug are required!")
             return
         slug = self.var_slug.get().strip()
+        
+        # Prepare Data
         data = {
             "title": self.var_title.get(),
             "slug": slug,
             "video_id": self.var_video_id.get(),
+            "placeholder_text": self.var_placeholder.get().strip(), # Save placeholder
             "date": datetime.now().strftime("%b %d, %Y"),
             "category": self.var_category.get(),
             "description": self.txt_desc.get("1.0", tk.END).strip()
         }
+
+        # Update JSON
         if not os.path.exists(ARTICLES_DB): articles = []
         else:
             with open(ARTICLES_DB, 'r') as f: articles = json.load(f)
@@ -399,6 +449,7 @@ class ArticleAutomator:
         else: articles.insert(0, data)
         with open(ARTICLES_DB, 'w') as f: json.dump(articles, f, indent=2)
         
+        # Generate HTML (Jinja handles empty video_id automatically)
         html_content = f"""{{% extends 'article_layout.html' %}}
 {{% block title %}}{data['title']} - CodeWme{{% endblock %}}
 {{% block meta_description %}}{data['description']}{{% endblock %}}

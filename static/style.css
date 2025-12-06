@@ -345,3 +345,43 @@ img { max-width: 100%; display: block; }
     .hero-title { font-size: 2.25rem; }
     .hero-sub { font-size: 1.1rem; }
 }
+
+/* ... add this at the very bottom of style.css ... */
+
+/* Placeholder for cards without images */
+.card-placeholder {
+    width: 100%;
+    height: 100%;
+    /* Subtle gradient background */
+    background: linear-gradient(135deg, var(--bg-body) 0%, var(--border-color) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Text inside the placeholder */
+.placeholder-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    opacity: 0.3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+/* Icon inside placeholder (optional) */
+.placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+/* Dark mode specific adjustment for placeholder */
+[data-theme="dark"] .card-placeholder {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #475569;
+}

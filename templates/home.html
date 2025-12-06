@@ -3,7 +3,7 @@
 {% block content %}
 <!-- HERO SECTION -->
 <div class="hero-center">
-    <h1 class="hero-title">Master tech with <span class="brand-accent">CodeWme</span></h1>
+    <h1 class="hero-title">Master Coding with <span class="brand-accent">CodeWme</span></h1>
     <p class="hero-sub">Practical tutorials and deployment guides.</p>
 </div>
 
@@ -13,10 +13,21 @@
     <!-- LOOP THROUGH ARTICLES FROM DATABASE -->
     {% for article in articles %}
     <a href="/{{ article.slug }}" class="card">
+        
         <div class="card-img-wrapper">
-            <!-- Dynamic Video Thumbnail -->
-            <img src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg" class="card-img" alt="{{ article.title }}">
+            {% if article.video_id %}
+                <!-- VIDEO THUMBNAIL -->
+                <img src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg" class="card-img" alt="{{ article.title }}">
+            {% else %}
+                <!-- TEXT-ONLY PLACEHOLDER (No Video) -->
+                <div class="card-placeholder">
+                    <div class="placeholder-icon">📄</div>
+                    <!-- Uses custom placeholder text if set, else uses category -->
+                    <div class="placeholder-text">{{ article.placeholder_text if article.placeholder_text else article.category }}</div>
+                </div>
+            {% endif %}
         </div>
+
         <div class="card-body">
             <div class="card-meta">
                 <span class="card-tag">{{ article.category }}</span>

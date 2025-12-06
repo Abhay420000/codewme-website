@@ -10,37 +10,36 @@
             <h1 class="article-h1">{% block article_header %}Title{% endblock %}</h1>
         </div>
 
-        <!-- Suggestion Box -->
-        <div class="rec-box">
-            💡 <strong>Recommendation:</strong> Watch the video tutorial below before reading.
-        </div>
+        <!-- Capture the video ID into a variable to check if it exists -->
+        {% set vid = self.video_id() | trim %}
 
-        <!-- Video Player -->
-        <div class="video-container">
-            <iframe 
-                class="video-iframe" 
-                src="https://www.youtube.com/embed/{% block video_id %}{% endblock %}" 
-                frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
+        {% if vid %}
+            <!-- Suggestion Box (Only show if there is a video) -->
+            <div class="rec-box">
+                💡 <strong>Recommendation:</strong> Watch the video tutorial below before reading.
+            </div>
+
+            <!-- Video Player (Only show if there is a video) -->
+            <div class="video-container">
+                <iframe 
+                    class="video-iframe" 
+                    src="https://www.youtube.com/embed/{{ vid }}" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        {% endif %}
 
         <!-- Article Text -->
         <article>
             {% block article_body %}{% endblock %}
         </article>
 
-        <!-- Bottom Ad (Hidden) -->
-        <!-- <div class="ad-slot ad-bottom">Bottom Ad Space</div> -->
-
     </div>
 
     <!-- RIGHT SIDEBAR -->
     <aside class="sidebar-col">
         
-        <!-- Sidebar Ad (Hidden) -->
-        <!-- <div class="ad-slot ad-sidebar">Sidebar Ad Space</div> -->
-
         <div class="sidebar-box">
             <h3 class="sidebar-title">Latest Guides</h3>
             <ul class="sidebar-list">
