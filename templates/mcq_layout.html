@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+<!-- Inject MCQ-Specific CSS -->
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/article.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/mcq.css') }}">
+{% endblock %}
+
+{% block title %}{{ title }} - CodeWme{% endblock %}
+{% block meta_description %}Practice {{ title }}. Free mock exam questions with detailed explanations and answers.{% endblock %}
+
+{% block content %}
+<div class="layout-split">
+    
+    <!-- LEFT CONTENT (Questions) -->
+    <div class="content-col mcq-container">
+        
+        <div class="article-header">
+            <span class="card-tag" style="font-size: 0.9rem;">{{ category | upper }}</span>
+            <h1 class="article-h1" style="margin-top:10px;">{{ title }}</h1>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+        <div class="rec-box">
+            📝 <strong>Instructions:</strong> Click on an option to check your answer immediately.
+        </div>
+
+        <!-- QUESTIONS LOOP -->
+        {% for q in questions %}
+        <div class="card mcq-card" id="q{{ loop.index }}">
+            
+            <!-- Question Title with Anchor Link -->
+            <h3 class="article-h3" style="margin-top: 0; font-size: 1.2rem; color: var(--text-header);">
+                <a href="#q{{ loop.index }}" class="question-anchor" title="Link to this question">#{{ loop.index }}</a>
+                {{ q.question }}
+            </h3>
+
+            <!-- Options List (Interactive) -->
+            <div class="mcq-options-list" id="opts-{{ q.id }}">
+                {% for opt in q.options %}
+                <!-- Check if this option is the correct one and mark it in data attribute -->
+                <div class="mcq-option" 
+                     data-correct="{{ 'true' if opt.strip() == q.correct.strip() else 'false' }}"
+                     onclick="checkAnswer(this, 'ans-{{ q.id }}')">
+                    
+                    <span class="option-label">
+                        {{ ["A","B","C","D","E"][loop.index0] }}.
+                    </span>
+                    {{ opt }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Manual Reveal Button (Optional fallback) -->
+            <div style="margin-top: 1rem; text-align: right;">
+                <button onclick="revealAnswer('ans-{{ q.id }}', 'opts-{{ q.id }}')" class="answer-reveal-btn" title="Show answer without selecting">
+                    Reveal Answer
+                </button>
+            </div>
+
+            <!-- Hidden Answer Area -->
+            <div id="ans-{{ q.id }}" class="answer-box">
+                <p class="correct-text">
+                    ✅ Correct Answer: {{ q.correct }}
+                </p>
+                <hr style="border:0; border-top:1px solid var(--border-color); margin: 15px 0;">
+                <div class="explanation-text">
+                    <strong>Explanation:</strong><br>
+                    {{ q.explanation }}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+        <!-- PAGINATION / NEXT SET LINK -->
+        <div class="quiz-nav">
+            {% if has_next %}
+            <a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-{{ set_num + 1 }}" class="btn-next-set">
+                Next Set (Set {{ set_num + 1 }}) &rarr;
+            </a>
+            {% else %}
+            <div style="padding: 20px; background: var(--ad-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+                <p style="margin:0; color:var(--text-muted);">🎉 You have reached the end of this series!</p>
+                <a href="/practice-mcqs" style="color:var(--primary); font-weight:bold; margin-top:10px; display:inline-block;">Back to Practice Dashboard</a>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar-col">
+        <div class="sidebar-box">
+            <h3 class="sidebar-title">Browse Sets</h3>
+            <ul class="sidebar-list">
+                <!-- Simple navigation for now -->
+                <li><a href="/practice-mcqs">← Back to All Sets</a></li>
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-1">Set 1</a></li>
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-2">Set 2</a></li>
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-3">Set 3</a></li>
+            </ul>
+        </div>
+        
+        <!-- Sidebar Ad Slot -->
+        <div class="ad-slot ad-sidebar" style="margin-top: 2rem;">MCQ Sidebar Ad</div>
+    </aside>
+
+</div>
+
+<!-- INTERACTIVE JS LOGIC -->
+<script>
+    function checkAnswer(selectedOption, answerBoxId) {
+        // 1. Get the container of options
+        const optionsList = selectedOption.parentElement;
+
+        // 2. Prevent clicking if already answered
+        if (optionsList.classList.contains('answered')) {
+            return;
+        }
+
+        // 3. Mark as answered
+        optionsList.classList.add('answered');
+
+        // 4. Check correctness
+        const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+
+        if (isCorrect) {
+            selectedOption.classList.add('correct');
+        } else {
+            selectedOption.classList.add('incorrect');
+            
+            // 5. Highlight the actual correct answer if user was wrong
+            const allOptions = optionsList.children;
+            for (let opt of allOptions) {
+                if (opt.getAttribute('data-correct') === 'true') {
+                    opt.classList.add('correct');
+                }
+            }
+        }
+
+        // 6. Reveal the explanation box
+        const ansBox = document.getElementById(answerBoxId);
+        if (ansBox) {
+            ansBox.style.display = 'block';
+        }
+    }
+
+    // Fallback function for the "Reveal" button
+    function revealAnswer(answerBoxId, optionsListId) {
+        const ansBox = document.getElementById(answerBoxId);
+        const optionsList = document.getElementById(optionsListId);
+        
+        if (ansBox.style.display === 'block') return; // Already open
+
+        ansBox.style.display = 'block';
+        optionsList.classList.add('answered'); // Disable clicking
+
+        // Highlight correct answer
+        const allOptions = optionsList.children;
+        for (let opt of allOptions) {
+            if (opt.getAttribute('data-correct') === 'true') {
+                opt.classList.add('correct');
+            }
+        }
+    }
+</script>
+
+<!-- GOOGLE SCHEMA MARKUP (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "{{ title }}",
+  "hasPart": [
+    {% for q in questions %}
+    {
+      "@type": "Question",
+      "name": "{{ q.question | replace('"', '\\"') | replace('\n', ' ') }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ q.correct | replace('"', '\\"') | replace('\n', ' ') }}"
+      },
+      "suggestedAnswer": [
+        {% for opt in q.options %}
+        {
+          "@type": "Answer",
+          "text": "{{ opt | replace('"', '\\"') | replace('\n', ' ') }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}

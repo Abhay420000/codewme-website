@@ -16,37 +16,94 @@
 
 <!-- SECTION HEADING -->
 <div class="section-heading-wrapper">
-    <h2 class="section-heading">Latest Practice Sets</h2>
+    <h2 class="section-heading">Available Sets</h2>
     <div class="section-underline"></div>
 </div>
 
 <!-- CARDS GRID -->
 <div class="practice-grid">
     
-    <!-- Example Set Card -->
-    <a href="/mcqs/salesforce-agentforce/set-1" class="card" style="text-decoration: none; padding: 0;">
-        <div class="set-card-icon">
-            <span>☁️</span>
-        </div>
-        <div class="card-body" style="text-align: left;">
-            <div class="card-meta">
-                <span class="card-tag">AGENTFORCE</span>
-                <span>Set 1</span>
+    {% if all_sets %}
+        <!-- Loop through the dynamic sets passed from app.py -->
+        {% for s in all_sets %}
+        <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" class="card set-card-item" style="text-decoration: none; padding: 0; display: none;">
+            <div class="set-card-icon">
+                <!-- Icon based on category (Simple logic: Default cloud) -->
+                <span>☁️</span>
             </div>
-            <h3 class="card-title">Salesforce Agentforce</h3>
-            <p class="card-desc">20 essential questions for the Agentforce Specialist certification.</p>
-        </div>
-    </a>
-    
-    <!-- Placeholder Card -->
-    <div class="card" style="padding: 2rem; opacity: 0.6;">
-        <div class="coming-soon-wrapper">
-            <div>
-                <h3 class="card-title" style="margin-bottom: 0.5rem;">More Coming Soon</h3>
-                <p class="card-desc">Stay tuned for Admin & LWC sets.</p>
+            <div class="card-body" style="text-align: left;">
+                <div class="card-meta">
+                    <span class="card-tag">{{ s.category | upper }}</span>
+                    <span>Set {{ s.set_num }}</span>
+                </div>
+                <h3 class="card-title">{{ s.category }}</h3>
+                <p class="card-desc">Practice questions for Set {{ s.set_num }}. Master the concepts with detailed explanations.</p>
             </div>
+        </a>
+        {% endfor %}
+    {% else %}
+        <!-- Fallback if no questions found in json -->
+        <div class="card" style="padding: 2rem; opacity: 0.6; grid-column: 1 / -1; text-align: center;">
+            <h3 class="card-title">No Questions Found</h3>
+            <p class="card-desc">Please generate mcqs.json first.</p>
         </div>
-    </div>
+    {% endif %}
 
 </div>
+
+<!-- LOAD MORE BUTTON -->
+<div class="load-more-container" style="text-align: center; padding: 2rem 0 4rem 0;">
+    <button id="loadMoreBtn" class="btn-load-more" style="background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem 2.5rem; border-radius: 2rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Load More Sets</button>
+</div>
+
+<!-- JAVASCRIPT FOR LOAD MORE -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll('.set-card-item');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let visibleCount = 6;
+
+        // 1. Initially show the first 6 cards
+        for(let i=0; i<visibleCount && i<cards.length; i++) {
+            cards[i].style.display = 'flex';
+        }
+
+        // 2. Hide button if total sets are less than or equal to 6
+        if(cards.length <= visibleCount) {
+            loadMoreBtn.style.display = 'none';
+        }
+
+        // 3. Handle Click
+        loadMoreBtn.addEventListener('click', function() {
+            const nextCount = visibleCount + 6;
+            
+            // Show next batch
+            for(let i=visibleCount; i<nextCount && i<cards.length; i++) {
+                cards[i].style.display = 'flex';
+                cards[i].style.animation = "fadeIn 0.5s ease";
+            }
+            
+            visibleCount = nextCount;
+
+            // Hide button if we have shown all cards
+            if(visibleCount >= cards.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<!-- Add fadeIn animation locally if needed -->
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.btn-load-more:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
+}
+</style>
 {% endblock %}

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "af_1",
+    "set_id": 1,
+    "category": "Salesforce Agentforce",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "sa_2",
+    "set_id": 1,
+    "category": "Salesforce Admin",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "py_1",
+    "set_id": 1,
+    "category": "Agentforce",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "js_1",
+    "set_id": 1,
+    "category": "Admin",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "af_2",
+    "set_id": 2,
+    "category": "Salesforce Agentforce",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "sa_4",
+    "set_id": 2,
+    "category": "Salesforce Admin",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "py_2",
+    "set_id": 2,
+    "category": "Agentforce",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "js_2",
+    "set_id": 2,
+    "category": "Admin",
+    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "options": [
+      "Option A text",
+      "Option B text",
+      "Option C text"
+    ],
+    "correct": "Option B text",
+    "explanation": "Detailed explanation here..."
+  }
+]
