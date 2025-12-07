@@ -219,13 +219,20 @@ def confirm_payment():
                     'message': 'Payment successful! You are registered for the contest.',
                     'contest_id': contest_id})
     
-# Conceptual new route in app.py
-
+# --- ROUTE: Dedicated Registration Page ---
 @app.route('/register/<contest_id>')
 def registration_page(contest_id):
-    # This page would fetch contest details and display the registration form.
-    # The form would then POST or AJAX request the OTP endpoints defined earlier.
-    return render_template('registration_page.html', contest_id=contest_id)
+    live_contests, _ = get_contests()
+    
+    # Find the specific contest matching the ID from the URL
+    contest = next((c for c in live_contests if c['id'] == contest_id), None)
+    
+    if not contest:
+        # If the contest is not found (or is expired), show 404
+        abort(404)
+        
+    return render_template('registration_page.html', 
+                           contest=contest)
 
 # --- 1. HOMEPAGE ---
 @app.route('/')
