@@ -1,29 +1,19 @@
 /* =========================================
-   CONTEST PAGE STYLES
+   CONTEST PAGE STYLES (NEW CARD LAYOUT)
    ========================================= */
 
 .contest-container {
-    text-align: center;
-    padding: 6rem 1.5rem;
-    min-height: 60vh; /* Keeps footer at bottom */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 2rem 0 4rem;
+    max-width: 1000px; /* Constrain content width */
+    margin: 0 auto;
 }
 
 .contest-icon {
-    font-size: 5rem;
-    margin-bottom: 1.5rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
     display: inline-block;
-    /* Subtle floating animation */
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
+    color: var(--primary);
+    animation: none; /* Remove previous floating animation */
 }
 
 .contest-title {
@@ -32,6 +22,7 @@
     color: var(--text-header);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
+    text-align: center;
 }
 
 .contest-sub {
@@ -39,57 +30,89 @@
     color: var(--text-muted);
     margin-bottom: 3rem;
     max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
-/* Coming Soon Card */
-.coming-soon-card {
-    background-color: var(--bg-card);
-    padding: 3rem;
-    border-radius: 1rem;
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-    max-width: 500px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
+/* Contest Card Specifics (Extends styles from home.css) */
 
-/* Decorative top bar */
-.coming-soon-card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--primary), #8b5cf6);
-}
-
-.card-heading {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-header);
-    margin-bottom: 1rem;
-}
-
-.card-text {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
-.btn-back {
-    display: inline-block;
-    background-color: var(--ad-bg);
-    color: var(--text-main);
-    padding: 0.8rem 2rem;
-    border-radius: 2rem;
-    font-weight: 600;
+.contest-item {
     text-decoration: none;
-    border: 1px solid var(--border-color);
-    transition: all 0.2s ease;
+    display: flex; /* Ensure it starts as flex for the JS */
+    flex-direction: column;
 }
 
-.btn-back:hover {
+.contest-footer {
+    padding: 0.8rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-body);
+}
+
+.contest-price {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.contest-time-left {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.contest-status {
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    
+    /* Default Upcoming Style */
+    color: var(--primary); 
+    background-color: rgba(37, 99, 235, 0.1); 
+}
+
+.contest-status.expired {
+    color: var(--text-muted);
     background-color: var(--border-color);
+}
+
+.contest-status#status-c101[style*="background-color: rgb(34, 197, 94)"] {
+    /* LIVE NOW */
+    color: white !important;
+    background-color: #22c55e !important; 
+}
+
+
+.expired-item {
+    opacity: 0.6;
+}
+
+.btn-leaderboard {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+
+.btn-leaderboard:hover {
     color: var(--text-header);
-    transform: translateY(-2px);
+}
+
+.empty-state {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    padding: 2rem 0;
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+    .contest-title { font-size: 2.25rem; }
+    .contest-sub { font-size: 1.1rem; }
 }
