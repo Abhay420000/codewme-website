@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Contests - CodeWme{% endblock %}
+{% block title %}Coding Contests - CodeWme{% endblock %}
 
-<!-- Inject Contest-Specific CSS -->
 {% block custom_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/contest.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -14,15 +14,263 @@
     
     <h1 class="contest-title">Coding Contests</h1>
     <p class="contest-sub">Compete with developers around the world, solve algorithmic challenges, and climb the leaderboard.</p>
-    
-    <div class="coming-soon-card">
-        <h3 class="card-heading">Feature Coming Soon</h3>
-        <p class="card-text">
-            We are currently building a robust contest platform. 
-            Stay tuned for weekly challenges and prizes!
-        </p>
-        <a href="/" class="btn-back">Return Home</a>
+
+    <div class="section-header">
+        <h2 class="section-title">Live & Upcoming Contests</h2>
+        <div class="section-underline"></div>
     </div>
+    
+    {% if live_contests %}
+    <div class="grid-cards" id="liveContestsGrid">
+        {% for contest in live_contests %}
+        <a href="#register-{{ contest.id }}" 
+           class="card contest-item live-item" 
+           data-start-date="{{ contest.start_date }}"
+           data-price="{{ contest.price }}">
+        
+            <div class="card-img-wrapper">
+                {% if contest.image_url %}
+                    <img src="{{ contest.image_url }}" class="card-img" alt="{{ contest.title }}">
+                {% else %}
+                    <div class="card-placeholder">
+                        <div class="placeholder-icon">💻</div>
+                        <div class="placeholder-text">{{ contest.tag | upper }}</div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="card-body">
+                <div class="card-meta">
+                    <span class="card-tag">{{ contest.tag | upper }}</span>
+                    <span class="contest-status" id="status-{{ contest.id }}">Upcoming</span>
+                </div>
+                <h3 class="card-title">{{ contest.title }}</h3>
+                <p class="card-desc">{{ contest.description }}</p>
+            </div>
+            <div class="contest-footer">
+                <span class="contest-price">{{ "$%.2f"|format(contest.price) if contest.price > 0 else "FREE" }}</span>
+                <span class="contest-time-left" id="countdown-{{ contest.id }}"></span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="load-more-container">
+        <button id="loadMoreLiveBtn" class="btn-load-more" style="display: none;">Load More Live Contests</button>
+    </div>
+    {% else %}
+    <p class="empty-state">No live or upcoming contests currently scheduled. Check back soon!</p>
+    {% endif %}
+
+
+    <div class="section-header" style="margin-top: 4rem;">
+        <h2 class="section-title">Past Contests</h2>
+        <div class="section-underline"></div>
+    </div>
+    
+    {% if expired_contests %}
+    <div class="grid-cards" id="expiredContestsGrid">
+        {% for contest in expired_contests %}
+        <div class="card contest-item expired-item" style="opacity: 0.6; pointer-events: none;">
+            <div class="card-img-wrapper">
+                {% if contest.image_url %}
+                    <img src="{{ contest.image_url }}" class="card-img" alt="{{ contest.title }}">
+                {% else %}
+                    <div class="card-placeholder">
+                        <div class="placeholder-icon">❌</div>
+                        <div class="placeholder-text">{{ contest.tag | upper }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="card-meta">
+                    <span class="card-tag">{{ contest.tag | upper }}</span>
+                    <span class="contest-status expired">EXPIRED</span>
+                </div>
+                <h3 class="card-title">{{ contest.title }}</h3>
+                <p class="card-desc">{{ contest.description }}</p>
+            </div>
+            <div class="contest-footer">
+                <span class="contest-price">Ended {{ contest.end_date.split(' ')[0] }}</span>
+                <a href="#leaderboard" class="btn-leaderboard">View Leaderboard</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="load-more-container">
+        <button id="loadMoreExpiredBtn" class="btn-load-more" style="display: none;">Load More Expired Contests</button>
+    </div>
+    {% else %}
+    <p class="empty-state">No past contests found.</p>
+    {% endif %}
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // --- CONFIGURATION ---
+        const LIVE_LIMIT = 4;
+        const EXPIRED_LIMIT = 2;
+        const LOAD_STEP = 6;
+        
+        const liveCards = document.querySelectorAll('.live-item');
+        const expiredCards = document.querySelectorAll('.expired-item');
+        const liveLoadBtn = document.getElementById('loadMoreLiveBtn');
+        const expiredLoadBtn = document.getElementById('loadMoreExpiredBtn');
+
+        let visibleLiveCount = 0;
+        let visibleExpiredCount = 0;
+
+        // --- 1. INITIAL DISPLAY LOGIC ---
+        function initializeContests(cards, limit, loadBtn, visibleCountRef, loadStep, isLive) {
+            cards.forEach(card => card.style.display = 'none');
+            
+            let currentVisible = 0;
+            for(let i = 0; i < cards.length && currentVisible < limit; i++) {
+                cards[i].style.display = 'flex';
+                currentVisible++;
+            }
+
+            if (isLive) {
+                visibleLiveCount = currentVisible;
+            } else {
+                visibleExpiredCount = currentVisible;
+            }
+
+            if (cards.length > limit) {
+                loadBtn.style.display = 'block';
+            }
+        }
+        
+        // --- 2. LOAD MORE HANDLERS ---
+        function createLoadMoreHandler(cards, limit, loadBtn, getVisibleCount, setVisibleCount) {
+            return function() {
+                let currentVisible = getVisibleCount();
+                const nextCount = currentVisible + LOAD_STEP;
+                
+                for(let i = currentVisible; i < nextCount && i < cards.length; i++) {
+                    cards[i].style.display = 'flex';
+                    cards[i].style.animation = "fadeIn 0.5s ease";
+                }
+                
+                setVisibleCount(Math.min(nextCount, cards.length));
+
+                if(getVisibleCount() >= cards.length) {
+                    loadBtn.style.display = 'none';
+                }
+            };
+        }
+
+        liveLoadBtn.addEventListener('click', createLoadMoreHandler(
+            liveCards, LIVE_LIMIT, liveLoadBtn, 
+            () => visibleLiveCount, (count) => visibleLiveCount = count
+        ));
+
+        expiredLoadBtn.addEventListener('click', createLoadMoreHandler(
+            expiredCards, EXPIRED_LIMIT, expiredLoadBtn, 
+            () => visibleExpiredCount, (count) => visibleExpiredCount = count
+        ));
+
+        // Initialize display
+        initializeContests(liveCards, LIVE_LIMIT, liveLoadBtn, visibleLiveCount, LOAD_STEP, true);
+        initializeContests(expiredCards, EXPIRED_LIMIT, expiredLoadBtn, visibleExpiredCount, LOAD_STEP, false);
+        
+        // --- 3. COUNTDOWN AND STATUS LOGIC ---
+        function updateContestTimers() {
+            const now = new Date().getTime();
+            
+            liveCards.forEach(card => {
+                const startDateString = card.dataset.startDate;
+                const startDate = new Date(startDateString.replace(' ', 'T')).getTime(); // ISO format conversion
+                const countdownEl = document.getElementById('countdown-' + card.href.split('-').pop());
+                const statusEl = document.getElementById('status-' + card.href.split('-').pop());
+                
+                if (!statusEl || !countdownEl) return;
+
+                const diff = startDate - now;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                
+                if (diff < 0) {
+                    // Contest is Ongoing/Live (for simplicity, we assume live when start date passes)
+                    const end = new Date(card.dataset.endDate.replace(' ', 'T')).getTime();
+                    const liveHours = Math.floor((end - now) / (1000 * 60 * 60));
+                    
+                    if (liveHours > 0) {
+                        statusEl.innerText = "LIVE NOW";
+                        statusEl.style.backgroundColor = "#22c55e"; // Success green
+                        countdownEl.innerText = `${liveHours} hrs left`;
+                        card.href = "#join-contest"; // Simulated join link
+                    } else {
+                        // The get_contests helper should have moved this to expired, but for safety:
+                        statusEl.innerText = "ENDED";
+                        statusEl.style.backgroundColor = "#ef4444"; // Danger red
+                        countdownEl.innerText = "Check Results";
+                        card.href = "#results";
+                    }
+
+                } else {
+                    // Contest is Upcoming
+                    statusEl.innerText = "UPCOMING";
+                    statusEl.style.backgroundColor = "rgba(59, 130, 246, 0.1)"; // Primary blue background
+                    countdownEl.innerText = `Starts in ${hours + 1} hrs`;
+                }
+            });
+        }
+        
+        // Update timers immediately and every hour (or more frequently for testing)
+        updateContestTimers();
+        setInterval(updateContestTimers, 600000); // Update every 10 minutes (600000ms) for production, or 1000ms for testing
+
+        // --- 4. SIMULATED ANTI-CHEATING LOGIC (Frontend Only) ---
+        let tabShiftCount = 0;
+        let lastShiftTime = 0;
+        const MAX_SHIFTS = 3;
+        const TIME_WINDOW = 10000; // 10 seconds
+
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                const now = new Date().getTime();
+                if (now - lastShiftTime < TIME_WINDOW) {
+                    tabShiftCount++;
+                } else {
+                    tabShiftCount = 1; // Reset count if time window passed
+                }
+                lastShiftTime = now;
+                
+                if (tabShiftCount > MAX_SHIFTS) {
+                    if (window.location.href.includes('#join-contest')) {
+                        alert(`🛑 ANTI-CHEATING ALERT: Tab shift limit exceeded (${MAX_SHIFTS} times in 10s). Your exam has been automatically submitted.`);
+                        // Here you would send an AJAX request to the server to submit the contest
+                        window.location.href = "/contest"; // Redirect away from simulated exam
+                    }
+                }
+            }
+        });
+        
+        // --- 5. SIMULATED REGISTRATION FLOW ---
+        document.getElementById('liveContestsGrid').addEventListener('click', function(e) {
+            let target = e.target.closest('.live-item');
+            if (!target) return;
+            
+            e.preventDefault();
+            
+            if (target.href.includes('#join-contest')) {
+                // Simulated 'Join Contest' logic
+                alert("✅ You are registered! Starting the online compiler contest now (Simulated environment). The tab-shift monitor is active!");
+                // Here you would redirect to a real unique contest compiler page
+                // For simulation, we'll just focus on the anti-cheating logic now active.
+                console.log("Simulated contest started. Anti-cheating monitoring is active.");
+                return;
+            }
+            
+            // Simulated 'Register/Upcoming' logic
+            if (target.href.includes('#register-')) {
+                const title = target.querySelector('.card-title').innerText;
+                const price = target.dataset.price;
+                
+                alert(`Redirecting to registration for "${title}" (Price: $${price}).\n\n[SIMULATION]:\n1. OTP email sent.\n2. Redirect to Payment Gateway.\n3. Upon success, registration confirmed.`);
+                // In a real app, this is where you'd redirect to a custom /register route.
+            }
+        });
+    });
+</script>
 {% endblock %}
