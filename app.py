@@ -1,6 +1,10 @@
 from flask import Flask, render_template, abort, send_from_directory, request, jsonify, session, redirect, url_for
 import json
 import os
+# --- START FIX: ADD DOTENV LOADER ---
+from dotenv import load_dotenv
+load_dotenv() 
+# --- END FIX ---
 import math
 from datetime import datetime
 import random # ADD THIS IMPORT
