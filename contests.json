@@ -1,0 +1,83 @@
+[
+  {
+    "id": "c101",
+    "title": "Python Data Structures Challenge",
+    "tag": "Python",
+    "description": "Test your knowledge on lists, dictionaries, and sets.",
+    "start_date": "2025-12-15 10:00:00",
+    "end_date": "2025-12-15 12:00:00",
+    "image_url": "https://images.unsplash.com/photo-1549490349-8643362c367d?fit=crop&w=600&h=300",
+    "price": 10
+  },
+  {
+    "id": "c102",
+    "title": "Apex Trigger Mastery",
+    "tag": "Salesforce",
+    "description": "Advanced scenarios on Before/After triggers and best practices.",
+    "start_date": "2026-01-05 14:00:00",
+    "end_date": "2026-01-05 16:00:00",
+    "image_url": "",
+    "price": 25
+  },
+  {
+    "id": "c103",
+    "title": "Web Fundamentals: HTML/CSS",
+    "tag": "Web Dev",
+    "description": "A basic-level contest on responsive design and semantics.",
+    "start_date": "2025-12-10 18:00:00",
+    "end_date": "2025-12-10 20:00:00",
+    "image_url": "https://images.unsplash.com/photo-1546146477-d779532f3c74?fit=crop&w=600&h=300",
+    "price": 0
+  },
+  {
+    "id": "c104",
+    "title": "SQL Join Operations",
+    "tag": "Database",
+    "description": "Inner, Left, Right, and Full Joins—solve complex queries.",
+    "start_date": "2025-12-25 09:00:00",
+    "end_date": "2025-12-25 11:00:00",
+    "image_url": "",
+    "price": 15
+  },
+  {
+    "id": "c105",
+    "title": "JavaScript ES6 Features",
+    "tag": "JavaScript",
+    "description": "Destructuring, Promises, and Async/Await challenges.",
+    "start_date": "2026-02-01 19:00:00",
+    "end_date": "2026-02-01 21:00:00",
+    "image_url": "",
+    "price": 20
+  },
+  
+  {
+    "id": "e201",
+    "title": "Flask API Basics",
+    "tag": "Python",
+    "description": "The fundamental of creating RESTful APIs with Flask.",
+    "start_date": "2025-11-20 10:00:00",
+    "end_date": "2025-11-20 12:00:00",
+    "image_url": "https://images.unsplash.com/photo-1555099962-4167e42d729b?fit=crop&w=600&h=300",
+    "price": 10
+  },
+  {
+    "id": "e202",
+    "title": "LWC Component Styling",
+    "tag": "Salesforce",
+    "description": "Master the use of SLDS and custom CSS in Lightning Web Components.",
+    "start_date": "2025-10-01 09:00:00",
+    "end_date": "2025-10-01 11:00:00",
+    "image_url": "",
+    "price": 5
+  },
+  {
+    "id": "e203",
+    "title": "Basic Sorting Algorithms",
+    "tag": "Algorithms",
+    "description": "Bubble, Selection, and Insertion Sort implementations.",
+    "start_date": "2025-09-01 13:00:00",
+    "end_date": "2025-09-01 15:00:00",
+    "image_url": "https://images.unsplash.com/photo-1582213880145-2d17c7680789?fit=crop&w=600&h=300",
+    "price": 0
+  }
+]
