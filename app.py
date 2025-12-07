@@ -1,14 +1,34 @@
-from flask import Flask, render_template, abort, send_from_directory
+from flask import Flask, render_template, abort, send_from_directory, request, jsonify, session, redirect, url_for
+import json
 import json
 import os
 import math
 from datetime import datetime
+import random # ADD THIS IMPORT
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
 QUESTIONS_PER_SET = 20 
 CONTESTS_DB = 'contests.json'
+app.secret_key = os.environ.get('SECRET_KEY', 'default-insecure-key')
+# --- EMAIL CONFIGURATION (Using Gmail SMTP via Environment Variables) ---
+# NOTE: Set these environment variables before running the app.
+# See Step 4 for required variables (MAIL_USERNAME, MAIL_PASSWORD, etc.)
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_USERNAME')
+
+mail = Mail(app)
+
+# --- IN-MEMORY REGISTRATION STORE (Temporary: Replace with Database) ---
+# Format: { 'contest_id': { 'email': 'otp' } }
+# WARNING: This will reset every time the server restarts.
+user_otps = {}
 
 # --- HELPER: Load Articles ---
 def get_articles():
@@ -91,6 +111,110 @@ def get_contests():
     expired_contests.sort(key=lambda x: datetime.strptime(x['end_date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
 
     return live_contests, expired_contests
+# --- NEW ROUTE: API Endpoint to Send OTP ---
+@app.route('/api/contest/send_otp', methods=['POST'])
+def send_otp():
+    data = request.get_json()
+    email = data.get('email')
+    contest_id = data.get('contest_id')
+    
+    if not email or not contest_id:
+        return jsonify({'success': False, 'message': 'Missing email or contest ID'}), 400
+
+    # 1. Generate OTP
+    otp = str(random.randint(100000, 999999))
+    
+    # 2. Store OTP in session/in-memory store for verification
+    if contest_id not in user_otps:
+        user_otps[contest_id] = {}
+    
+    user_otps[contest_id][email] = otp
+    session['registration_email'] = email
+    session['current_contest_id'] = contest_id
+
+    # 3. Send Email
+    try:
+        msg = Message(subject=f'CodeWme Contest: Your Verification Code',
+                      recipients=[email])
+        
+        # We include the OTP in the body
+        msg.body = f"""
+Hello,
+
+Thank you for registering for the contest!
+
+Your One-Time Verification Code (OTP) is: {otp}
+
+Please enter this code on the registration screen to proceed to payment.
+
+If you did not request this, please ignore this email.
+"""
+        mail.send(msg)
+        
+        # Log to console for debugging (optional in production)
+        print(f"--- OTP SENT ---\nContest: {contest_id}\nEmail: {email}\nOTP: {otp}\n--------------")
+        
+        return jsonify({'success': True, 'message': 'Verification code sent to your email.'})
+    
+    except Exception as e:
+        # This catches errors like invalid MAIL_USERNAME/PASSWORD or connection issues
+        print(f"SMTP Error: {e}")
+        return jsonify({'success': False, 'message': 'Failed to send verification email. Check server configuration.'}), 500
+
+# --- NEW ROUTE: API Endpoint to Verify OTP ---
+@app.route('/api/contest/verify_otp', methods=['POST'])
+def verify_otp():
+    data = request.get_json()
+    entered_otp = data.get('otp')
+    
+    email = session.get('registration_email')
+    contest_id = session.get('current_contest_id')
+
+    if not email or not contest_id:
+        return jsonify({'success': False, 'message': 'Session expired. Please restart registration.'}), 400
+
+    stored_otp = user_otps.get(contest_id, {}).get(email)
+
+    if entered_otp == stored_otp:
+        # OTP is valid!
+        # Clear sensitive data and mark user as verified (in session)
+        session['is_verified'] = True
+        
+        # In a real app, delete OTP from database after successful verification
+        if email in user_otps[contest_id]:
+            del user_otps[contest_id][email]
+            
+        return jsonify({'success': True, 'message': 'OTP verified. Proceed to payment.'})
+    else:
+        return jsonify({'success': False, 'message': 'Invalid verification code.'}), 401
+
+# --- NEW ROUTE: Simulated Payment Confirmation ---
+@app.route('/api/contest/confirm_payment', methods=['POST'])
+def confirm_payment():
+    # Placeholder for actual payment gateway integration (Stripe, PayPal, etc.)
+    
+    is_verified = session.get('is_verified', False)
+    contest_id = session.get('current_contest_id')
+
+    if not is_verified or not contest_id:
+        return jsonify({'success': False, 'message': 'Verification required before payment.'}), 403
+
+    # SIMULATION: Assume payment succeeded.
+    
+    # In a real app, you would:
+    # 1. Charge the user via a payment gateway token.
+    # 2. Store the "is_paid" status in the database (linked to the user/contest).
+    
+    # Clear registration session data
+    session.pop('registration_email', None)
+    session.pop('current_contest_id', None)
+    session.pop('is_verified', None)
+    
+    # You would send a confirmation email here
+    
+    return jsonify({'success': True, 
+                    'message': 'Payment successful! You are registered for the contest.',
+                    'contest_id': contest_id})
 # --- 1. HOMEPAGE ---
 @app.route('/')
 def home():
