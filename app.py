@@ -1,21 +1,21 @@
 from flask import Flask, render_template, abort, send_from_directory, request, jsonify, session, redirect, url_for
 import json
-import json
 import os
 import math
 from datetime import datetime
 import random # ADD THIS IMPORT
-from flask_mail import Mail, Message
+from flask_mail import Mail, Message # ADD THIS IMPORT
 
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
 QUESTIONS_PER_SET = 20 
 CONTESTS_DB = 'contests.json'
+# We use a secret key for session management (required for Flask)
 app.secret_key = os.environ.get('SECRET_KEY', 'default-insecure-key')
+
 # --- EMAIL CONFIGURATION (Using Gmail SMTP via Environment Variables) ---
 # NOTE: Set these environment variables before running the app.
-# See Step 4 for required variables (MAIL_USERNAME, MAIL_PASSWORD, etc.)
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
 app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True').lower() == 'true'
@@ -28,7 +28,7 @@ mail = Mail(app)
 # --- IN-MEMORY REGISTRATION STORE (Temporary: Replace with Database) ---
 # Format: { 'contest_id': { 'email': 'otp' } }
 # WARNING: This will reset every time the server restarts.
-user_otps = {}
+user_otps = {} 
 
 # --- HELPER: Load Articles ---
 def get_articles():
@@ -81,7 +81,8 @@ def get_mcq_sets():
     set_list.sort(key=lambda x: (x['category'], x['set_num']))
     
     return set_list
-    # --- HELPER: Load & Sort Contests ---
+    
+# --- HELPER: Load & Sort Contests ---
 def get_contests():
     if not os.path.exists(CONTESTS_DB):
         return [], []
@@ -94,6 +95,7 @@ def get_contests():
     expired_contests = []
 
     for c in all_contests:
+        # Use a consistent date format for parsing
         start_time = datetime.strptime(c['start_date'], '%Y-%m-%d %H:%M:%S')
         end_time = datetime.strptime(c['end_date'], '%Y-%m-%d %H:%M:%S')
         
@@ -111,6 +113,7 @@ def get_contests():
     expired_contests.sort(key=lambda x: datetime.strptime(x['end_date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
 
     return live_contests, expired_contests
+
 # --- NEW ROUTE: API Endpoint to Send OTP ---
 @app.route('/api/contest/send_otp', methods=['POST'])
 def send_otp():
@@ -181,7 +184,7 @@ def verify_otp():
         session['is_verified'] = True
         
         # In a real app, delete OTP from database after successful verification
-        if email in user_otps[contest_id]:
+        if email in user_otps.get(contest_id, {}):
             del user_otps[contest_id][email]
             
         return jsonify({'success': True, 'message': 'OTP verified. Proceed to payment.'})
@@ -215,6 +218,7 @@ def confirm_payment():
     return jsonify({'success': True, 
                     'message': 'Payment successful! You are registered for the contest.',
                     'contest_id': contest_id})
+
 # --- 1. HOMEPAGE ---
 @app.route('/')
 def home():
