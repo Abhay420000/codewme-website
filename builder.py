@@ -361,8 +361,10 @@ class ArticleAutomator:
             f = tk.Frame(mcq_form, bg=self.BG_APP)
             f.pack(fill=tk.X, pady=2)
             
+            # Checkbutton for multiple correct answers
             cb = tk.Checkbutton(f, variable=self.mcq_var_correct_flags[i], bg=self.BG_APP, cursor="hand2")
             cb.pack(side=tk.LEFT)
+            CreateToolTip(cb, "Mark as Correct")
             
             tk.Label(f, text=f"{opt_labels[i]}.", bg=self.BG_APP, width=3, font=("Segoe UI", 9, "bold")).pack(side=tk.LEFT)
             tk.Entry(f, textvariable=self.mcq_opts[i], relief="solid", borderwidth=1, font=("Segoe UI", 10)).pack(side=tk.LEFT, fill=tk.X, expand=True)
@@ -678,12 +680,17 @@ class ArticleAutomator:
         if not q_id:
             q_id = uuid.uuid4().hex[:8]
 
+        current_set = self.mcq_var_set.get()
+        current_cat = self.mcq_var_cat.get().strip()
+        current_tag = self.mcq_var_tag.get().strip()
+        current_desc = self.mcq_var_desc.get().strip()
+
         data = {
             "id": q_id,
-            "set_id": self.mcq_var_set.get(),
-            "category": self.mcq_var_cat.get().strip(), # Title
-            "tag": self.mcq_var_tag.get().strip(),       # Tag
-            "description": self.mcq_var_desc.get().strip(), # Description (Set level)
+            "set_id": current_set,
+            "category": current_cat, # Title
+            "tag": current_tag,       # Tag
+            "description": current_desc, # Description (Set level)
             "question": q_text,
             "image_url": self.mcq_var_image_url.get().strip(),
             "options": options,
@@ -706,13 +713,19 @@ class ArticleAutomator:
         else:
             mcqs.append(data)
 
+        # SYNC: Update all other questions in the same set with new Tag/Description
+        for q in mcqs:
+            if q.get('set_id') == current_set and q.get('category') == current_cat:
+                q['tag'] = current_tag
+                q['description'] = current_desc
+
         with open(MCQS_DB, 'w', encoding='utf-8') as f:
             json.dump(mcqs, f, indent=2)
 
         # 5. UI Updates
         self.load_mcq_list()
         timestamp = datetime.now().strftime("%H:%M:%S")
-        self.lbl_mcq_status.config(text=f"✅ Saved! ({timestamp})", fg=self.BTN_SUCCESS)
+        self.lbl_mcq_status.config(text=f"✅ Saved & Synced! ({timestamp})", fg=self.BTN_SUCCESS)
         self.clear_question_fields_only()
         self.txt_mcq_question.focus_set()
 

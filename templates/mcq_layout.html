@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/article.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/mcq.css') }}">
 <style>
-    /* Badge style for the hint */
     .q-type-badge {
         font-size: 0.75rem;
         background-color: var(--bg-read-only, #e2e8f0);
@@ -152,19 +151,18 @@
 </div>
 
 <script>
-    // 1. Toggle Selection State (Handles Single vs Multi Logic)
+    // 1. Toggle Selection State
     function toggleSelection(el) {
-        const parent = el.closest('.mcq-options-list'); // Use closest to be safe
+        const parent = el.closest('.mcq-options-list'); 
         if (!parent) return;
-
-        const mode = parent.getAttribute('data-mode'); // 'single' or 'multi'
 
         // If locked (already checked), do nothing
         if (parent.classList.contains('checked-mode')) return;
+
+        const mode = parent.getAttribute('data-mode'); // 'single' or 'multi'
         
         if (mode === 'single') {
             // Radio Button Behavior: Deselect all others
-            // Select ONLY elements with class 'mcq-option'
             const siblings = parent.querySelectorAll('.mcq-option');
             siblings.forEach(sib => {
                 if (sib !== el) {
@@ -237,15 +235,13 @@
 
         // Determine Status Message
         statusLbl.style.opacity = '1';
-        if (anyIncorrect) {
-            statusLbl.innerText = "❌ Incorrect";
-            statusLbl.style.color = "#ef4444";
-        } else if (missedCorrect) {
-            statusLbl.innerText = "⚠️ Incomplete";
-            statusLbl.style.color = "#f59e0b"; // Amber/Orange
-        } else if (userSelectedCount === 0) {
+        if (userSelectedCount === 0) {
             statusLbl.innerText = "⚠️ No Option Selected";
             statusLbl.style.color = "#64748b";
+        } else if (anyIncorrect || missedCorrect) {
+            // STRICT MODE: Any wrong selection OR missing correct option = Incorrect
+            statusLbl.innerText = "❌ Incorrect";
+            statusLbl.style.color = "#ef4444";
         } else {
             statusLbl.innerText = "✅ Correct!";
             statusLbl.style.color = "#22c55e";

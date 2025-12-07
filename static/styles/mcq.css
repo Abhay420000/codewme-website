@@ -2,7 +2,6 @@
    MCQ / QUIZ PAGE STYLES
    ========================================= */
 
-/* Layout specific adjustments */
 .mcq-container {
     padding-bottom: 4rem;
 }
@@ -15,7 +14,6 @@
     display: block;
 }
 
-/* Question Styling */
 .question-anchor {
     text-decoration: none;
     color: var(--text-muted);
@@ -24,7 +22,6 @@
     opacity: 0.6;
     font-weight: 400;
 }
-
 .question-anchor:hover {
     opacity: 1;
     color: var(--primary);
@@ -36,12 +33,10 @@
     border: 1px solid var(--border-color);
     transition: box-shadow 0.2s ease;
 }
-
 .mcq-card:hover {
     box-shadow: var(--shadow);
 }
 
-/* Options Styling */
 .mcq-options-list {
     margin-top: 1.5rem;
     display: flex;
@@ -60,7 +55,7 @@
     align-items: flex-start;
     line-height: 1.5;
     position: relative;
-    user-select: none; /* Prevent text highlighting on rapid clicks */
+    user-select: none; 
 }
 
 .mcq-option:hover {
@@ -70,22 +65,20 @@
 
 /* --- INTERACTIVE STATES --- */
 
-/* 1. SELECTED (User clicks) */
+/* 1. Selected (Blue) */
 .mcq-option.selected {
     border-color: var(--primary);
     background-color: rgba(59, 130, 246, 0.1);
     box-shadow: 0 0 0 1px var(--primary) inset;
 }
 
-/* Locked State (After Check) */
+/* Locked Mode */
 .mcq-options-list.checked-mode .mcq-option {
     cursor: default;
     pointer-events: none;
 }
 
-/* 2. VALIDATION STATES (Overrides Selected) */
-
-/* Correct Choice */
+/* 2. Validation Colors (Overrides Selected) */
 .mcq-option.correct {
     background-color: rgba(34, 197, 94, 0.15) !important;
     border-color: #22c55e !important;
@@ -100,7 +93,6 @@
     transform: translateY(-50%);
 }
 
-/* Incorrect Choice */
 .mcq-option.incorrect {
     background-color: rgba(239, 68, 68, 0.15) !important;
     border-color: #ef4444 !important;
@@ -115,7 +107,7 @@
     transform: translateY(-50%);
 }
 
-/* Missed Correct Option (Was correct but user didn't pick it) */
+/* Missed (Was correct, but not selected) */
 .mcq-option.missed {
     border: 1px dashed #22c55e !important;
     background-color: rgba(34, 197, 94, 0.05) !important;
@@ -138,7 +130,6 @@
     min-width: 20px;
 }
 
-/* Answer & Explanation Box */
 .answer-reveal-btn {
     background: var(--bg-card);
     color: var(--text-muted);
@@ -151,14 +142,13 @@
     transition: all 0.2s ease;
     min-width: 130px;
 }
-
 .answer-reveal-btn:hover {
     border-color: var(--primary);
     color: var(--primary);
 }
 
 .answer-box {
-    display: none; /* Hidden by default */
+    display: none;
     margin-top: 1.5rem;
     background: var(--ad-bg);
     padding: 1.5rem;
@@ -204,13 +194,11 @@
     font-weight: 600;
     transition: transform 0.2s ease;
 }
-
 .btn-next-set:hover {
     transform: translateX(5px);
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-/* Active Set in Sidebar */
 .active-set {
     color: var(--primary) !important;
     font-weight: 700;
