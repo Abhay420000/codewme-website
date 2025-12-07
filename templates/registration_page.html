@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Register - {{ contest.title }} - CodeWme{% endblock %}
@@ -25,7 +24,7 @@
         color: var(--primary);
         margin-bottom: 2rem;
     }
-    /* Re-use modal styles for the form layout */
+    /* Re-use styles for the form layout */
     .form-step label {
         display: block;
         margin-top: 15px;
@@ -126,7 +125,7 @@
     // Get contest ID from the hidden input field
     const currentContestId = document.getElementById('contestId').value;
     
-    // --- STEP 1: OTP SEND ---
+    // --- STEP 1: OTP SEND (Now using dedicated page functions) ---
     async function handleOtpSend() {
         const email = document.getElementById('regEmail').value.trim();
         const password = document.getElementById('regPassword').value.trim();
