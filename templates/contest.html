@@ -438,34 +438,30 @@
              }
         }
 
-        // --- 5. INITIAL CARD CLICK HANDLER ---
+        // --- 5. INITIAL CARD CLICK HANDLER (CHANGE HERE) ---
         document.getElementById('liveContestsGrid').addEventListener('click', function(e) {
             let target = e.target.closest('.live-item');
             if (!target) return;
             
-            e.preventDefault();
+            // e.preventDefault() is removed so the browser follows the link, 
+            // but for safety, let's keep the modal click logic clean:
+            
             const contestId = target.href.split('-').pop();
-            const contestTitle = target.querySelector('.card-title').innerText;
             
             if (target.href.includes('#join-contest')) {
                 // Already Registered / Live
-                alert("✅ You are registered! Starting the online compiler contest now (Simulated environment). The anti-cheating tab-shift monitor is active!");
-                console.log("Simulated contest started. Anti-cheating monitoring is active.");
+                e.preventDefault(); 
+                alert("✅ You are registered! Starting the online compiler contest now...");
+                window.location.href = "/contest/start/" + contestId;
                 return;
             }
             
             if (target.href.includes('#register-')) {
-                // Upcoming - Start the registration flow
-                document.getElementById('modal-contest-title').innerText = contestTitle;
-                
-                // Reset to email step for new flow
-                document.getElementById('emailStep').style.display = 'block';
-                document.getElementById('otpStep').style.display = 'none';
-                document.getElementById('regEmail').value = '';
-                document.getElementById('regOtp').value = '';
-                document.getElementById('regPassword').value = '';
-                
-                openModal('registrationModal', contestId);
+                // UPCOMING - Force redirection to a new registration page URL
+                // We let the browser follow the link's original href after converting it:
+                window.location.href = "/register/" + contestId;
+                // We MUST stop the current event to prevent modal code from firing first
+                e.preventDefault(); 
             }
         });
     });
