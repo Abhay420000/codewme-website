@@ -158,19 +158,6 @@
         let visibleLiveCount = 0;
         let visibleExpiredCount = 0;
 
-        // --- GLOBAL MODAL FUNCTIONS ---
-        let currentContestId = null;
-
-        function openModal(modalId, contestId) {
-            currentContestId = contestId;
-            document.getElementById(modalId).style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-
         // --- 1. INITIAL DISPLAY LOGIC ---
         function initializeContests(cards, limit, loadBtn, visibleCountRef, loadStep, isLive) {
             cards.forEach(card => card.style.display = 'none');
@@ -225,7 +212,7 @@
         initializeContests(liveCards, LIVE_LIMIT, liveLoadBtn, visibleLiveCount, LOAD_STEP, true);
         initializeContests(expiredCards, EXPIRED_LIMIT, expiredLoadBtn, visibleExpiredCount, LOAD_STEP, false);
         
-        // --- 3. COUNTDOWN AND STATUS LOGIC ---
+        // --- 3. COUNTDOWN AND STATUS LOGIC (UNCHANGED) ---
         function updateContestTimers() {
             const now = new Date().getTime();
             
@@ -271,7 +258,7 @@
         updateContestTimers();
         setInterval(updateContestTimers, 600000); // Update every 10 minutes (600000ms) for production, or 1000ms for testing
 
-        // --- 4. SIMULATED ANTI-CHEATING LOGIC (Frontend Only) ---
+        // --- 4. ANTI-CHEATING LOGIC (UNCHANGED) ---
         let tabShiftCount = 0;
         let lastShiftTime = 0;
         const MAX_SHIFTS = 3;
@@ -290,178 +277,30 @@
                 if (tabShiftCount > MAX_SHIFTS) {
                     if (window.location.href.includes('#join-contest')) {
                         alert(`🛑 ANTI-CHEATING ALERT: Tab shift limit exceeded (${MAX_SHIFTS} times in 10s). Your exam has been automatically submitted.`);
-                        // Here you would send an AJAX request to the server to submit the contest
-                        window.location.href = "/contest"; // Redirect away from simulated exam
+                        window.location.href = "/contest"; 
                     }
                 }
             }
         });
         
-        // --- REAL-TIME STEP 1: OTP SEND ---
-        async function simulateOtpSend() {
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value.trim();
-            
-            if (!email || !password) {
-                alert("Please enter both email and a password.");
-                return;
-            }
-            
-            // Disable button during request
-            const button = document.querySelector('#emailStep button');
-            button.disabled = true;
-            button.innerText = 'Sending...';
-
-            try {
-                const response = await fetch('/api/contest/send_otp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, contest_id: currentContestId })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert("Verification code sent! Check your inbox.");
-                    
-                    // Switch to OTP step
-                    document.getElementById('emailStep').style.display = 'none';
-                    document.getElementById('otpStep').style.display = 'block';
-                    
-                    // Update status message
-                    document.getElementById('otp-status-message').innerHTML = '✅ Code sent to <strong style="color:var(--primary);">' + email + '</strong>.';
-
-                } else {
-                    alert("Error: " + data.message);
-                }
-
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                alert("Network error. Could not connect to server or SMTP configuration failed.");
-            } finally {
-                button.disabled = false;
-                button.innerText = 'Send Verification Code';
-            }
-        }
-
-        // --- REAL-TIME STEP 2: OTP VERIFICATION ---
-        async function simulateOtpVerification() {
-            const enteredOtp = document.getElementById('regOtp').value.trim();
-            
-            if (!enteredOtp) {
-                alert("Please enter the OTP.");
-                return;
-            }
-            
-            const button = document.querySelector('#otpStep button');
-            button.disabled = true;
-            button.innerText = 'Verifying...';
-
-            try {
-                const response = await fetch('/api/contest/verify_otp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ otp: enteredOtp })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert("Verification successful! Proceeding to payment.");
-                    
-                    // Close registration modal
-                    closeModal('registrationModal');
-                    
-                    // Open payment modal
-                    openModal('paymentModal', currentContestId);
-                    
-                    // Set payment price (get from card metadata)
-                    const priceEl = document.querySelector(`a[href="#register-${currentContestId}"]`);
-                    const price = priceEl ? priceEl.dataset.price : 0;
-                    document.getElementById('payment-amount').innerText = price > 0 ? `$${parseFloat(price).toFixed(2)}` : 'FREE (Registration Fee)';
-                    
-                } else {
-                    alert("❌ " + data.message);
-                }
-
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                alert("Network error during verification.");
-            } finally {
-                button.disabled = false;
-                button.innerText = 'Verify and Proceed to Payment';
-            }
-        }
-        
-        // --- REAL-TIME STEP 3: PAYMENT COMPLETION ---
-        async function simulatePaymentCompletion() {
-             const cardDetails = document.getElementById('cardDetails').value.trim();
-             if (!cardDetails) {
-                 alert("Please enter simulated card details.");
-                 return;
-             }
-            
-             const button = document.querySelector('#paymentModal button');
-             button.disabled = true;
-             button.innerText = 'Processing...';
-
-             try {
-                const response = await fetch('/api/contest/confirm_payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({}) 
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert("✅ Payment Confirmed! You are registered for the contest!");
-                    closeModal('paymentModal');
-                    
-                    // Update the card visually and set it to the 'join-contest' state
-                    const registeredCard = document.querySelector(`a[href="#register-${currentContestId}"]`);
-                    if (registeredCard) {
-                        registeredCard.href = "#join-contest";
-                        registeredCard.querySelector('.contest-status').innerText = 'REGISTERED';
-                        registeredCard.querySelector('.contest-status').style.backgroundColor = '#8b5cf6';
-                        registeredCard.querySelector('.contest-time-left').innerText = 'Ready to Join!';
-                    }
-                } else {
-                    alert("Payment failed: " + data.message);
-                }
-             } catch (error) {
-                console.error("Fetch Error:", error);
-                alert("Network error during payment confirmation.");
-             } finally {
-                button.disabled = false;
-                button.innerText = 'Confirm Payment (Simulated)';
-             }
-        }
-
-        // --- 5. INITIAL CARD CLICK HANDLER (CHANGE HERE) ---
+        // --- 5. INITIAL CARD CLICK HANDLER (NOW FORCING REDIRECT) ---
         document.getElementById('liveContestsGrid').addEventListener('click', function(e) {
             let target = e.target.closest('.live-item');
             if (!target) return;
             
-            // e.preventDefault() is removed so the browser follows the link, 
-            // but for safety, let's keep the modal click logic clean:
-            
+            e.preventDefault(); // Must prevent the hash-link behavior
+
             const contestId = target.href.split('-').pop();
             
             if (target.href.includes('#join-contest')) {
-                // Already Registered / Live
-                e.preventDefault(); 
+                // Already Registered - Join Contest
                 alert("✅ You are registered! Starting the online compiler contest now...");
                 window.location.href = "/contest/start/" + contestId;
-                return;
             }
             
             if (target.href.includes('#register-')) {
-                // UPCOMING - Force redirection to a new registration page URL
-                // We let the browser follow the link's original href after converting it:
+                // Upcoming - Redirect to the Flask Registration Page
                 window.location.href = "/register/" + contestId;
-                // We MUST stop the current event to prevent modal code from firing first
-                e.preventDefault(); 
             }
         });
     });
