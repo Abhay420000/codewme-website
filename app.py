@@ -2,11 +2,13 @@ from flask import Flask, render_template, abort, send_from_directory
 import json
 import os
 import math
+from datetime import datetime
 
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
-QUESTIONS_PER_SET = 20  
+QUESTIONS_PER_SET = 20 
+CONTESTS_DB = 'contests.json'
 
 # --- HELPER: Load Articles ---
 def get_articles():
@@ -59,7 +61,36 @@ def get_mcq_sets():
     set_list.sort(key=lambda x: (x['category'], x['set_num']))
     
     return set_list
+    # --- HELPER: Load & Sort Contests ---
+def get_contests():
+    if not os.path.exists(CONTESTS_DB):
+        return [], []
+    
+    with open(CONTESTS_DB, 'r', encoding='utf-8') as f:
+        all_contests = json.load(f)
 
+    now = datetime.now()
+    live_contests = []
+    expired_contests = []
+
+    for c in all_contests:
+        start_time = datetime.strptime(c['start_date'], '%Y-%m-%d %H:%M:%S')
+        end_time = datetime.strptime(c['end_date'], '%Y-%m-%d %H:%M:%S')
+        
+        if end_time > now:
+            # Contest is Live/Upcoming (Use start_date for sorting)
+            live_contests.append(c)
+        else:
+            # Contest is Expired (Use end_date for sorting)
+            expired_contests.append(c)
+
+    # 1. Sort Live: Older Order (Earliest start_date first)
+    live_contests.sort(key=lambda x: datetime.strptime(x['start_date'], '%Y-%m-%d %H:%M:%S'))
+
+    # 2. Sort Expired: Latest Expired Order (Most recent end_date first)
+    expired_contests.sort(key=lambda x: datetime.strptime(x['end_date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+
+    return live_contests, expired_contests
 # --- 1. HOMEPAGE ---
 @app.route('/')
 def home():
@@ -69,7 +100,10 @@ def home():
 # --- 2. FEATURE ROUTES ---
 @app.route('/contest')
 def page_contest():
-    return render_template('contest.html')
+    live_contests, expired_contests = get_contests()
+    return render_template('contest.html', 
+                           live_contests=live_contests, 
+                           expired_contests=expired_contests)
 
 @app.route('/practice-mcqs')
 def page_practice_mcqs():
