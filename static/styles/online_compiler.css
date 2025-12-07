@@ -147,13 +147,6 @@
     height: 700px;
 }
 
-@media (max-width: 900px) {
-    .compiler-grid {
-        grid-template-columns: 1fr;
-        height: auto;
-    }
-}
-
 /* --- PANELS --- */
 .editor-container, .io-container {
     display: flex;
@@ -191,11 +184,8 @@
     height: 100%;
     min-height: 150px;
     padding: 1rem;
-    
-    /* Force Dark Background & Light Text */
     background-color: #1e1e1e !important; 
     color: #e2e8f0 !important;
-    
     border: 1px solid #333;
     border-radius: 0.5rem;
     font-family: 'Consolas', 'Monaco', monospace;
@@ -209,8 +199,76 @@
     overflow-y: auto;
 }
 
-/* Focus states */
 .io-textarea:focus {
     outline: 1px solid var(--primary);
     border-color: var(--primary);
+}
+
+/* =========================================
+   MOBILE OPTIMIZATIONS (Max Width 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    .compiler-header {
+        flex-direction: column;
+        align-items: stretch; /* Stretch children to full width */
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .header-left {
+        justify-content: center; /* Center logo and title */
+        text-align: center;
+        flex-direction: column; /* Stack logo on top of title */
+    }
+
+    .compiler-icon {
+        margin-bottom: 0.5rem;
+    }
+
+    .compiler-title {
+        font-size: 1.5rem;
+    }
+
+    /* Stack Controls (Selector + Button) */
+    .controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .lang-selector-container {
+        width: 100%; /* Full width selector */
+    }
+
+    .btn-run {
+        width: 100%; /* Full width button */
+        justify-content: center;
+        padding: 0.8rem; /* Larger touch target */
+    }
+
+    /* Stack Editor and IO */
+    .compiler-grid {
+        display: flex;
+        flex-direction: column;
+        height: auto; /* Allow content to grow naturally */
+    }
+
+    .editor-container {
+        height: auto;
+    }
+
+    /* Adjust Editor Height for Mobile */
+    #editor {
+        min-height: 50vh; /* Takes up half the screen height */
+        height: 500px;    /* Max height to prevent getting lost */
+    }
+
+    .io-container {
+        gap: 1.5rem; /* More space between Input and Output */
+    }
+
+    /* Fixed heights for IO boxes on mobile to ensure scrollability */
+    .io-textarea, .io-output {
+        min-height: 200px; 
+    }
 }

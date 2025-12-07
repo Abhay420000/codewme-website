@@ -42,39 +42,50 @@
 
         <div class="io-container">
             
-            <div class="io-box" style="flex: 0 0 30%;">
+            <div class="io-box" id="io-input-box" style="flex: 0 0 30%;">
                 <div class="panel-label">Input (stdin)</div>
-                <textarea id="stdin" class="io-textarea" placeholder="⚠️ For interactive programs:&#10;Enter all user inputs here on separate lines BEFORE clicking Run.&#10;&#10;Example:&#10;John&#10;25"></textarea>
+                <textarea id="stdin" class="io-textarea" placeholder="Enter input here BEFORE running your code...&#10;Example:&#10;John&#10;25"></textarea>
             </div>
 
-            <div class="io-box" style="flex: 1;">
+            <div class="io-box" id="io-output-box" style="flex: 1;">
                 <div class="panel-label">Output (stdout)</div>
                 <div id="output" class="io-output"></div>
             </div>
-
         </div>
     </div>
 
 </div>
 
 <script>
-    // --- 1. LANGUAGE CONFIGURATION ---
+    // --- 1. EXTENSIVE LANGUAGE CONFIGURATION ---
     const languages = [
         { name: "Python", id: "python", version: "3.10.0", mode: "python", snippet: 'print("Hello from Python!")\nname = input("Enter name: ")\nprint(f"Nice to meet you, {name}")' },
         { name: "JavaScript", id: "javascript", version: "18.15.0", mode: "javascript", snippet: 'console.log("Hello from NodeJS!");' },
-        { name: "Java", id: "java", version: "15.0.2", mode: "java", snippet: 'import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.println("Enter name:");\n        if(scanner.hasNext()) {\n            String name = scanner.nextLine();\n            System.out.println("Hello " + name);\n        } else {\n            System.out.println("No input provided in STDIN box!");\n        }\n    }\n}' },
-        { name: "C++ (GCC)", id: "c++", version: "10.2.0", mode: "c_cpp", snippet: '#include <iostream>\nusing namespace std;\nint main() {\n    string name;\n    cout << "Enter Name: ";\n    if (cin >> name) {\n        cout << "Hello " << name;\n    } else {\n        cout << "No input found.";\n    }\n    return 0;\n}' },
+        { name: "Java", id: "java", version: "15.0.2", mode: "java", snippet: 'import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        if(scanner.hasNext()) {\n            String name = scanner.nextLine();\n            System.out.println("Hello " + name);\n        } else {\n            System.out.println("Hello Java! (No Input Provided)");\n        }\n    }\n}' },
+        { name: "C++ (GCC)", id: "c++", version: "10.2.0", mode: "c_cpp", snippet: '#include <iostream>\nusing namespace std;\nint main() {\n    string name;\n    if (cin >> name) {\n        cout << "Hello " << name;\n    } else {\n        cout << "Hello C++";\n    }\n    return 0;\n}' },
         { name: "C (GCC)", id: "c", version: "10.2.0", mode: "c_cpp", snippet: '#include <stdio.h>\nint main() {\n    printf("Hello C World");\n    return 0;\n}' },
         { name: "C#", id: "csharp", version: "6.12.0", mode: "csharp", snippet: 'using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello C#");\n    }\n}' },
         { name: "Go", id: "go", version: "1.16.2", mode: "golang", snippet: 'package main\nimport "fmt"\nfunc main() {\n    fmt.Println("Hello Go")\n}' },
         { name: "Rust", id: "rust", version: "1.68.2", mode: "rust", snippet: 'fn main() {\n    println!("Hello Rust");\n}' },
-        { name: "PHP", id: "php", version: "8.2.3", mode: "php", snippet: '<?php\n  echo "Hello PHP";\n?>' },
+        { name: "PHP", id: "php", version: "8.2.3", mode: "php", snippet: '<?php echo "Hello PHP"; ?>' },
         { name: "Swift", id: "swift", version: "5.3.3", mode: "swift", snippet: 'print("Hello Swift")' },
         { name: "TypeScript", id: "typescript", version: "5.0.3", mode: "typescript", snippet: 'const msg: string = "Hello TS";\nconsole.log(msg);' },
-        { name: "Ruby", id: "ruby", version: "3.0.1", mode: "ruby", snippet: 'puts "Hello Ruby"' }
+        { name: "Ruby", id: "ruby", version: "3.0.1", mode: "ruby", snippet: 'puts "Hello Ruby"' },
+        { name: "Kotlin", id: "kotlin", version: "1.8.20", mode: "kotlin", snippet: 'fun main() {\n    println("Hello Kotlin")\n}' },
+        { name: "Bash", id: "bash", version: "5.2.0", mode: "sh", snippet: 'echo "Hello Bash"' },
+        { name: "Perl", id: "perl", version: "5.36.0", mode: "perl", snippet: 'print "Hello Perl\\n";' },
+        { name: "R", id: "r", version: "4.2.3", mode: "r", snippet: 'print("Hello R")' },
+        { name: "Lua", id: "lua", version: "5.4.4", mode: "lua", snippet: 'print("Hello Lua")' },
+        { name: "Haskell", id: "haskell", version: "9.0.1", mode: "haskell", snippet: 'main = putStrLn "Hello Haskell"' },
+        { name: "Scala", id: "scala", version: "3.2.2", mode: "scala", snippet: 'object Main extends App {\n  println("Hello Scala")\n}' },
+        { name: "Dart", id: "dart", version: "2.19.6", mode: "dart", snippet: 'void main() {\n  print("Hello Dart");\n}' },
+        { name: "Pascal", id: "pascal", version: "3.2.2", mode: "pascal", snippet: 'program Hello;\nbegin\n  writeln(\'Hello Pascal\');\nend.' },
+        { name: "Elixir", id: "elixir", version: "1.11.3", mode: "elixir", snippet: 'IO.puts "Hello Elixir"' },
+        { name: "Julia", id: "julia", version: "1.9.0", mode: "julia", snippet: 'println("Hello Julia")' },
+        { name: "Nim", id: "nim", version: "1.6.12", mode: "text", snippet: 'echo "Hello Nim"' }
     ];
 
-    let currentLang = languages[0]; 
+    let currentLang = languages[0]; // Default to Python
 
     // --- 2. EDITOR SETUP ---
     var editor = ace.edit("editor");
@@ -100,16 +111,13 @@
         });
     }
 
-    function toggleLangList() {
-        langList.classList.toggle('show');
-    }
+    function toggleLangList() { langList.classList.toggle('show'); }
 
     function filterLanguages() {
         const term = langSearch.value.toLowerCase();
         const options = langList.getElementsByClassName('lang-option');
         for (let opt of options) {
-            const txt = opt.innerText.toLowerCase();
-            opt.style.display = txt.includes(term) ? "block" : "none";
+            opt.style.display = opt.innerText.toLowerCase().includes(term) ? "block" : "none";
         }
         langList.classList.add('show');
     }
@@ -120,14 +128,14 @@
         langList.classList.remove('show');
         editor.session.setMode("ace/mode/" + lang.mode);
         editor.setValue(lang.snippet, -1);
+        
+        // Reset Placeholder
+        document.getElementById('stdin').placeholder = "Enter input here BEFORE running your code...\nExample:\nJohn\n25";
     }
 
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.lang-selector-container')) {
-            langList.classList.remove('show');
-        }
+        if (!e.target.closest('.lang-selector-container')) langList.classList.remove('show');
     });
-
     renderLangList();
     langSearch.value = currentLang.name;
 
@@ -136,25 +144,33 @@
         if (!code) return false;
         code = code.toLowerCase();
         
-        // Keywords indicating input requirement
+        // Check for common input patterns
         if (langId === 'python' && code.includes('input(')) return true;
         if (langId.includes('c++') && code.includes('cin')) return true;
         if (langId.includes('c') && code.includes('scanf')) return true;
         if (langId === 'java' && (code.includes('scanner') || code.includes('system.in'))) return true;
+        if (langId === 'go' && code.includes('scan')) return true;
+        if (langId === 'ruby' && code.includes('gets')) return true;
+        if (langId === 'kotlin' && code.includes('readline')) return true;
         
         return false;
     }
 
-    // --- 5. EXECUTION LOGIC ---
+    // --- 5. RUN CODE (PISTON API) ---
     async function runCode() {
         const runBtn = document.getElementById('runBtn');
         const outputDiv = document.getElementById('output');
         const code = editor.getValue();
         const stdin = document.getElementById('stdin').value;
 
-        // SMART WARNING
+        // Mobile Scroll Logic
+        if (window.innerWidth <= 768) {
+            document.getElementById('io-output-box').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smart Warning
         if (codeNeedsInput(currentLang.id, code) && !stdin.trim()) {
-            const proceed = confirm("⚠️ WAITING FOR INPUT?\n\nThis compiler is non-interactive. You must enter your input in the 'Input (stdin)' box BEFORE running.\n\nYour code seems to ask for input, but the box is empty.\n\nClick OK to run anyway, or Cancel to enter input.");
+            const proceed = confirm("⚠️ WAITING FOR INPUT?\n\nThis compiler is non-interactive. You must enter your input in the 'Input (stdin)' box BEFORE clicking Run.\n\nYour code seems to ask for input, but the box is empty.\n\nClick OK to run anyway, or Cancel to enter input.");
             if (!proceed) {
                 document.getElementById('stdin').focus();
                 return; 
@@ -186,10 +202,10 @@
             if (data.run) {
                 if (data.run.stderr) {
                     outputDiv.innerText = data.run.stderr;
-                    outputDiv.style.color = "#ef4444"; // Red
+                    outputDiv.style.color = "#ef4444"; // Red for errors
                 } else {
                     outputDiv.innerText = data.run.stdout;
-                    outputDiv.style.color = "#86efac"; // Light Green
+                    outputDiv.style.color = "#86efac"; // Light Green for success
                 }
             } else {
                 outputDiv.innerText = "Error: " + (data.message || "Unknown error");
