@@ -1,1 +1,250 @@
 
+{% extends 'base.html' %}
+
+{% block title %}Register - {{ contest.title }} - CodeWme{% endblock %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/contest.css') }}">
+<style>
+    /* New dedicated page container style */
+    .registration-container {
+        max-width: 500px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: var(--bg-card);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+    }
+    .registration-container h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-header);
+    }
+    .registration-container p.contest-tag {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 2rem;
+    }
+    /* Re-use modal styles for the form layout */
+    .form-step label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+    .form-step input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background: var(--bg-body);
+        color: var(--text-main);
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+    .form-step button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        margin-top: 20px;
+        transition: background-color 0.2s;
+    }
+    .btn-modal-primary {
+        background-color: var(--primary);
+        color: white;
+    }
+    .btn-modal-primary:hover {
+        background-color: var(--primary-hover);
+    }
+    .btn-modal-success {
+        background-color: #22c55e;
+        color: white;
+    }
+    .btn-modal-success:hover {
+        background-color: #16a34a;
+    }
+    .info-message {
+        padding: 10px;
+        background: rgba(59, 130, 246, 0.1);
+        border-left: 4px solid var(--primary);
+        color: var(--text-main);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+    .otp-hint {
+        margin-top: 10px;
+        font-size: 0.85rem;
+        color: var(--accent-red);
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <h1>Contest Registration</h1>
+    <p class="contest-tag">{{ contest.title }} ({{ "$%.2f"|format(contest.price) if contest.price > 0 else "FREE" }})</p>
+
+    <div id="emailStep" class="form-step">
+        <h2>1. Email & Password</h2>
+        <label for="regEmail">Email Address:</label>
+        <input type="email" id="regEmail" placeholder="Enter your email" required>
+        <label for="regPassword">Password (for account creation):</label>
+        <input type="password" id="regPassword" placeholder="Set your password" required>
+        <button class="btn-modal-primary" onclick="handleOtpSend()">Send Verification Code</button>
+    </div>
+
+    <div id="otpStep" class="form-step" style="display: none;">
+        <h2>2. Verify OTP</h2>
+        <p id="otp-status-message" class="info-message"></p>
+        <label for="regOtp">Verification Code (6 digits):</label>
+        <input type="text" id="regOtp" placeholder="Enter OTP" required>
+        <button class="btn-modal-primary" onclick="handleOtpVerification()">Verify and Proceed to Payment</button>
+        <p class="otp-hint">Note: Check your inbox. Server logs may display the OTP if email fails.</p>
+    </div>
+
+    <div id="paymentStep" class="form-step" style="display: none;">
+        <h2>3. Payment</h2>
+        <p class="modal-sub">Total Payable: <span id="payment-amount" class="contest-price">{{ "$%.2f"|format(contest.price) if contest.price > 0 else "FREE" }}</span></p>
+        
+        <label for="cardDetails">Card Details (Simulation):</label>
+        <input type="text" id="cardDetails" placeholder="1234 5678 9012 3456" required>
+        <button class="btn-modal-success" onclick="handlePaymentCompletion()">Confirm Payment (Simulated)</button>
+    </div>
+    
+    <input type="hidden" id="contestId" value="{{ contest.id }}">
+
+</div>
+
+<script>
+    // Get contest ID from the hidden input field
+    const currentContestId = document.getElementById('contestId').value;
+    
+    // --- STEP 1: OTP SEND ---
+    async function handleOtpSend() {
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+        
+        if (!email || !password) {
+            alert("Please enter both email and a password.");
+            return;
+        }
+        
+        const button = document.querySelector('#emailStep button');
+        button.disabled = true;
+        button.innerText = 'Sending...';
+
+        try {
+            const response = await fetch('/api/contest/send_otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, contest_id: currentContestId })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                document.getElementById('emailStep').style.display = 'none';
+                document.getElementById('otpStep').style.display = 'block';
+                document.getElementById('otp-status-message').innerHTML = '✅ Code sent to <strong style="color:var(--primary);">' + email + '</strong>. Check your email!';
+                alert("Verification code sent! Check your inbox.");
+            } else {
+                alert("Error sending OTP: " + data.message);
+            }
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            alert("Network error. Could not connect to server or SMTP configuration failed.");
+        } finally {
+            button.disabled = false;
+            button.innerText = 'Send Verification Code';
+        }
+    }
+
+    // --- STEP 2: OTP VERIFICATION ---
+    async function handleOtpVerification() {
+        const enteredOtp = document.getElementById('regOtp').value.trim();
+        
+        if (!enteredOtp) {
+            alert("Please enter the OTP.");
+            return;
+        }
+        
+        const button = document.querySelector('#otpStep button');
+        button.disabled = true;
+        button.innerText = 'Verifying...';
+
+        try {
+            const response = await fetch('/api/contest/verify_otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ otp: enteredOtp })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Verification successful! Proceeding to payment.");
+                
+                // Show payment step
+                document.getElementById('otpStep').style.display = 'none';
+                document.getElementById('paymentStep').style.display = 'block';
+                
+            } else {
+                alert("❌ " + data.message);
+            }
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            alert("Network error during verification.");
+        } finally {
+            button.disabled = false;
+            button.innerText = 'Verify and Proceed to Payment';
+        }
+    }
+    
+    // --- STEP 3: PAYMENT COMPLETION ---
+    async function handlePaymentCompletion() {
+        const cardDetails = document.getElementById('cardDetails').value.trim();
+        
+        if (!cardDetails) {
+            alert("Please enter simulated card details.");
+            return;
+        }
+        
+        const button = document.querySelector('#paymentStep button');
+        button.disabled = true;
+        button.innerText = 'Processing...';
+
+        try {
+            const response = await fetch('/api/contest/confirm_payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({}) 
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("✅ Payment Confirmed! You are registered for the contest! Redirecting to contest list.");
+                // Redirect back to the contest listing page
+                window.location.href = "/contest";
+            } else {
+                alert("Payment failed: " + data.message);
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            alert("Network error during payment confirmation.");
+        } finally {
+            button.disabled = false;
+            button.innerText = 'Confirm Payment (Simulated)';
+        }
+    }
+</script>
+{% endblock %}
