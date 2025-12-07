@@ -4,10 +4,12 @@ import json
 import os
 import re
 import shutil
+import uuid
 from datetime import datetime
 
 # --- CONFIGURATION ---
 ARTICLES_DB = 'articles.json'
+MCQS_DB = 'mcqs.json'
 TEMPLATE_DIR = os.path.join('templates', 'articles')
 
 # --- TOOLTIP CLASS ---
@@ -94,9 +96,9 @@ class ArticleAutomator:
     def __init__(self, root):
         self.root = root
         self.root.title("CodeWme CMS & Builder")
-        self.root.geometry("1200x850")
+        self.root.geometry("1300x900")
         
-        # Internal Styling (No separate file needed)
+        # Internal Styling
         self.BG_APP = "#f0f2f5"
         self.BG_PANEL = "white"
         self.BG_READONLY = "#e2e8f0"
@@ -127,10 +129,15 @@ class ArticleAutomator:
         self.notebook.add(self.tab_editor, text="  📝 Editor  ")
         self._init_editor_tab()
 
-        # Tab 2: Manager
+        # Tab 2: Manage Articles
         self.tab_manage = tk.Frame(self.notebook, bg=self.BG_PANEL)
         self.notebook.add(self.tab_manage, text="  📂 Manage Articles  ")
         self._init_manage_tab()
+
+        # Tab 3: Manage MCQs
+        self.tab_mcq = tk.Frame(self.notebook, bg=self.BG_PANEL)
+        self.notebook.add(self.tab_mcq, text="  ✅ Manage MCQs  ")
+        self._init_mcq_tab()
 
     # ==========================================
     # TAB 1: EDITOR UI
@@ -230,10 +237,10 @@ class ArticleAutomator:
 
         self.editor = scrolledtext.ScrolledText(right_main, font=("Consolas", 11), wrap=tk.WORD, undo=True, padx=15, pady=15, borderwidth=1, relief="solid")
         self.editor.pack(fill=tk.BOTH, expand=True)
-        self.editor.insert(tk.END, "<!-- Content goes here -->\n")
+        self.editor.insert(tk.END, "\n")
 
     # ==========================================
-    # TAB 2: MANAGE UI
+    # TAB 2: MANAGE ARTICLES UI
     # ==========================================
     def _init_manage_tab(self):
         top_frame = tk.Frame(self.tab_manage, bg=self.BG_PANEL, pady=20, padx=20)
@@ -265,7 +272,141 @@ class ArticleAutomator:
 
         self.load_articles_list()
 
-    # --- LOGIC METHODS ---
+    # ==========================================
+    # TAB 3: MANAGE MCQS (NEW & ENHANCED)
+    # ==========================================
+    def _init_mcq_tab(self):
+        paned = tk.PanedWindow(self.tab_mcq, orient=tk.HORIZONTAL, sashwidth=4, bg="#cbd5e1")
+        paned.pack(fill=tk.BOTH, expand=True)
+
+        # --- LEFT PANEL (FORM) ---
+        left_main = tk.Frame(paned, bg=self.BG_APP, width=450)
+        
+        form_wrapper = ScrollableFrame(left_main, bg_color=self.BG_APP)
+        form_wrapper.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        mcq_form = form_wrapper.scrollable_frame 
+        
+        # --- RIGHT PANEL (LIST) ---
+        right_main = tk.Frame(paned, bg=self.BG_PANEL)
+
+        paned.add(left_main, minsize=400)
+        paned.add(right_main, minsize=500)
+
+        # === MCQ FORM HEADER ===
+        ttk.Label(mcq_form, text="MCQ Editor", style="Header.TLabel").pack(anchor="w", pady=(0, 15))
+        
+        # Action Buttons
+        btn_box = tk.Frame(mcq_form, bg=self.BG_APP)
+        btn_box.pack(fill=tk.X, pady=(0, 15))
+        
+        tk.Button(btn_box, text="Reset Form (New Set)", command=self.reset_full_mcq_form, bg=self.BTN_NEUTRAL, fg="white", relief="flat", pady=5).pack(side=tk.LEFT, padx=2)
+        tk.Button(btn_box, text="💾 SAVE QUESTION", command=self.save_mcq, bg=self.BTN_SUCCESS, fg="white", relief="flat", font=("Segoe UI", 9, "bold"), pady=5).pack(side=tk.LEFT, padx=5, expand=True, fill=tk.X)
+
+        # Status Label (Feedback without popup)
+        self.lbl_mcq_status = tk.Label(mcq_form, text="", bg=self.BG_APP, fg=self.BTN_SUCCESS, font=("Segoe UI", 9, "bold"))
+        self.lbl_mcq_status.pack(anchor="w", pady=(0, 5))
+
+        # Variables
+        self.mcq_var_id = tk.StringVar()
+        self.mcq_var_cat = tk.StringVar(value="Salesforce Agentforce") # Title/Category
+        self.mcq_var_tag = tk.StringVar(value="Salesforce")          # Broader Tag
+        self.mcq_var_set = tk.IntVar(value=1)
+        self.mcq_var_desc = tk.StringVar(value="Practice questions for this set.") # Set Description
+        self.mcq_var_image_url = tk.StringVar()
+        
+        # Multiple correct flags
+        self.mcq_var_correct_flags = [tk.BooleanVar() for _ in range(5)]
+        self.mcq_opts = [tk.StringVar() for _ in range(5)]
+
+        # 1. Category (Title) & Tag & Set
+        row1 = tk.Frame(mcq_form, bg=self.BG_APP)
+        row1.pack(fill=tk.X, pady=5)
+        
+        # Col 1: Category (Title)
+        f_cat = tk.Frame(row1, bg=self.BG_APP)
+        f_cat.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        tk.Label(f_cat, text="Card Title:", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w")
+        tk.Entry(f_cat, textvariable=self.mcq_var_cat, width=20, font=("Segoe UI", 10)).pack(fill=tk.X, padx=(0, 5))
+
+        # Col 2: Tag
+        f_tag = tk.Frame(row1, bg=self.BG_APP)
+        f_tag.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        tk.Label(f_tag, text="Card Tag:", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w")
+        tk.Entry(f_tag, textvariable=self.mcq_var_tag, width=15, font=("Segoe UI", 10)).pack(fill=tk.X, padx=(0, 5))
+
+        # Col 3: Set
+        f_set = tk.Frame(row1, bg=self.BG_APP)
+        f_set.pack(side=tk.LEFT)
+        tk.Label(f_set, text="Set #:", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w")
+        tk.Spinbox(f_set, textvariable=self.mcq_var_set, from_=1, to=100, width=5, font=("Segoe UI", 10)).pack()
+
+        # 2. Set Description (NEW)
+        tk.Label(mcq_form, text="Set Description (On Card):", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(10, 0))
+        tk.Entry(mcq_form, textvariable=self.mcq_var_desc, font=("Segoe UI", 10), bg="white").pack(fill=tk.X, pady=(2, 5))
+
+        # 3. Image URL
+        tk.Label(mcq_form, text="Image URL (Optional):", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(10, 0))
+        tk.Entry(mcq_form, textvariable=self.mcq_var_image_url, font=("Segoe UI", 10), bg="white").pack(fill=tk.X, pady=(2, 5))
+
+        # 4. Question Text
+        tk.Label(mcq_form, text="Question:", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(10, 0))
+        self.txt_mcq_question = tk.Text(mcq_form, height=5, font=("Segoe UI", 10), wrap=tk.WORD, borderwidth=1, relief="solid")
+        self.txt_mcq_question.pack(fill=tk.X, pady=5)
+
+        # 5. Options
+        tk.Label(mcq_form, text="Options (Check box if Correct):", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(10, 5))
+        
+        opt_labels = ["A", "B", "C", "D", "E"]
+        for i in range(5):
+            f = tk.Frame(mcq_form, bg=self.BG_APP)
+            f.pack(fill=tk.X, pady=2)
+            
+            cb = tk.Checkbutton(f, variable=self.mcq_var_correct_flags[i], bg=self.BG_APP, cursor="hand2")
+            cb.pack(side=tk.LEFT)
+            
+            tk.Label(f, text=f"{opt_labels[i]}.", bg=self.BG_APP, width=3, font=("Segoe UI", 9, "bold")).pack(side=tk.LEFT)
+            tk.Entry(f, textvariable=self.mcq_opts[i], relief="solid", borderwidth=1, font=("Segoe UI", 10)).pack(side=tk.LEFT, fill=tk.X, expand=True)
+
+        # 6. Explanation
+        tk.Label(mcq_form, text="Explanation (Shown after answering):", bg=self.BG_APP, font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(15, 0))
+        self.txt_mcq_expl = tk.Text(mcq_form, height=4, font=("Segoe UI", 10), wrap=tk.WORD, borderwidth=1, relief="solid")
+        self.txt_mcq_expl.pack(fill=tk.X, pady=5)
+
+        # === MCQ LIST ===
+        top_bar = tk.Frame(right_main, bg=self.BG_PANEL, padx=10, pady=10)
+        top_bar.pack(fill=tk.X)
+        
+        tk.Button(top_bar, text="🔄 Reload List", command=self.load_mcq_list, relief="flat", bg=self.BG_READONLY).pack(side=tk.RIGHT)
+        
+        tk.Button(top_bar, text="✏️ Edit", command=self.edit_mcq, bg=self.BTN_PRIMARY, fg="white", relief="flat", padx=15).pack(side=tk.LEFT, padx=5)
+        tk.Button(top_bar, text="🗑️ Delete", command=self.delete_mcq, bg=self.BTN_DANGER, fg="white", relief="flat", padx=15).pack(side=tk.LEFT, padx=5)
+
+        # Treeview
+        columns = ("Set", "Tag", "Title", "Question")
+        self.tree_mcq = ttk.Treeview(right_main, columns=columns, show='headings', height=25)
+        
+        self.tree_mcq.heading("Set", text="Set")
+        self.tree_mcq.heading("Tag", text="Tag")
+        self.tree_mcq.heading("Title", text="Title")
+        self.tree_mcq.heading("Question", text="Question Preview")
+        
+        self.tree_mcq.column("Set", width=40, anchor="center")
+        self.tree_mcq.column("Tag", width=80)
+        self.tree_mcq.column("Title", width=120)
+        self.tree_mcq.column("Question", width=350)
+        
+        scrollbar_mcq = ttk.Scrollbar(right_main, orient="vertical", command=self.tree_mcq.yview)
+        self.tree_mcq.configure(yscrollcommand=scrollbar_mcq.set)
+        
+        self.tree_mcq.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        scrollbar_mcq.pack(side=tk.RIGHT, fill=tk.Y, pady=10)
+
+        self.load_mcq_list()
+
+
+    # ==========================================
+    # LOGIC METHODS (ARTICLE)
+    # ==========================================
     def parse_video_id(self, event=None):
         text = self.txt_youtube.get("1.0", tk.END)
         match = re.search(r'(?:v=|\/|embed\/)([0-9A-Za-z_-]{11})', text)
@@ -353,7 +494,7 @@ class ArticleAutomator:
         except:
             self.editor.insert(tk.INSERT, f'<div style="text-align:{align};">\n    Content\n</div>')
 
-    # --- DATA MANAGEMENT ---
+    # --- DATA MANAGEMENT (ARTICLES) ---
 
     def load_articles_list(self):
         for row in self.tree.get_children(): self.tree.delete(row)
@@ -371,7 +512,7 @@ class ArticleAutomator:
         self.txt_youtube.delete("1.0", tk.END)
         self.txt_desc.delete("1.0", tk.END)
         self.editor.delete("1.0", tk.END)
-        self.editor.insert("1.0", "<!-- Content -->\n")
+        self.editor.insert("1.0", "\n")
         self.entry_slug.config(state='normal')
 
     def edit_selected(self):
@@ -466,6 +607,171 @@ class ArticleAutomator:
         with open(os.path.join(TEMPLATE_DIR, f"{slug}.html"), 'w', encoding='utf-8') as f: f.write(html_content)
         messagebox.showinfo("Success", f"Article Saved: {slug}")
         self.load_articles_list()
+
+    # ==========================================
+    # LOGIC METHODS (MCQ) - UPDATED FOR MULTIPLE CORRECT, IMAGES, TAGS & DESCRIPTION
+    # ==========================================
+    def load_mcq_list(self):
+        for row in self.tree_mcq.get_children(): self.tree_mcq.delete(row)
+        if not os.path.exists(MCQS_DB): return
+        
+        try:
+            with open(MCQS_DB, 'r', encoding='utf-8') as f:
+                mcqs = json.load(f)
+        except: return
+
+        # Sort by Category, then Set, then ID
+        mcqs.sort(key=lambda x: (x.get('category', ''), x.get('set_id', 0)))
+
+        for q in mcqs:
+            # Display Set, Tag, Title(Category), Question
+            tag = q.get('tag', 'General')
+            cat = q.get('category', 'Uncategorized')
+            self.tree_mcq.insert("", tk.END, iid=q.get('id'), values=(q.get('set_id'), tag, cat, q.get('question')))
+
+    # Only resets specific fields (keeps Category, Tag, Set & Description)
+    def clear_question_fields_only(self):
+        self.mcq_var_id.set("")
+        self.mcq_var_image_url.set("") 
+        
+        # Reset checkboxes
+        for v in self.mcq_var_correct_flags:
+            v.set(False)
+            
+        self.txt_mcq_question.delete("1.0", tk.END)
+        self.txt_mcq_expl.delete("1.0", tk.END)
+        for v in self.mcq_opts: v.set("")
+
+    # Full reset for "Reset Form" button
+    def reset_full_mcq_form(self):
+        self.mcq_var_cat.set("Salesforce Agentforce")
+        self.mcq_var_tag.set("Salesforce")
+        self.mcq_var_desc.set("Practice questions for this set.")
+        self.mcq_var_set.set(1)
+        self.clear_question_fields_only()
+        self.lbl_mcq_status.config(text="Form Reset.", fg="black")
+
+    def save_mcq(self):
+        # 1. Validation
+        q_text = self.txt_mcq_question.get("1.0", tk.END).strip()
+        options = [v.get().strip() for v in self.mcq_opts if v.get().strip()]
+        
+        if not q_text:
+            messagebox.showerror("Error", "Question text cannot be empty.")
+            return
+        if len(options) < 2:
+            messagebox.showerror("Error", "Please provide at least 2 options.")
+            return
+
+        # 2. Determine Correct Answers
+        correct_list = []
+        for i in range(5):
+            if self.mcq_var_correct_flags[i].get() and self.mcq_opts[i].get().strip():
+                correct_list.append(self.mcq_opts[i].get().strip())
+        
+        if not correct_list:
+            messagebox.showerror("Error", "Please mark at least one option as correct.")
+            return
+
+        # 3. Generate ID if new
+        q_id = self.mcq_var_id.get()
+        if not q_id:
+            q_id = uuid.uuid4().hex[:8]
+
+        data = {
+            "id": q_id,
+            "set_id": self.mcq_var_set.get(),
+            "category": self.mcq_var_cat.get().strip(), # Title
+            "tag": self.mcq_var_tag.get().strip(),       # Tag
+            "description": self.mcq_var_desc.get().strip(), # Description (Set level)
+            "question": q_text,
+            "image_url": self.mcq_var_image_url.get().strip(),
+            "options": options,
+            "correct": correct_list,
+            "explanation": self.txt_mcq_expl.get("1.0", tk.END).strip()
+        }
+
+        # 4. Load & Update JSON
+        if os.path.exists(MCQS_DB):
+            try:
+                with open(MCQS_DB, 'r', encoding='utf-8') as f:
+                    mcqs = json.load(f)
+            except: mcqs = []
+        else:
+            mcqs = []
+
+        idx = next((i for i, item in enumerate(mcqs) if item["id"] == q_id), -1)
+        if idx >= 0:
+            mcqs[idx] = data
+        else:
+            mcqs.append(data)
+
+        with open(MCQS_DB, 'w', encoding='utf-8') as f:
+            json.dump(mcqs, f, indent=2)
+
+        # 5. UI Updates
+        self.load_mcq_list()
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.lbl_mcq_status.config(text=f"✅ Saved! ({timestamp})", fg=self.BTN_SUCCESS)
+        self.clear_question_fields_only()
+        self.txt_mcq_question.focus_set()
+
+    def edit_mcq(self):
+        sel = self.tree_mcq.selection()
+        if not sel: return
+        q_id = sel[0]
+
+        with open(MCQS_DB, 'r', encoding='utf-8') as f:
+            mcqs = json.load(f)
+            
+        found = next((q for q in mcqs if q['id'] == q_id), None)
+        if not found: return
+
+        # Populate Form
+        self.clear_question_fields_only()
+        self.mcq_var_id.set(found['id'])
+        self.mcq_var_cat.set(found.get('category', ''))
+        self.mcq_var_tag.set(found.get('tag', 'Salesforce')) 
+        self.mcq_var_desc.set(found.get('description', 'Practice questions...'))
+        self.mcq_var_set.set(found['set_id'])
+        self.mcq_var_image_url.set(found.get('image_url', ''))
+        self.txt_mcq_question.insert("1.0", found['question'])
+        self.txt_mcq_expl.insert("1.0", found.get('explanation', ''))
+
+        opts = found['options']
+        for i, txt in enumerate(opts):
+            if i < 5: self.mcq_opts[i].set(txt)
+        
+        # Handle correct checkboxes
+        correct_data = found.get('correct')
+        if isinstance(correct_data, str):
+            correct_data = [correct_data]
+        
+        if correct_data:
+            for i, txt in enumerate(opts):
+                if txt in correct_data:
+                    self.mcq_var_correct_flags[i].set(True)
+            
+        self.lbl_mcq_status.config(text="Editing Question...", fg="blue")
+
+    def delete_mcq(self):
+        sel = self.tree_mcq.selection()
+        if not sel: return
+        q_id = sel[0]
+
+        if not messagebox.askyesno("Confirm", "Delete this question?"): return
+
+        with open(MCQS_DB, 'r', encoding='utf-8') as f:
+            mcqs = json.load(f)
+        
+        new_mcqs = [q for q in mcqs if q['id'] != q_id]
+        
+        with open(MCQS_DB, 'w', encoding='utf-8') as f:
+            json.dump(new_mcqs, f, indent=2)
+            
+        self.load_mcq_list()
+        self.clear_question_fields_only()
+        self.lbl_mcq_status.config(text="Question Deleted.", fg="red")
 
 if __name__ == "__main__":
     root = tk.Tk()

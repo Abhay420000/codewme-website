@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
 
-<!-- Inject MCQ-Specific CSS -->
 {% block custom_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/article.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/mcq.css') }}">
+<style>
+    /* Badge style for the hint */
+    .q-type-badge {
+        font-size: 0.75rem;
+        background-color: var(--bg-read-only, #e2e8f0);
+        color: var(--text-muted);
+        padding: 2px 8px;
+        border-radius: 12px;
+        vertical-align: middle;
+        margin-left: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .mcq-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
+        display: block;
+    }
+</style>
 {% endblock %}
 
 {% block title %}{{ title }} - CodeWme{% endblock %}
@@ -12,36 +34,53 @@
 {% block content %}
 <div class="layout-split">
     
-    <!-- LEFT CONTENT (Questions) -->
     <div class="content-col mcq-container">
         
         <div class="article-header">
-            <span class="card-tag" style="font-size: 0.9rem;">{{ category | upper }}</span>
+            <span class="card-tag" style="font-size: 0.9rem;">{{ current_tag | upper }}</span>
             <h1 class="article-h1" style="margin-top:10px;">{{ title }}</h1>
         </div>
 
-        <!-- INSTRUCTIONS -->
         <div class="rec-box">
-            📝 <strong>Instructions:</strong> Click on an option to check your answer immediately.
+            📝 <strong>Instructions:</strong> Read the hint to know if you need to select one or multiple options.
         </div>
 
-        <!-- QUESTIONS LOOP -->
         {% for q in questions %}
         <div class="card mcq-card" id="q{{ loop.index }}">
             
-            <!-- Question Title with Anchor Link -->
+            {% if q.correct is string %}
+                {% set correct_list = [q.correct] %}
+            {% elif q.correct is iterable and q.correct is not string %}
+                {% set correct_list = q.correct %}
+            {% else %}
+                {% set correct_list = [] %}
+            {% endif %}
+
+            {% set is_multi = correct_list | length > 1 %}
+
             <h3 class="article-h3" style="margin-top: 0; font-size: 1.2rem; color: var(--text-header);">
                 <a href="#q{{ loop.index }}" class="question-anchor" title="Link to this question">#{{ loop.index }}</a>
                 {{ q.question }}
+                
+                <span class="q-type-badge">
+                    {{ 'Select all that apply' if is_multi else 'Select 1' }}
+                </span>
             </h3>
 
-            <!-- Options List (Interactive) -->
-            <div class="mcq-options-list" id="opts-{{ q.id }}">
+            {% if q.image_url %}
+            <div style="margin: 1rem 0;">
+                <img src="{{ q.image_url }}" alt="Question Image" class="mcq-image">
+            </div>
+            {% endif %}
+
+            <div class="mcq-options-list" id="opts-{{ q.id }}" data-mode="{{ 'multi' if is_multi else 'single' }}">
                 {% for opt in q.options %}
-                <!-- Check if this option is the correct one and mark it in data attribute -->
+                
+                {% set is_correct = opt.strip() in correct_list %}
+
                 <div class="mcq-option" 
-                     data-correct="{{ 'true' if opt.strip() == q.correct.strip() else 'false' }}"
-                     onclick="checkAnswer(this, 'ans-{{ q.id }}')">
+                     data-correct="{{ 'true' if is_correct else 'false' }}"
+                     onclick="toggleSelection(this)">
                     
                     <span class="option-label">
                         {{ ["A","B","C","D","E"][loop.index0] }}.
@@ -51,17 +90,17 @@
                 {% endfor %}
             </div>
 
-            <!-- Manual Reveal Button (Optional fallback) -->
-            <div style="margin-top: 1rem; text-align: right;">
-                <button onclick="revealAnswer('ans-{{ q.id }}', 'opts-{{ q.id }}')" class="answer-reveal-btn" title="Show answer without selecting">
-                    Reveal Answer
+            <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                <span class="result-status" id="status-{{ q.id }}" style="font-weight:bold; opacity:0; transition: opacity 0.3s;"></span>
+                
+                <button onclick="checkAnswer(this, 'ans-{{ q.id }}', 'opts-{{ q.id }}', 'status-{{ q.id }}')" class="answer-reveal-btn">
+                    Check Answer
                 </button>
             </div>
 
-            <!-- Hidden Answer Area -->
             <div id="ans-{{ q.id }}" class="answer-box">
                 <p class="correct-text">
-                    ✅ Correct Answer: {{ q.correct }}
+                    ✅ Answer: {{ correct_list | join(', ') }}
                 </p>
                 <hr style="border:0; border-top:1px solid var(--border-color); margin: 15px 0;">
                 <div class="explanation-text">
@@ -73,7 +112,6 @@
         </div>
         {% endfor %}
 
-        <!-- PAGINATION / NEXT SET LINK -->
         <div class="quiz-nav">
             {% if has_next %}
             <a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-{{ set_num + 1 }}" class="btn-next-set">
@@ -89,84 +127,132 @@
 
     </div>
 
-    <!-- RIGHT SIDEBAR -->
     <aside class="sidebar-col">
         <div class="sidebar-box">
             <h3 class="sidebar-title">Browse Sets</h3>
             <ul class="sidebar-list">
-                <!-- Simple navigation for now -->
                 <li><a href="/practice-mcqs">← Back to All Sets</a></li>
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-1">Set 1</a></li>
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-2">Set 2</a></li>
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-3">Set 3</a></li>
+                
+                {% if sidebar_sets %}
+                    {% for s in sidebar_sets %}
+                    <li>
+                        <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" 
+                           class="{{ 'active-set' if s.set_num == set_num else '' }}">
+                            Set {{ s.set_num }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li><span style="color:var(--text-muted); font-size:0.9rem;">No other sets available.</span></li>
+                {% endif %}
             </ul>
         </div>
-        
-        <!-- Sidebar Ad Slot -->
-        <div class="ad-slot ad-sidebar" style="margin-top: 2rem;">MCQ Sidebar Ad</div>
     </aside>
 
 </div>
 
-<!-- INTERACTIVE JS LOGIC -->
 <script>
-    function checkAnswer(selectedOption, answerBoxId) {
-        // 1. Get the container of options
-        const optionsList = selectedOption.parentElement;
+    // 1. Toggle Selection State (Handles Single vs Multi Logic)
+    function toggleSelection(el) {
+        const parent = el.closest('.mcq-options-list'); // Use closest to be safe
+        if (!parent) return;
 
-        // 2. Prevent clicking if already answered
-        if (optionsList.classList.contains('answered')) {
-            return;
-        }
+        const mode = parent.getAttribute('data-mode'); // 'single' or 'multi'
 
-        // 3. Mark as answered
-        optionsList.classList.add('answered');
-
-        // 4. Check correctness
-        const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
-
-        if (isCorrect) {
-            selectedOption.classList.add('correct');
-        } else {
-            selectedOption.classList.add('incorrect');
-            
-            // 5. Highlight the actual correct answer if user was wrong
-            const allOptions = optionsList.children;
-            for (let opt of allOptions) {
-                if (opt.getAttribute('data-correct') === 'true') {
-                    opt.classList.add('correct');
+        // If locked (already checked), do nothing
+        if (parent.classList.contains('checked-mode')) return;
+        
+        if (mode === 'single') {
+            // Radio Button Behavior: Deselect all others
+            // Select ONLY elements with class 'mcq-option'
+            const siblings = parent.querySelectorAll('.mcq-option');
+            siblings.forEach(sib => {
+                if (sib !== el) {
+                    sib.classList.remove('selected');
                 }
-            }
-        }
-
-        // 6. Reveal the explanation box
-        const ansBox = document.getElementById(answerBoxId);
-        if (ansBox) {
-            ansBox.style.display = 'block';
+            });
+            // Always select the clicked one
+            el.classList.add('selected');
+        } else {
+            // Checkbox Behavior: Toggle self
+            el.classList.toggle('selected');
         }
     }
 
-    // Fallback function for the "Reveal" button
-    function revealAnswer(answerBoxId, optionsListId) {
-        const ansBox = document.getElementById(answerBoxId);
-        const optionsList = document.getElementById(optionsListId);
+    // 2. Validate Answers
+    function checkAnswer(btn, ansId, optsId, statusId) {
+        const ansBox = document.getElementById(ansId);
+        const optionsList = document.getElementById(optsId);
+        const statusLbl = document.getElementById(statusId);
         
-        if (ansBox.style.display === 'block') return; // Already open
+        // Select all option divs securely
+        const allOptions = optionsList.querySelectorAll('.mcq-option');
 
+        // --- MODE: HIDE / RESET ---
+        if (ansBox.style.display === 'block') {
+            ansBox.style.display = 'none';
+            btn.innerText = "Check Answer";
+            
+            // Unlock options
+            optionsList.classList.remove('checked-mode');
+            statusLbl.style.opacity = '0';
+            
+            // Remove validation classes (keep 'selected' so user doesn't lose work)
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect', 'missed');
+            });
+            return;
+        }
+
+        // --- MODE: CHECK ---
         ansBox.style.display = 'block';
-        optionsList.classList.add('answered'); // Disable clicking
+        btn.innerText = "Hide Answer";
+        optionsList.classList.add('checked-mode'); // Lock clicks
 
-        // Highlight correct answer
-        const allOptions = optionsList.children;
-        for (let opt of allOptions) {
-            if (opt.getAttribute('data-correct') === 'true') {
-                opt.classList.add('correct');
+        let anyIncorrect = false;
+        let missedCorrect = false;
+        let userSelectedCount = 0;
+        let totalCorrectCount = 0;
+
+        allOptions.forEach(opt => {
+            const isSelected = opt.classList.contains('selected');
+            const isActuallyCorrect = opt.getAttribute('data-correct') === 'true';
+
+            if (isActuallyCorrect) totalCorrectCount++;
+            if (isSelected) userSelectedCount++;
+
+            if (isSelected && isActuallyCorrect) {
+                // Good job
+                opt.classList.add('correct'); 
+            } else if (isSelected && !isActuallyCorrect) {
+                // Wrong choice
+                opt.classList.add('incorrect');
+                anyIncorrect = true;
+            } else if (!isSelected && isActuallyCorrect) {
+                // Missed it
+                opt.classList.add('missed');
+                missedCorrect = true;
             }
+        });
+
+        // Determine Status Message
+        statusLbl.style.opacity = '1';
+        if (anyIncorrect) {
+            statusLbl.innerText = "❌ Incorrect";
+            statusLbl.style.color = "#ef4444";
+        } else if (missedCorrect) {
+            statusLbl.innerText = "⚠️ Incomplete";
+            statusLbl.style.color = "#f59e0b"; // Amber/Orange
+        } else if (userSelectedCount === 0) {
+            statusLbl.innerText = "⚠️ No Option Selected";
+            statusLbl.style.color = "#64748b";
+        } else {
+            statusLbl.innerText = "✅ Correct!";
+            statusLbl.style.color = "#22c55e";
         }
     }
 </script>
 
-<!-- GOOGLE SCHEMA MARKUP (JSON-LD) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -179,7 +265,7 @@
       "name": "{{ q.question | replace('"', '\\"') | replace('\n', ' ') }}",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "{{ q.correct | replace('"', '\\"') | replace('\n', ' ') }}"
+        "text": "{{ (q.correct if q.correct is string else q.correct | join(', ')) | replace('"', '\\"') | replace('\n', ' ') }}"
       },
       "suggestedAnswer": [
         {% for opt in q.options %}

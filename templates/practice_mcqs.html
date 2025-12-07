@@ -2,7 +2,6 @@
 
 {% block title %}Practice MCQs - CodeWme{% endblock %}
 
-<!-- Inject Practice-Specific CSS -->
 {% block custom_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/practice_mcqs.css') }}">
 {% endblock %}
@@ -14,35 +13,31 @@
     <p class="practice-sub">Prepare for your certification exams with our curated sets.</p>
 </div>
 
-<!-- SECTION HEADING -->
 <div class="section-heading-wrapper">
     <h2 class="section-heading">Available Sets</h2>
     <div class="section-underline"></div>
 </div>
 
-<!-- CARDS GRID -->
 <div class="practice-grid">
     
     {% if all_sets %}
-        <!-- Loop through the dynamic sets passed from app.py -->
         {% for s in all_sets %}
         <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" class="card set-card-item" style="text-decoration: none; padding: 0; display: none;">
             <div class="set-card-icon">
-                <!-- Icon based on category (Simple logic: Default cloud) -->
                 <span>☁️</span>
             </div>
             <div class="card-body" style="text-align: left;">
                 <div class="card-meta">
-                    <span class="card-tag">{{ s.category | upper }}</span>
+                    <span class="card-tag">{{ s.tag | upper }}</span>
                     <span>Set {{ s.set_num }}</span>
                 </div>
                 <h3 class="card-title">{{ s.category }}</h3>
-                <p class="card-desc">Practice questions for Set {{ s.set_num }}. Master the concepts with detailed explanations.</p>
+                
+                <p class="card-desc">{{ s.description }}</p>
             </div>
         </a>
         {% endfor %}
     {% else %}
-        <!-- Fallback if no questions found in json -->
         <div class="card" style="padding: 2rem; opacity: 0.6; grid-column: 1 / -1; text-align: center;">
             <h3 class="card-title">No Questions Found</h3>
             <p class="card-desc">Please generate mcqs.json first.</p>
@@ -51,12 +46,10 @@
 
 </div>
 
-<!-- LOAD MORE BUTTON -->
 <div class="load-more-container" style="text-align: center; padding: 2rem 0 4rem 0;">
     <button id="loadMoreBtn" class="btn-load-more" style="background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem 2.5rem; border-radius: 2rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Load More Sets</button>
 </div>
 
-<!-- JAVASCRIPT FOR LOAD MORE -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const cards = document.querySelectorAll('.set-card-item');
@@ -93,7 +86,6 @@
     });
 </script>
 
-<!-- Add fadeIn animation locally if needed -->
 <style>
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }

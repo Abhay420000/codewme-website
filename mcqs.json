@@ -42,14 +42,18 @@
     "id": "js_1",
     "set_id": 1,
     "category": "Admin",
-    "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "tag": "Salesforce",
+    "question": "jwebbhb",
+    "image_url": "",
     "options": [
       "Option A text",
       "Option B text",
       "Option C text"
     ],
-    "correct": "Option B text",
-    "explanation": "Detailed explanation here..."
+    "correct": [
+      "Option B text"
+    ],
+    "explanation": "Detailed explanation here...jw wjwe"
   },
   {
     "id": "af_2",
@@ -94,13 +98,170 @@
     "id": "js_2",
     "set_id": 2,
     "category": "Admin",
+    "tag": "Salesforce",
     "question": "Universal Containers (UC) is using Einstein Generative AI...",
+    "image_url": "",
     "options": [
       "Option A text",
       "Option B text",
       "Option C text"
     ],
-    "correct": "Option B text",
+    "correct": [
+      "Option B text"
+    ],
     "explanation": "Detailed explanation here..."
+  },
+  {
+    "id": "4ac59502",
+    "set_id": 1,
+    "category": "Admin",
+    "tag": "Salesforce",
+    "question": "jbhkb kbb kjbk jkb kjb wefwe",
+    "image_url": "",
+    "options": [
+      "jhb",
+      "bjh",
+      "jjhv vgvb",
+      "uvghv",
+      "serger"
+    ],
+    "correct": [
+      "bjh"
+    ],
+    "explanation": "jhvbjhvjh"
+  },
+  {
+    "id": "d37a9c44",
+    "set_id": 1,
+    "category": "Admin",
+    "tag": "Salesforce",
+    "question": "waefwe",
+    "image_url": "",
+    "options": [
+      "werer",
+      "segre",
+      "serg",
+      "sergs"
+    ],
+    "correct": [
+      "werer"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "31a48313",
+    "set_id": 1,
+    "category": "Admin",
+    "tag": "Salesforce",
+    "question": "serversv",
+    "image_url": "",
+    "options": [
+      "sergvre",
+      "serv",
+      "servrf"
+    ],
+    "correct": [
+      "servrf"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "3b1a1eef",
+    "set_id": 1,
+    "category": "Admin",
+    "tag": "Salesforce",
+    "question": "wej cjkc sjkew  secnsj   skjcvnsw  sjkvjse",
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",
+    "options": [
+      "skjc ws",
+      "sjkcvjkv",
+      "jbjhbhb",
+      "jkjb",
+      "kjnbjk"
+    ],
+    "correct": [
+      "skjc ws",
+      "sjkcvjkv"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "17fd2925",
+    "set_id": 1,
+    "category": "Admin",
+    "tag": "Salesforce",
+    "question": "le wlekfn weklfn lwefn klwenf lkanf lkarfn",
+    "image_url": "",
+    "options": [
+      "awlkef",
+      "awef",
+      "awef",
+      "awefj",
+      "dfv"
+    ],
+    "correct": [
+      "dfv"
+    ],
+    "explanation": "kjnjk kjnjk"
+  },
+  {
+    "id": "894eb04f",
+    "set_id": 1,
+    "category": "Python Set",
+    "tag": "Python",
+    "question": "jweb wej wefn qofn qefn w3efn 4efn oiend",
+    "image_url": "",
+    "options": [
+      "wefkj wqefj",
+      "wekjf",
+      "kqjwef",
+      "erf qwe",
+      "wqefj"
+    ],
+    "correct": [
+      "kqjwef"
+    ],
+    "explanation": "qwf wq"
+  },
+  {
+    "id": "5af61516",
+    "set_id": 1,
+    "category": "Salesforce Agentforce Expert",
+    "tag": "Salesforce",
+    "description": "Practice questions for this set.",
+    "question": "werfwerf",
+    "image_url": "",
+    "options": [
+      "ewrf",
+      "arf",
+      "awef",
+      "awef",
+      "awef"
+    ],
+    "correct": [
+      "awef"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "11cc3858",
+    "set_id": 1,
+    "category": "Salesforce Agentforce",
+    "tag": "Salesforce",
+    "description": "Practice questions for this set.",
+    "question": "werfewrf",
+    "image_url": "",
+    "options": [
+      "werf",
+      "werf",
+      "erf werf",
+      "werf",
+      "werf"
+    ],
+    "correct": [
+      "werf",
+      "werf"
+    ],
+    "explanation": ""
   }
 ]

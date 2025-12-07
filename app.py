@@ -19,7 +19,6 @@ def get_articles():
 def get_mcq_sets():
     """
     Returns a flat list of all available sets for the Practice Page.
-    Example: [{'category': 'Salesforce', 'set_num': 1}, {'category': 'Salesforce', 'set_num': 2}]
     """
     if not os.path.exists('mcqs.json'):
         return []
@@ -27,24 +26,36 @@ def get_mcq_sets():
     with open('mcqs.json', 'r', encoding='utf-8') as f:
         questions = json.load(f)
     
-    # 1. Identify all unique Category + Set combinations
-    # Structure: { ("Salesforce Agentforce", 1), ("Salesforce Agentforce", 2) }
-    unique_sets = set()
+    # Identify unique sets by (Category, SetID)
+    sets_map = {} 
     for q in questions:
         cat = q.get('category', 'Uncategorized')
-        set_id = q.get('set_id', 1)
-        unique_sets.add((cat, set_id))
+        sid = q.get('set_id', 1)
+        tag = q.get('tag', 'General')
+        
+        # Default text matches your original hardcoded text to keep design consistent
+        default_desc = f"Practice questions for Set {sid}. Master the concepts with detailed explanations."
+        desc = q.get('description', default_desc)
+        
+        # We only need to grab metadata once per set (using the first question found)
+        if (cat, sid) not in sets_map:
+            sets_map[(cat, sid)] = {
+                'tag': tag,
+                'description': desc
+            }
     
-    # 2. Convert to a clean list of dictionaries
+    # Convert to list
     set_list = []
-    for cat, sid in unique_sets:
+    for (cat, sid), meta in sets_map.items():
         set_list.append({
             'category': cat,
             'set_num': sid,
+            'tag': meta['tag'],
+            'description': meta['description'],
             'url_slug': cat.replace(' ', '-').lower()
         })
     
-    # 3. Sort by Category then Set Number
+    # Sort
     set_list.sort(key=lambda x: (x['category'], x['set_num']))
     
     return set_list
@@ -119,24 +130,35 @@ def mcq_page(category, set_num):
     cat_clean = category.replace('-', ' ')
     
     # Filter Questions for Current Set
+    # Note: Using case-insensitive match for category
     questions = [q for q in all_data if q['set_id'] == set_num and q['category'].lower() == cat_clean.lower()]
 
     if not questions:
         abort(404)
 
-    # Check if Next Set exists (for button visibility)
+    # Get metadata from the first question of this set
+    first_q = questions[0]
+    current_tag = first_q.get('tag', 'General')
+
+    # Check Next Set
     next_set_questions = [q for q in all_data if q['set_id'] == set_num + 1 and q['category'].lower() == cat_clean.lower()]
     has_next = len(next_set_questions) > 0
 
-    title = f"{cat_clean.title()} Exam Questions - Set {set_num}"
+    # Sidebar sets (Same Category only)
+    all_sets_info = get_mcq_sets()
+    sidebar_sets = [s for s in all_sets_info if s['category'].lower() == cat_clean.lower()]
+
+    title = f"{cat_clean} - Set {set_num}"
     
     return render_template(
         'mcq_layout.html', 
         questions=questions, 
         title=title, 
-        category=cat_clean, 
+        category=cat_clean,
+        current_tag=current_tag, 
         set_num=set_num, 
-        has_next=has_next
+        has_next=has_next,
+        sidebar_sets=sidebar_sets
     )
 
 if __name__ == '__main__':
