@@ -218,6 +218,14 @@ def confirm_payment():
     return jsonify({'success': True, 
                     'message': 'Payment successful! You are registered for the contest.',
                     'contest_id': contest_id})
+    
+# Conceptual new route in app.py
+
+@app.route('/register/<contest_id>')
+def registration_page(contest_id):
+    # This page would fetch contest details and display the registration form.
+    # The form would then POST or AJAX request the OTP endpoints defined earlier.
+    return render_template('registration_page.html', contest_id=contest_id)
 
 # --- 1. HOMEPAGE ---
 @app.route('/')
