@@ -26,7 +26,7 @@
         <a href="#register-{{ contest.id }}" 
            class="card contest-item live-item" 
            data-start-date="{{ contest.start_date }}"
-           data-price="{{ contest.price }}">
+           data-end-date="{{ contest.end_date }}"  data-price="{{ contest.price }}">
         
             <div class="card-img-wrapper">
                 {% if contest.image_url %}
@@ -174,13 +174,18 @@
         initializeContests(liveCards, LIVE_LIMIT, liveLoadBtn, visibleLiveCount, LOAD_STEP, true);
         initializeContests(expiredCards, EXPIRED_LIMIT, expiredLoadBtn, visibleExpiredCount, LOAD_STEP, false);
         
-        // --- 3. COUNTDOWN AND STATUS LOGIC ---
+        // --- 3. COUNTDOWN AND STATUS LOGIC (FIXED) ---
         function updateContestTimers() {
             const now = new Date().getTime();
             
             liveCards.forEach(card => {
                 const startDateString = card.dataset.startDate;
-                const startDate = new Date(startDateString.replace(' ', 'T')).getTime(); // ISO format conversion
+                const endDateString = card.dataset.endDate; // Now available in HTML
+                
+                // SAFETY CHECK: Skip if required data attributes are missing (avoids TypeError)
+                if (!startDateString || !endDateString) return; 
+
+                const startDate = new Date(startDateString.replace(' ', 'T')).getTime();
                 const countdownEl = document.getElementById('countdown-' + card.href.split('-').pop());
                 const statusEl = document.getElementById('status-' + card.href.split('-').pop());
                 
@@ -191,7 +196,7 @@
                 
                 if (diff < 0) {
                     // Contest is Ongoing/Live 
-                    const end = new Date(card.dataset.endDate.replace(' ', 'T')).getTime();
+                    const end = new Date(endDateString.replace(' ', 'T')).getTime();
                     const liveHours = Math.floor((end - now) / (1000 * 60 * 60));
                     
                     if (liveHours > 0) {
