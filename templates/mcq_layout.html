@@ -36,7 +36,7 @@
     <div class="content-col mcq-container">
         
         <div class="article-header">
-            <span class="card-tag" style="font-size: 0.9rem;">{{ current_tag | upper }}</span>
+            <span class="card-tag" style="font-size: 0.9rem;">{{ category | upper }}</span>
             <h1 class="article-h1" style="margin-top:10px;">{{ title }}</h1>
         </div>
 
@@ -131,21 +131,14 @@
             <h3 class="sidebar-title">Browse Sets</h3>
             <ul class="sidebar-list">
                 <li><a href="/practice-mcqs">← Back to All Sets</a></li>
-                
-                {% if sidebar_sets %}
-                    {% for s in sidebar_sets %}
-                    <li>
-                        <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" 
-                           class="{{ 'active-set' if s.set_num == set_num else '' }}">
-                            Set {{ s.set_num }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                {% else %}
-                    <li><span style="color:var(--text-muted); font-size:0.9rem;">No other sets available.</span></li>
-                {% endif %}
+                <!-- Ideally dynamic, but keeping structure as is -->
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-1">Set 1</a></li>
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-2">Set 2</a></li>
+                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-3">Set 3</a></li>
             </ul>
         </div>
+        
+        <div class="ad-slot ad-sidebar" style="margin-top: 2rem;">MCQ Sidebar Ad</div>
     </aside>
 
 </div>
@@ -249,6 +242,7 @@
     }
 </script>
 
+<!-- GOOGLE SCHEMA MARKUP (Safe for Null Values) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -256,12 +250,25 @@
   "name": "{{ title }}",
   "hasPart": [
     {% for q in questions %}
+    
+    {# --- Safety Check for Answer Text --- #}
+    {% set safe_correct = '' %}
+    {% if q.correct %}
+        {% if q.correct is string %}
+            {% set safe_correct = q.correct %}
+        {% elif q.correct is iterable %}
+            {% set safe_correct = q.correct | join(', ') %}
+        {% endif %}
+    {% else %}
+        {% set safe_correct = 'See Explanation' %}
+    {% endif %}
+    
     {
       "@type": "Question",
       "name": "{{ q.question | replace('"', '\\"') | replace('\n', ' ') }}",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "{{ (q.correct if q.correct is string else q.correct | join(', ')) | replace('"', '\\"') | replace('\n', ' ') }}"
+        "text": "{{ safe_correct | replace('"', '\\"') | replace('\n', ' ') }}"
       },
       "suggestedAnswer": [
         {% for opt in q.options %}

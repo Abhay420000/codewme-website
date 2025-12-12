@@ -2,8 +2,11 @@ from flask import Flask, render_template, abort, send_from_directory, request, j
 import json
 import os
 # --- START FIX: ADD DOTENV LOADER ---
-from dotenv import load_dotenv
-load_dotenv() 
+try:
+    from dotenv import load_dotenv
+    load_dotenv() 
+except ModuleNotFoundError:
+    print('Module not found set environmet variable on your local machine if already set ignore!')
 # --- END FIX ---
 import math
 from datetime import datetime
