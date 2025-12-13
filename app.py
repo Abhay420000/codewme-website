@@ -204,7 +204,7 @@ def confirm_payment():
 
 @app.route('/sitemap.xml')
 def sitemap():
-    host = "https://www.codewme.dev"  # REPLACE with your actual domain name
+    host = "https://codewme.dev"
     
     # 1. Static pages
     static_urls = [
