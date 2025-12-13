@@ -3436,7 +3436,7 @@
     "id": "39149d2a",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business implements several OmniScripts and requests a design review to identify possible improvements. During the review, the consultant notices that each OmniScript needs to update address data, but each OmniScript collects the information differently using different labels and input elements. What can the consultant recommend to improve these OmniScripts?",
     "options": [
@@ -3454,7 +3454,7 @@
     "id": "590e0f26",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business needs to display installed products for field service technicians on service calls using a mobile device. The installed product information must be summarized so the technician can see key details at a glance. However, the technician also needs to sometimes access a list of past service dates for each product. Which two FlexCards features should the consultant recommend to meet this requirement?",
     "options": [
@@ -3473,7 +3473,7 @@
     "id": "fc525913",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "An insurance company wants to create an OmniScript that allows the user to review and change account details such as phone number and website. In this process, the following functionality is needed: Enter the company's website; Enter the account phone number; Each field should display on a separate line of the page. Which three elements should the consultant include in the OmniScript design solution?",
     "options": [
@@ -3494,7 +3494,7 @@
     "id": "cfc0a791",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "When designing OmniScripts, which three best practices should consultants recommend to increase user adoption?",
     "options": [
@@ -3515,7 +3515,7 @@
     "id": "28bb6d88",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business implements FlexCards in their customer 360° view. The business wants to add a new action to one of the FlexCards that redirects users to an external web page. Which type of action should the consultant recommend to meet this new requirement?",
     "options": [
@@ -3533,7 +3533,7 @@
     "id": "cd9de1be",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has a requirement to create a 360° view of their customers using FlexCards. At this company, customer data is stored in Salesforce but also in external legacy systems. A consultant reviews the use cases needed and recommends a FlexCard canvas that contains 5 child FlexCards inside the state of the parent FlexCard. How many different data sources can be configured using FlexCards in this scenario?",
     "options": [
@@ -3551,7 +3551,7 @@
     "id": "bbbf8ed3",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business wants to create a reusable OmniScript to capture customer payment information during the ordering process. The business decides that the first step of the payment process should include: Payment type (credit card or bank account); Payment amount. Which two elements should the consultant recommend for this step of the process?",
     "options": [
@@ -3570,7 +3570,7 @@
     "id": "018dd63c",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "How many levels deep can reusable OmniScripts be nested?",
     "options": [
@@ -3588,7 +3588,7 @@
     "id": "013cb994",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which three use cases should be implemented using Calculation Procedures & Matrices?",
     "options": [
@@ -3609,7 +3609,7 @@
     "id": "16918e2a",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "In which two scenarios should a DataRaptor be used?",
     "options": [
@@ -3628,7 +3628,7 @@
     "id": "cfd2dfe9",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company needs to create multiple guided processes on their public website. The processes need to be styled using the corporate branding kit. The corporate branding kit includes guidance on colors, fonts, and icons. In addition, the website that the process will be deployed to has a style guide that dictates the format for radio buttons, slide bars, and other user interface elements. The company wants both the corporate branding kit and the website's style guide to be globally implemented in these new processes. Which three OmniStudio features and tools should the consultant recommend to meet these requirements?",
     "options": [
@@ -3649,7 +3649,7 @@
     "id": "94fc9605",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business requires a solution to generate an event (platform event) using account information. All the event information is related to the customer and is stored in Salesforce. Using an Integration Procedure, which two actions are necessary to design this solution?",
     "options": [
@@ -3668,7 +3668,7 @@
     "id": "19c070ee",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business is creating a new OmniScript that will allow agents to launch a guided selling process from an account detail page. The consultant reviews the initial design proposed for the OmniScript and sees that the process has the following steps: Step 1: Enter account name to retrieve account information; Step 2: Review and edit account information; Step 3: Select products; Step 4: Enter payment Information. Following best practices, what suggestion should the consultant make to improve the design?",
     "options": [
@@ -3686,7 +3686,7 @@
     "id": "be3567cb",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company implements an integration procedure that is invoked from an OmniScript. The integration procedure includes a very long-running process that makes users impatient. Which feature should the consultant recommend to improve performance and address users' concerns?",
     "options": [
@@ -3704,7 +3704,7 @@
     "id": "d2796c82",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business needs a 360° view of their accounts, including a FlexCard to display all of the products sold to the account. The business identified 20 different data elements and 10 actions that users would need when viewing the product information. Once all of the elements are collected together on the FlexCard, it looks cluttered. Which two FlexCard features should the consultant recommend to address this issue?",
     "options": [
@@ -3723,7 +3723,7 @@
     "id": "6db9e636",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A telecommunications company wants to create a 360° view of their customers, including all customer installed products grouped by service address. During the discovery phase of the project, the consultant identifies that installed products can have 4 different statuses. Agents complete different processes, depending on status of the installed product. The consultant creates an inventory of all statuses and processes as shown below. Status = Active: Pay bill, Review usage, Cancel service. Status = Suspended: Pay bill, Reconnect service, Cancel service. Status = Pending installation: Set up billing, Schedule installation, Cancel installation. Status = Canceled: Pay bill, Disconnect service, Reconnect service. Which two FlexCard features should the consultant use to meet these requirements?",
     "options": [
@@ -3742,7 +3742,7 @@
     "id": "1345f9e7",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "An existing OmniScript used to capture and update customer information displays the following information on the same page: Name, Age, Street, Last name, Postal code, Gender, State, Phone, City, Country, Email. Users report that the information displays in no specific order. Users experience errors when filling the information because it is not categorized. The process fails after submission because the mandatory fields are blank. How can the consultant improve the user experience of the OmniScript?",
     "options": [
@@ -3760,7 +3760,7 @@
     "id": "163a1772",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company needs to create an OmniScript with three steps.\n* Step 1: Enter customer details\n* Step 2: Select a product\n* Step 3: Display a price retrieved from a REST API\nThe product's price should automatically display in Step 3.\nWhat should the consultant add to the design of the OmniScript to meet these requirements?",
     "options": [
@@ -3778,7 +3778,7 @@
     "id": "0d971b3d",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which OmniStudio tool is optimized for performance and minimizes configuration time?",
     "options": [
@@ -3796,7 +3796,7 @@
     "id": "0b2349de",
     "set_id": 1,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company needs to create a new quote estimation process for its services team. This process involves multiple steps. The user needs to enter a variable number of rows of data in order to calculate the correct final price for the quote. The data that needs to be entered in each row includes:\n* Service category\n* Number of hours\n* Hourly rate\nThe number of hours should be multiplied with the hourly rate to calculate the total for each row.\nWhich three OmniScript elements should the consultant recommend to meet these requirements?",
     "options": [
@@ -3817,7 +3817,7 @@
     "id": "abfd057f",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "What is the purpose of Step elements in OmniScript?",
     "options": [
@@ -3835,7 +3835,7 @@
     "id": "8011f23a",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Based on the user analysis exhibit shown below, which three actions should appear on the card?",
     "options": [
@@ -3856,7 +3856,7 @@
     "id": "a600b821",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A health provider company is building a new application for its medical officers. The company wants to display medical test reports for patients. Medical test reports is a custom object, related to the Patients object. For each patient, the company needs to list each medical test report including the report name, date requested, and date generated. From each medical test report, the user should be able to take the following actions:\n* Approve\n* Print for Review\n* Send for Retest\nWhich OmniStudio tools should the consultant use to design a solution to meet these requirements?",
     "options": [
@@ -3874,7 +3874,7 @@
     "id": "df13ce1f",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company plans to rebuild a process that includes functionality that was originally written in APEX and Visualforce pages using OmniScript. The consultant reviews the process and sees in the first step, the user reviews data and then enters additional information. In the next step, the process retrieves data from an external system.\nIn this scenario, which OmniStudio data tool should the consultant recommend?",
     "options": [
@@ -3892,7 +3892,7 @@
     "id": "a9861090",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has a legacy application to display customer information. The application currently uses custom CSS/HTML to display Information in the company's color scheme and fonts. The application also provides users with access to more than 25 processes. Recently, a new project was started to build a 360° view using FlexCards to replace the legacy application.\nIn this scenario, which three FlexCard features should the consultant recommend?",
     "options": [
@@ -3913,7 +3913,7 @@
     "id": "256fa2ec",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "An insurance agency wants to enable its call center agents to be more efficient when handling customer inquiries. After analyzing patterns in the call logs, the agency discovers that one of the top customer requests is to find out total insurance premiums paid as well as the difference year over year. Agents need to relay this information to the customer and then send them a summary report by email. The agency decides to implement this process using OmniScript.\nWhat three OmniScripts elements should be used to meet the requirements?",
     "options": [
@@ -3934,7 +3934,7 @@
     "id": "587aacaf",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company plans to use OmniScript to digitally transform its business. During the discovery phase of the project, the team reviews all of the business processes including the individual steps of each process. As a result of the analysis, it is clear that many processes need to update contact data at different points in the process.\nWhat solution should the consultant recommend to efficiently meet these requirements?",
     "options": [
@@ -3952,7 +3952,7 @@
     "id": "0f7c4aa1",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company is designing a new console for contact center agents. The cards in the console need to display the following:\n* \"Open\" cases with case description, case open date, case type, assigned to and priority fields. Open cases should be highlighted with a red border.\n* \"Awaiting Closure\" cases with case description, last action taken date, resolution, approval reason for closure, and assigned to fields. These cases should be highlighted with a grey border.\n* \"Closed\" cases with case description, resolution, case closed date fields with a link to duplicate cases.\nAll cases will be fetched using a single DataRaptor.\nHow should the consultant design the FlexCard solution to meet these requirements?",
     "options": [
@@ -3970,7 +3970,7 @@
     "id": "f52fe268",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "When a customer wants to buy a new device, a discounted rate can be applied after considering the number of lines and internet coverage on their current plan.\nWhich OmniStudio tool could a consultant recommend to get the discounted rate?",
     "options": [
@@ -3988,7 +3988,7 @@
     "id": "a3a3c02f",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which OmniStudio tool can be used to invoke scheduled jobs?",
     "options": [
@@ -4006,7 +4006,7 @@
     "id": "cb43b3e5",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business wants to create an OmniScript that allows call center agents to schedule field service appointments for customers. The process needs to retrieve available appointment dates from an external system via a REST API, and then display them to the user for selection in a dropdown list. Once the user selects a date, a confirmation should display with rich text and images.\nWhich three OmniScript elements should be used to meet these requirements?",
     "options": [
@@ -4027,7 +4027,7 @@
     "id": "776ea522",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business has a requirement to display an account and all of the associated contacts on a page. The number of contacts will vary for each account. For each contact, the page should display first name, last name, email, and phone number with options to edit the contact information or send a message. The primary contact for an account should be highlighted with a blue border.\nWhich two FlexCards features should the consultant recommend to meet these requirements?",
     "options": [
@@ -4046,7 +4046,7 @@
     "id": "b7c1a7b0",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has deployed an OmniScript that is working as designed. During the process, the OmniScript has multiple steps that allow the user to review lists of cases, contacts, quotes, orders, and contracts for an account.\nEach step uses DataRaptor Extract Actions to retrieve Salesforce data. However, the OmniScript is reaching performance limitations, and the development team warns that they may begin hitting Governor limits.\nWhich two suggestions should the consultant propose to address this concern?",
     "options": [
@@ -4065,7 +4065,7 @@
     "id": "f0b79166",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business wants to display customer 360° information in a console for their call center agents. The customer information will come from a variety of sources, and the information should be grouped together logically. The agents will need to take different actions depending on the context of each group of information.\nWhich tool should a consultant recommend to meet this requirement?",
     "options": [
@@ -4083,7 +4083,7 @@
     "id": "f821a0ed",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "What is the purpose of a DataRaptor Load?",
     "options": [
@@ -4101,7 +4101,7 @@
     "id": "5f3563da",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company is beginning their first project using Calculation Procedures & Matrices. The developers on the team are concerned about learning the new tool and how they will test their calculation procedures. The consultant recommends that they use the built-in simulator.\nIn this scenario, what benefit should the consultant highlight to the developer team?",
     "options": [
@@ -4119,7 +4119,7 @@
     "id": "e42e60c2",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has a requirement to create a 360° view of their customers using FlexCards. At this company, customer data is stored in Salesforce but also in external legacy systems. A consultant reviews the use cases needed and recommends a FlexCard canvas that contains multiple child cards inside the state of a parent FlexCard.\nWhat is the advantage of embedding multiple child cards in this scenario?",
     "options": [
@@ -4137,7 +4137,7 @@
     "id": "0ec4f3a7",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business needs to create a FlexCard to display open cases for an account. The cases should display differently depending on their priority.\n* Low or Medium priority cases should display case data and an Update Account Info action.\n* High priority cases should include a red border, an alert notification, and an Escalate action.\nWhat is the most efficient way to meet these requirements?",
     "options": [
@@ -4155,7 +4155,7 @@
     "id": "77eab6ed",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Service agents must confirm customer contact information in the first step of a payment OmniScript. Contact information includes name, telephone number, mobile number, and email. None of the contact information on the first step is required. On the last step, after taking payment, the agent can optionally email the receipt to the customer. If the customer says yes, the agent selects a checkbox. If the agent selects the box but the email address field is empty, the process must require the user to return to the first step and enter the customer's email address. What should the consultant recommend to meet this requirement?",
     "options": [
@@ -4173,7 +4173,7 @@
     "id": "392f095d",
     "set_id": 2,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has account information that they want to display to agents in a summarized view. For each account, they want to display icons that allow the user to launch guided processes for frequent tasks. The processes are reused in other parts of the business. Which three OmniStudio tools are needed to meet these requirements?",
     "options": [
@@ -4194,7 +4194,7 @@
     "id": "9ce7ab29",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A consultant must design a 360 view of the customer. The business requirements are: • A header card with account information (name, account number, next billing date, invoice method) • A list of related contacts (first name, last name, phone) • All the open cases related to the account (subject, priority, SLA) An account will not have more than 2 contacts, but it could have more than 10 open cases. It is necessary to have the different sections available at a glance. Which two FlexCard features should the consultant recommend to improve the user experience?",
     "options": [
@@ -4213,7 +4213,7 @@
     "id": "2b6d6245",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business has a requirement to display cases in a console for service agents. Cases can have a variety of statuses, including Active, Closed, or Escalated. When a case is Closed, agents need to be able to reopen the case. When the case is Active or Escalated, agents should not have the option to reopen the case. Which FlexCard functionality can be used to meet this requirement?",
     "options": [
@@ -4231,7 +4231,7 @@
     "id": "19cace03",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "The design team creates a mock-up proposal of an OmniScript for sales that includes more than 25 steps. The consultant reviews the proposal and sees that the OmniScript will be used for three different and complex sales processes: change of plan, new sale, and loyalty. The user will select the type of sale at the beginning of the interaction, and then the OmniScript will branch into either change of plan, new sales, or loyalty processes. Each process will contain multiple decision points for the user. Following best practices, what should the consultant recommend to improve the planned design of this OmniScript?",
     "options": [
@@ -4249,7 +4249,7 @@
     "id": "1276194b",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which two functions can be performed by DataRaptors?",
     "options": [
@@ -4268,7 +4268,7 @@
     "id": "747c005b",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A consultant has a project with the following requirement: \"Agents need to follow a standard customer greeting script in order to ensure brand consistency.\" Which OmniScript element should the consultant recommend to ensure the agents can see and follow these standard scripts?",
     "options": [
@@ -4286,7 +4286,7 @@
     "id": "176979e2",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Agents for an insurance company need to know the current and past weather conditions when creating claims for customers. The consultant implements a FlexCard for weather conditions in the console to ensure the agents have access to the information. The FlexCard needs to provide fields extracted from a weather API and account fields from Salesforce. According to best practice, what data source should be used?",
     "options": [
@@ -4304,7 +4304,7 @@
     "id": "e6d60e80",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "An OmniScript saves data to Salesforce and to an external system. What OmniScript element could save all this data?",
     "options": [
@@ -4322,7 +4322,7 @@
     "id": "a3650934",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which three of the following are functions of a Text Block element in OmniScript?",
     "options": [
@@ -4343,7 +4343,7 @@
     "id": "a2b694d3",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "What is the purpose of the Messaging element in OmniScript?",
     "options": [
@@ -4361,7 +4361,7 @@
     "id": "59f3c4d7",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which OmniStudio tool creates a Chatter post and sends to a Chatter feed?",
     "options": [
@@ -4379,7 +4379,7 @@
     "id": "41a71c58",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A customer needs to create an OmniScript to capture payment information. In the first step of the process, the user selects a payment type such as credit card, debit card, or direct bank account payment. Each payment type should display with a different icon. The process should check to see if the customer has any saved payment information of that type, and if there is, no further action is required. If there is no saved payment information, then the user should be allowed to enter the information, and the process should save it. Which three OmniStudio elements should be used to meet these requirements?",
     "options": [
@@ -4400,7 +4400,7 @@
     "id": "928a08b8",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business has an existing Contact FlexCard that currently displays 5 actions. The business needs to add 3 more actions to the existing FlexCard. All 8 actions are equally important and used with the same frequency. The business wants to display the name and icon for each action. However, when reviewing the existing design, the consultant notices that the FlexCard is overloaded with actions. What FlexCard design solution should the consultant recommend?",
     "options": [
@@ -4418,7 +4418,7 @@
     "id": "8c00aa68",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A business has been experiencing a downturn in customer satisfaction due to billing issues. The business learns that when customers are allowed to schedule an inquiry call with an agent, customer satisfaction improves. For this reason, the business decides to create an OmniScript that asks the customer to rate their customer satisfaction using a 1-5 rating scale. If the customer satisfaction is less than 2, it should allow the customer to request a call back on a certain date and then create a case that includes a list of bills from an external system for the last 5 months in the case description. In what order should the consultant design the elements of the OmniScript to meet these requirements?",
     "options": [
@@ -4436,7 +4436,7 @@
     "id": "5bae2345",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "When a customer calls to add a new primary contact to their account, call center agents need to complete a new contact form. The agent enters the new contact information using an OmniScript and then needs to generate a PDF with the contact information pre-filled that can be shared with the customer. Which OmniStudio tool should the consultant recommend to generate the pre-filled PDF?",
     "options": [
@@ -4454,7 +4454,7 @@
     "id": "2b5fcbc5",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company begins a project to unify its customer data across the enterprise. After completing the discovery and analysis phases of the project, the project team recommends FlexCards as the primary solution. The stakeholders of the project are excited to move forward with this recommendation. However, IT is concerned that creating FlexCards will require custom coding and advanced technical skills they do not have on their team. Which two features should the consultant highlight to address IT's concerns?",
     "options": [
@@ -4473,7 +4473,7 @@
     "id": "41bf355b",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has an existing OmniScript running in production. The business decides additional customer information is needed and wants to add more questions to the process. What is the most efficient approach that the consultant can recommend to the business to meet this requirement?",
     "options": [
@@ -4491,7 +4491,7 @@
     "id": "1045d710",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "A company has an existing OmniScript that agents use to create new billing accounts. It currently has three steps to capture required information: • Step 1: account name and legal number • Step 2: billing cycle and monthly due date • Step 3: email and telephone number After each step, a DataRaptor is used to update the account information in Salesforce. Following best practices, which two improvements can the consultant recommend for this OmniScript?",
     "options": [
@@ -4510,7 +4510,7 @@
     "id": "71c348e8",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "When designing OmniStudio solutions, what are two reasons that explain why Integration Procedures are recommended as the first choice of data sources for FlexCards and OmniScripts?",
     "options": [
@@ -4529,7 +4529,7 @@
     "id": "c21a68b5",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "An insurance company decides to use calculation procedures and matrices to calculate premium costs for new insurance policies. Prices change very frequently, resulting in multiple copies of the rating or pricing tables. What is an advantage of calculation procedures that the consultant should highlight in this scenario?",
     "options": [
@@ -4547,7 +4547,7 @@
     "id": "06a377fc",
     "set_id": 3,
     "category": "Salesforce Omnistudio Consultant",
-    "tag": "Salesforce",
+    "tag": "SALESFORCE",
     "description": "Practice quiestions for salesforce omnistudio consultant certification exam.",
     "question": "Which OmniScript element can be used to retrieve data from more than one source?",
     "options": [
@@ -4564,10 +4564,10 @@
   {
     "id": "ud5i2vqa",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
-    "question": "A company has a requirement to create a 360\u00b0 view of their customers using Flexcards. At this company, customer data is stored in Salesforce but also in external legacy systems, so it's required to obtain certain information from this system. A consultant reviews the use cases needed and recommends a parent Flexcard that contains five child Flexcards inside the state of the parent Flexcard. Based on the Flexcard capabilities, how many different data sources can be configured for the Flexcards in this scenario?",
+    "question": "A company has a requirement to create a 360° view of their customers using Flexcards. At this company, customer data is stored in Salesforce but also in external legacy systems, so it's required to obtain certain information from this system. A consultant reviews the use cases needed and recommends a parent Flexcard that contains five child Flexcards inside the state of the parent Flexcard. Based on the Flexcard capabilities, how many different data sources can be configured for the Flexcards in this scenario?",
     "image_url": "",
     "options": [
       "6",
@@ -4583,8 +4583,8 @@
   {
     "id": "4qheia8g",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A Salesforce Omnistudio Consultant is tasked with creating an Omniscript for a client's customer service prices. The consultant wants to integrate Salesforce Knowledge into the Omniscript. What is one way the consultant can configure an Omniscript to search for Salesforce Knowledge articles?",
     "image_url": "",
@@ -4602,8 +4602,8 @@
   {
     "id": "mpn5tcmw",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Company has an existing Omniscript running in production. The business decides additional customer information is needed and wants to add more questions to the process. What is the most efficient approach that the consultant can recommend to the business to meet this requirement?",
     "image_url": "",
@@ -4621,8 +4621,8 @@
   {
     "id": "d035xx2j",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant is working with a client who wants to use a Flexcard to display data from a specific Salesforce object. The client is unsure which data source to use. What advice should the consultant give to the client?",
     "image_url": "",
@@ -4640,8 +4640,8 @@
   {
     "id": "j4617tjd",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A customer needs to create an Omniscript to capture payment information. In the first step of the process, the user selects a payment type such as credit card, debit card, or direct bank account payment. Each payment type should display with a different icon. The process should check to see if the customer has any saved payment information of that type, and if there is, no further action is required. If there is no saved payment information, then the user should be allowed to enter the information, and the process should save it. Which three Omniscript elements should be used to meet these requirements?",
     "image_url": "",
@@ -4662,8 +4662,8 @@
   {
     "id": "x9lo31bd",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business has a requirement to display an account and all of the associated contacts on a page. The number of contacts will vary for each account. For each contact, the page should display first name, last name, email, and phone number with options to edit the contact information or send a message. The primary contact for an account should be highlighted with a blue border. Which two Flexcards features could the consultant recommend to meet these requirements?",
     "image_url": "",
@@ -4682,8 +4682,8 @@
   {
     "id": "n2qhxwu9",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business is creating a new Omniscript that will allow agents to launch a guided selling process from an account detail page. The consultant reviews the initial design proposed for the Omniscript and sees that the process has the following steps: Step 1: Enter account name to retrieve account information; Step 2: Review and edit account information; Step 3: Select products; Step 4: Enter payment information. Following best practices, which suggestion should the consultant make to improve the design?",
     "image_url": "",
@@ -4701,8 +4701,8 @@
   {
     "id": "nygvruyd",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "What is the purpose of Step elements in an Omniscript?",
     "image_url": "",
@@ -4720,8 +4720,8 @@
   {
     "id": "9v9uw23s",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business needs to create a Flexcard to display open cases for an account. The cases should display differently depending on their priority. Low or Medium priority cases should display case data and an Update Account Info action. High priority cases should include a red border, an alert notification, and an Escalate action. What is the most efficient way to meet these requirements?",
     "image_url": "",
@@ -4739,8 +4739,8 @@
   {
     "id": "sb8wshqe",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A Salesforce Omnistudio Consultant is validating an Omniscript they have developed for a client. The client has specific business requirements that the script must meet. What is the best way for the consultant to ensure that the Omniscript meets the client's business requirements?",
     "image_url": "",
@@ -4758,8 +4758,8 @@
   {
     "id": "ao5c4dgt",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company has an existing Omniscript that gathers customer information. User feedback suggests that the current process requires too much typing because all the data is entered into input text fields. The users also are concerned because there is no validation in the data that is entered, and users can sometimes enter data that contains errors. The required inputs are first name, last name, age, and email. Users are also presented a brief questionnaire regarding customer satisfaction. Which three input elements can the consultant recommend to improve usability and to provide validation?",
     "image_url": "",
@@ -4780,8 +4780,8 @@
   {
     "id": "drcjq8p7",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Creating a Flexcard for agents to respond to account inquiries. The company has decided based on user analysis that High Frequency and High Importance tasks should be on the card. Based on a user analysis exhibit (not shown but implying Payment, Statements, and Credit Score are priority), which three actions should appear on the card?",
     "image_url": "",
@@ -4801,8 +4801,8 @@
   {
     "id": "3vvdeovp",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business requires a solution to generate an event record that is sent to the customer and is stored in Salesforce. Using an Integration Procedure, which two actions are necessary?",
     "image_url": "",
@@ -4821,8 +4821,8 @@
   {
     "id": "osc_1a2b3",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant is working with a client who wants to transfer and transform data between Salesforce and the Omniscripts, Flexcards, and Integration Procedures tools. Which Omnistudio tool should the consultant recommend for this requirement?",
     "image_url": "",
@@ -4840,8 +4840,8 @@
   {
     "id": "osc_4c5d6",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "An insurance company decides to use Expression Sets and Decision Matrices to calculate premium costs for new insurance policies. Prices change very frequently, resulting in multiple copies of the rating or pricing tables. What is an advantage of Expression Sets that the consultant should highlight in this scenario?",
     "image_url": "",
@@ -4859,8 +4859,8 @@
   {
     "id": "osc_7e8f9",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "How should a consultant design the Omniscript solution to allow the user to stop and resume a process at a later time?",
     "image_url": "",
@@ -4878,8 +4878,8 @@
   {
     "id": "osc_0g1h2",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company needs to create an Omniscript with three steps. Step 1: Enter customer details. Step 2: Select a product. Step 3: Display a price retrieved from a REST API. The product's price should automatically display in Step 3. What should the consultant add to the design of the Omniscript to meet these requirements?",
     "image_url": "",
@@ -4897,8 +4897,8 @@
   {
     "id": "osc_3i4j5",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Service agents must confirm customer contact information in the first step of a payment Omniscript... On the last step, after taking payment, the agent can optionally email the receipt. If the agent selects the box but the email address field is empty, the process must require the user to return to the first step and enter the customer's email address. What should the consultant recommend?",
     "image_url": "",
@@ -4916,8 +4916,8 @@
   {
     "id": "osc_6k7l8",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Company has a legacy application using custom CSS/HTML... also provides access to more than 25 processes. Recently, a new project was started to build a 360° view using Flexcards to replace the legacy application. Which three Flexcard features should the consultant recommend? (Select 3)",
     "image_url": "",
@@ -4938,8 +4938,8 @@
   {
     "id": "osc_9m0n1",
     "set_id": 4,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business implements several Omniscripts... the consultant notices that each Omniscript needs to update address data, but each Omniscript collects the information differently using different labels and input elements. What should the consultant recommend to improve these Omniscripts?",
     "image_url": "",
@@ -4957,8 +4957,8 @@
   {
     "id": "osc_2o3p4",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Which Omniscript element can be used to retrieve data from more than one source?",
     "image_url": "",
@@ -4976,8 +4976,8 @@
   {
     "id": "osc_5q6r7",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business is creating an agent console with Flexcards to provide a 360° view... Account information, Active opportunities, Active contracts, and the ability to view and renew contracts. How should the consultant design the Flexcards to meet these requirements?",
     "image_url": "",
@@ -4995,8 +4995,8 @@
   {
     "id": "osc_8s9t0",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company needs to create a quoting process... The process should use the grade and size to look up a discount factor, then multiply the unit price by that discount to return the quote. Which two tools should the consultant recommend? (Select 2)",
     "image_url": "",
@@ -5015,8 +5015,8 @@
   {
     "id": "osc_1u2v3",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company needs to create a new quote estimation process... the user needs to enter a variable number of rows of data... Service category, Number of hours, Hourly rate... calculate the total for each row. Which two Omniscript elements should the consultant recommend? (Select 2)",
     "image_url": "",
@@ -5035,8 +5035,8 @@
   {
     "id": "osc_4w5x6",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business needs to display installed products... on a mobile device. The information must be summarized so the technician can see key details at a glance. However, the technician also needs to sometimes access a list of past service dates for each product. Which two Flexcards features should the consultant recommend? (Select 2)",
     "image_url": "",
@@ -5055,8 +5055,8 @@
   {
     "id": "osc_7y8z9",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business wants to add typeahead functionality... begin entering the name of a contact in Salesforce... allow the user to select the contact... retrieve the contact's email address. Which data source is needed when using the Type Ahead Block element?",
     "image_url": "",
@@ -5074,8 +5074,8 @@
   {
     "id": "osc_0a1b2",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant is working on a project... considering using Decision Matrices and Expression Sets. What is the primary benefit of using Decision Matrices and Expression Sets in Omnistudio?",
     "image_url": "",
@@ -5093,8 +5093,8 @@
   {
     "id": "osc_3c4d5",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company needs to create a process that allows call center admins to retrieve all open cases that have a case type of network issue and submit the case data 'as is' to a back office system for validation in batch on a daily basis. Once the cases have been submitted, the process should trigger an email to the supervisor. Which three Omnistudio tools should the consultant recommend? (Select 3)",
     "image_url": "",
@@ -5115,8 +5115,8 @@
   {
     "id": "osc_6e7f8",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company has a process that requires minimum age to purchase... If the user is younger than 18 years, then the Omniscript needs to display a message stating 'You must be 18 years or older...' and also prevent users from continuing. Which two Omniscript components should the consultant recommend? (Select 2)",
     "image_url": "",
@@ -5135,8 +5135,8 @@
   {
     "id": "osc_9g0h1",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Agents for an insurance company need to know the current and past weather conditions... The Flexcard needs to provide fields extracted from a weather API and account fields from Salesforce. According to best practice, which data source should be used?",
     "image_url": "",
@@ -5154,8 +5154,8 @@
   {
     "id": "osc_2i3j4",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Omniscript has multiple steps that allow the user to review lists of cases, contacts, quotes... reaching performance limitations... development team warns that they may begin hitting Governor limits. Which two suggestions should the consultant propose? (Select 2)",
     "image_url": "",
@@ -5174,8 +5174,8 @@
   {
     "id": "osc_5k6l7",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company has a requirement to create a 360° view of their customers using Flexcards... customer data is stored in Salesforce but also in external legacy systems... parent Flexcard that contains multiple child cards... What is the advantage of embedding multiple child cards in this scenario?",
     "image_url": "",
@@ -5193,8 +5193,8 @@
   {
     "id": "osc_8m9n0",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business needs a 360° view... identified 20 different data elements and 10 actions... Once all of the elements are collected together on the Flexcard, it looks cluttered. Which two Flexcard features should the consultant recommend? (Select 2)",
     "image_url": "",
@@ -5213,8 +5213,8 @@
   {
     "id": "osc_1o2p3",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company needs to implement new verification processes for contacts... Recruiter, Candidate, and Trainer... verification process is different for each type of contact. Which Omnistudio tools should the consultant recommend?",
     "image_url": "",
@@ -5232,8 +5232,8 @@
   {
     "id": "osc_4q5r6",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Omniscript that allows call center agents to schedule field service appointments... retrieve available appointment dates from an external system via a REST API... display them to the user for selection in a dropdown list. Once the user selects a date, a confirmation should display with rich text and images. Which three Omniscript elements should be used? (Select 3)",
     "image_url": "",
@@ -5254,8 +5254,8 @@
   {
     "id": "osc_7s8t9",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Which Omnistudio tool creates a Chatter post and sends to a Chatter feed?",
     "image_url": "",
@@ -5273,8 +5273,8 @@
   {
     "id": "osc_0u1v2",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "An insurance agency... find out total insurance premiums paid as well as the difference year over year... send them a summary report by email. Which three Omniscript elements should be used? (Select 3)",
     "image_url": "",
@@ -5295,8 +5295,8 @@
   {
     "id": "osc_3w4x5",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant needs to design an Omniscript to capture... Select one payment method... Enter the address information with autocomplete... Enter a phone number. Which Omniscript elements should be used?",
     "image_url": "",
@@ -5314,8 +5314,8 @@
   {
     "id": "osc_6y7z8",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "An insurance company decides to implement a sales console... determines that Flexcards would be the best solution to display part of the required information. Which two pieces of data should the consultant recommend displaying using Flexcards? (Select 2)",
     "image_url": "",
@@ -5334,8 +5334,8 @@
   {
     "id": "osc_9a0b1",
     "set_id": 5,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company plans to rebuild a process... functionality that was originally written in APEX... process retrieves data from an external system. In this scenario, which Omnistudio data tool should the consultant recommend?",
     "image_url": "",
@@ -5353,8 +5353,8 @@
   {
     "id": "osc_2c3d4",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business process needs to perform a multi step calculation on each contact record in a list. Using an Integration Procedure to process the list, which feature can be used to meet this requirement?",
     "image_url": "",
@@ -5372,8 +5372,8 @@
   {
     "id": "osc_5e6f7",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant has a project with the following requirement: Agents need to follow a standard customer greeting script in order to ensure brand consistency. Which Omniscript element should the consultant recommend to ensure the agents can see and follow these standard scripts?",
     "image_url": "",
@@ -5391,8 +5391,8 @@
   {
     "id": "osc_8g9h0",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A business plans to implement new tools... requirements: 'At a glance' dashboards... Lists of customer bills (external). Which two Flexcard benefits should the consultant highlight? (Select 2)",
     "image_url": "",
@@ -5411,8 +5411,8 @@
   {
     "id": "osc_1i2j3",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "The client wants to include account status, priority level, creation date, and company logo. They also want to include actions such as closing a case... What is the best approach for the consultant to meet the client's requirements?",
     "image_url": "",
@@ -5430,8 +5430,8 @@
   {
     "id": "osc_4k5l6",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A telecommunications company wants to create a 360° view... installed products can have 4 different statuses... Agents complete different processes, depending on status. Which two Flexcard features should the consultant use? (Select 2)",
     "image_url": "",
@@ -5450,8 +5450,8 @@
   {
     "id": "osc_7m8n9",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Salesforce Omnistudio Consultant is creating an Omniscript... wants to enhance the performance and usability. What is one best practice the consultant can follow?",
     "image_url": "",
@@ -5469,8 +5469,8 @@
   {
     "id": "osc_0o1p2",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Which two functions can be performed by Data Mappers? (Select 2)",
     "image_url": "",
@@ -5489,8 +5489,8 @@
   {
     "id": "osc_3q4r5",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Which Omnistudio tool can be used to invoke scheduled jobs?",
     "image_url": "",
@@ -5508,8 +5508,8 @@
   {
     "id": "osc_6s7t8",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Many processes need to update contact data at different points in the process. Which solution should the consultant recommend to efficiently meet these requirements?",
     "image_url": "",
@@ -5527,8 +5527,8 @@
   {
     "id": "osc_9u0v1",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A consultant is tasked with migrating Calculation Matrices and Procedures... What is a key consideration when migrating Calculation Matrices and Procedures?",
     "image_url": "",
@@ -5546,8 +5546,8 @@
   {
     "id": "osc_2w3x4",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "Agent enters the new contact information using an Omniscript and then needs to generate a PDF with the contact information pre-filled. What should the consultant recommend to generate the pre filled PDF?",
     "image_url": "",
@@ -5565,8 +5565,8 @@
   {
     "id": "osc_5y6z7",
     "set_id": 6,
-    "category": "Salesforce",
-    "tag": "Salesforce Omnistudio Consultant",
+    "category": "Salesforce Omnistudio Consultant",
+    "tag": "SALESFORCE",
     "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
     "question": "A company has a requirement to create a 360° view... parent Flexcard that contains five child Flexcards... Based on the Flexcard capabilities, how many different data sources can be configured for the Flexcards in this scenario?",
     "image_url": "",
@@ -5580,5 +5580,864 @@
       "6"
     ],
     "explanation": "Each of the 5 Child Flexcards plus the 1 Parent Flexcard can have its own independent data source."
+  },
+  {
+    "id": "b76fdf3e",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "A developer is using the Salesforce CLI to deploy agent component to several topics, instructions, and actions. Which metadata component should the developer include in the page agent will interact with?",
+    "image_url": "",
+    "options": [
+      "EinsteinAiPlannerBundle",
+      "BotBundle",
+      "genAiPlannerBundle"
+    ],
+    "correct": [
+      "genAiPlannerBundle"
+    ],
+    "explanation": "The GenAiPlannerBundle is the correct metadata type for defining an Agentforce Agent's planner configuration in recent API versions (v64.0 and later). It serves as a container that groups Topics, Instructions, and Actions."
+  },
+  {
+    "id": "4ca2ff72",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Booking failures verify customer eligibility, and finally create the booking. The current implementation allows the large Resorts needs to ensure its booking agent executes actions in a specific sequence. Which approach should an Agentforce Specialist implement?",
+    "image_url": "",
+    "options": [
+      "Write comprehensive topic instructions detailing the exact sequence of actions using numbered steps ordering requirements for the reasoning engine to follow during booking workflows.",
+      "Create custom variables that store completion status for each step, then implement conditional logic.",
+      "Configure topic, classification description, and action instructions with priority levels and sequence indications."
+    ],
+    "correct": [
+      "Write comprehensive topic instructions detailing the exact sequence of actions using numbered steps ordering requirements for the reasoning engine to follow during booking workflows."
+    ],
+    "explanation": "In Salesforce Agentforce, the primary mechanism to guide the Planner (the reasoning engine) to execute actions in a specific order is through clear, numbered Topic Instructions."
+  },
+  {
+    "id": "3c93d5a7",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) recently attended a major trade show and received thousands of new leads. Goals: Qualify and nurture leads 24/7, Provide accurate answers, Automatically book meetings. Which Agentforce capability should UC implement to meet these goals?",
+    "image_url": "",
+    "options": [
+      "Commerce Agent",
+      "SDR Agent"
+    ],
+    "correct": [
+      "SDR Agent"
+    ],
+    "explanation": "The SDR (Sales Development Representative) Agent is purpose-built to handle top-of-funnel sales activities like qualifying leads, answering inquiries, and booking meetings 24/7."
+  },
+  {
+    "id": "1110bd2a",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers' administrator has developed a new agent in a sandbox and needs to deploy it to production. What should the administrator do to deploy an agent?",
+    "image_url": "",
+    "options": [
+      "Export agent components as JSON files and manually import them into production.",
+      "Manually recreate the agent configuration, topics, and actions in production.",
+      "Create an outbound change set with all the necessary agent components, then upload."
+    ],
+    "correct": [
+      "Create an outbound change set with all the necessary agent components, then upload."
+    ],
+    "explanation": "Agentforce Agents are metadata. The standard path is to use deployment tools like Change Sets, DevOps Center, or Salesforce CLI to move the agent and its dependencies (Topics, Actions) to Production."
+  },
+  {
+    "id": "2c2dc3ee",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) has registered an external service to fetch data from a REST API. UC now needs to use the data in a prompt template as a merge field. How should UC meet this requirement?",
+    "image_url": "",
+    "options": [
+      "Use External Service Record merge fields.",
+      "Use the 'Add Prompt Instructions' flow element.",
+      "Convert the JSON to an XML merge field."
+    ],
+    "correct": [
+      "Use External Service Record merge fields."
+    ],
+    "explanation": "External Services generate Apex-defined types. By creating a Template-Triggered Prompt Flow that calls the External Service, the output record can be used directly as a merge field in the prompt."
+  },
+  {
+    "id": "d5b58f7c",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) is building a Flex prompt template. Which flow element should UC use to pass data to the prompt?",
+    "image_url": "",
+    "options": [
+      "Add Flow Instructions",
+      "Add Prompt Instructions",
+      "Add Flex Instructions"
+    ],
+    "correct": [
+      "Add Prompt Instructions"
+    ],
+    "explanation": "The 'Add Prompt Instructions' element is the specific Flow element designed to pass text and data from a Template-Triggered Prompt Flow back to the Prompt Builder context."
+  },
+  {
+    "id": "42d7457b",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers deploys a new Agentforce Service Agent into the company's website but the Agent is not providing answers to customer questions that are found in the company's Knowledge base. What is the likely issue?",
+    "image_url": "",
+    "options": [
+      "The Agentforce Service Agent user is not assigned the correct Agent Type License.",
+      "The Agentforce Service Agent user was not given the Allow View Knowledge permission set.",
+      "The Agentforce Service Agent user needs to be created under the standard Agent Knowledge profile."
+    ],
+    "correct": [
+      "The Agentforce Service Agent user was not given the Allow View Knowledge permission set."
+    ],
+    "explanation": "Agents run as a specific user. If that user does not have permission to read Knowledge articles (via a Permission Set), the agent cannot retrieve or search that data."
+  },
+  {
+    "id": "629ef61c",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers wants to answer questions based on similar cases that have been resolved. What should UC consider when implementing this approach?",
+    "image_url": "",
+    "options": [
+      "No action is needed, as past cases are used to answer the question.",
+      "Create an unstructured data model object (UDMO) based on Case object and create an index on it.",
+      "Create a data model object (DMO) based on Case object and create an index on it."
+    ],
+    "correct": [
+      "Create an unstructured data model object (UDMO) based on Case object and create an index on it."
+    ],
+    "explanation": "For semantic search (finding 'similar' content), data must be mapped to an Unstructured Data Model Object (UDMO) and indexed in Data Cloud."
+  },
+  {
+    "id": "fc094851",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers is setting up the data library configuration. What is true regarding Agentforce Data Libraries?",
+    "image_url": "",
+    "options": [
+      "Only data library owners can assign it to the agent.",
+      "Each data category can only have one data library.",
+      "An agent can have only one data library assigned to it."
+    ],
+    "correct": [
+      "An agent can have only one data library assigned to it."
+    ],
+    "explanation": "In the standard configuration, an Agentforce Agent is typically restricted to a single Data Library assignment to ground its responses."
+  },
+  {
+    "id": "9da6ccd7",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) wants to empower its marketing team to surface relevant information, generate creative content, and manage project tasks directly in Salesforce. Which AI solution should UC implement?",
+    "image_url": "",
+    "options": [
+      "Service Agent",
+      "Employee Agent",
+      "Sales Coach Agent"
+    ],
+    "correct": [
+      "Employee Agent"
+    ],
+    "explanation": "The Employee Agent is designed for internal users (like marketing or HR) to enhance productivity by generating content and managing tasks within the flow of work."
+  },
+  {
+    "id": "0a6d5868",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) needs to capture and store detailed interaction logs to get a full view of the agent's actions, prompt and gateway inputs/outputs, and error messages. Which feature should they use?",
+    "image_url": "",
+    "options": [
+      "Agentforce Session Tracing",
+      "Agentforce Analytics",
+      "Utterance Analysis"
+    ],
+    "correct": [
+      "Agentforce Session Tracing"
+    ],
+    "explanation": "Agentforce Session Tracing provides granular logs of the reasoning process, inputs, outputs, and errors for debugging specific interactions."
+  },
+  {
+    "id": "509fa7b6",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers has multiple Salesforce orgs. They need to ensure customer identity is persistent across agent handoffs without exposure to large language model (LLM) alteration. What is the most appropriate configuration?",
+    "image_url": "",
+    "options": [
+      "Store customer identity information in conversation variables.",
+      "Use the Agent API to start the downstream agent's session and pass the verified customer context variable."
+    ],
+    "correct": [
+      "Use the Agent API to start the downstream agent's session and pass the verified customer context variable."
+    ],
+    "explanation": "Using the Agent API to pass immutable Context Variables ensures that critical data like identity is verified and cannot be hallucinated or altered by the LLM."
+  },
+  {
+    "id": "14737aa7",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "A company wants to retrieve patient history details to augment Cloud search index feature. What is best practice when considering retrieval-augmented generation (RAG) and personally identifiable information (PII)?",
+    "image_url": "",
+    "options": [
+      "Depend on the agent's prompt to avoid exposing PII.",
+      "Mask sensitive fields and index only non-PII data.",
+      "Encrypt embeddings, but still index PII records."
+    ],
+    "correct": [
+      "Mask sensitive fields and index only non-PII data."
+    ],
+    "explanation": "The best practice is to mask or remove high-risk PII before it enters the vector search index to minimize the attack surface and prevent accidental retrieval."
+  },
+  {
+    "id": "99cfbc08",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "What does it mean when a prompt template version is described as immutable?",
+    "image_url": "",
+    "options": [
+      "Every modification on a template will be saved as a new version automatically.",
+      "Only the latest version of a template can be activated.",
+      "After a prompt template version is activated, no further changes can be saved to that version."
+    ],
+    "correct": [
+      "After a prompt template version is activated, no further changes can be saved to that version."
+    ],
+    "explanation": "Activation 'locks' a Prompt Template version to ensure stability for running processes. Any further edits must be saved as a new version."
+  },
+  {
+    "id": "0e2e364e",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) is considering using a Field Generation prompt. What should UC check before creating the Field Generation prompt to ensure the feature works on the page?",
+    "image_url": "",
+    "options": [
+      "That the field chosen is a rich text field with 255 characters or more.",
+      "That the org is set to API version 59 or higher.",
+      "That the Lightning page layout where the field will reside has been upgraded to Dynamic Forms."
+    ],
+    "correct": [
+      "That the Lightning page layout where the field will reside has been upgraded to Dynamic Forms."
+    ],
+    "explanation": "To add the generative AI button to a specific field, the Lightning page must be upgraded to Dynamic Forms so the field component's properties can be configured."
+  },
+  {
+    "id": "b5c72903",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Coral Cloud Resorts is uploading thousands of reviews to ensure Agentforce retrieves accurate responses. Which chunking strategy is best?",
+    "image_url": "",
+    "options": [
+      "Semantic-based passage extraction",
+      "Conversation-based chunking",
+      "Section-aware chunking"
+    ],
+    "correct": [
+      "Section-aware chunking"
+    ],
+    "explanation": "Section-aware chunking respects the structural hierarchy of documents (headers, logical breaks), ensuring retrieved chunks represent complete thoughts, which is ideal for structured knowledge articles or reviews."
+  },
+  {
+    "id": "ce30dfe1",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "An Agentforce Specialist at Universal Containers (UC) needs to help the sales team prep for calls by summarizing past purchases, displaying interests, and recapping conversations. Which approach should they use?",
+    "image_url": "",
+    "options": [
+      "Fine-tune the standard foundational model",
+      "Use a prompt template grounded on CRM and Data Cloud data",
+      "Deploy UC's own custom foundational model"
+    ],
+    "correct": [
+      "Use a prompt template grounded on CRM and Data Cloud data"
+    ],
+    "explanation": "Grounding allows the model to retrieve real-time data (purchases, emails) from the CRM to answer specific questions without the need for resource-intensive fine-tuning or custom models."
+  },
+  {
+    "id": "53c971ca",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "An Agentforce Specialist is creating a custom action. Which option is available for the Agentforce Specialist to choose?",
+    "image_url": "",
+    "options": [
+      "Flows",
+      "SOQL",
+      "Apex trigger"
+    ],
+    "correct": [
+      "Flows"
+    ],
+    "explanation": "Autolaunched Flows are a supported custom action type in Agentforce. SOQL and Apex triggers cannot be directly selected as standalone actions in the agent configuration."
+  },
+  {
+    "id": "a435b499",
+    "set_id": 11,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) wants to deploy a Digital Experience site and enable messaging to the agent with pre-chat variables. What is a required step?",
+    "image_url": "",
+    "options": [
+      "Configure a messaging Lightning web component",
+      "Create an Omni-Channel flow that routes messages to the agent",
+      "Configure MuleSoft to establish a secure connection"
+    ],
+    "correct": [
+      "Create an Omni-Channel flow that routes messages to the agent"
+    ],
+    "explanation": "In Messaging for In-App and Web (MIAW), an Omni-Channel Flow is required to handle routing logic and map pre-chat variables to the agent."
+  },
+  {
+    "id": "1ca57c04",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) wants to ensure its compliance team can perform exact term matching in a structured legal document library. Which search type should UC implement?",
+    "image_url": "",
+    "options": [
+      "Use hybrid search to blend keyword and semantic search",
+      "Use keyword search for exact term matching in structured fields",
+      "Use semantic search to interpret synonyms of clauses"
+    ],
+    "correct": [
+      "Use keyword search for exact term matching in structured fields"
+    ],
+    "explanation": "Keyword search is deterministic and ideal for exact matches (like legal codes or IDs), whereas semantic search is probabilistic and better for intent/meaning."
+  },
+  {
+    "id": "04ff32fc",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) needs to create a prompt template that provides a detailed product description based on the product data. Which prompt template type should UC use?",
+    "image_url": "",
+    "options": [
+      "Sales Email",
+      "Record Summary",
+      "Field Generation"
+    ],
+    "correct": [
+      "Field Generation"
+    ],
+    "explanation": "Field Generation templates are designed to use GenAI to write content for a single specific field (like a description) based on record data."
+  },
+  {
+    "id": "7d6fdbe7",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "A generic company is about to start testing its concierge agent. Which metrics should be captured to monitor performance?",
+    "image_url": "",
+    "options": [
+      "Response times, accuracy and relevance of answers, and resolution success",
+      "Response performance, tone, and CSATS",
+      "Agent performance, token usage, and conversation duration"
+    ],
+    "correct": [
+      "Response times, accuracy and relevance of answers, and resolution success"
+    ],
+    "explanation": "Effective AI evaluation requires monitoring Efficiency (Response Times), Quality (Accuracy/Relevance), and Outcome (Resolution Success)."
+  },
+  {
+    "id": "8aaa6124",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "What is the use of Model Context Protocol (MCP)?",
+    "image_url": "",
+    "options": [
+      "A legal assistant agent using MCP to dynamically find documents",
+      "A customer service agent engaging another agent in real-time conversations",
+      "A sales agent discovering other agents' capabilities using Agent Cards"
+    ],
+    "correct": [
+      "A legal assistant agent using MCP to dynamically find documents"
+    ],
+    "explanation": "MCP is an open standard that allows AI agents to securely connect to external data (reading resources like documents) and tools."
+  },
+  {
+    "id": "12b71a67",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "An Agentforce Specialist is building a Flex prompt template. Which best practice should they follow?",
+    "image_url": "",
+    "options": [
+      "Provide the large language model (LLM) with context examples",
+      "Ground the large language model (LLM) with account data to contextualize the response",
+      "Ground the large language model (LLM) with a response"
+    ],
+    "correct": [
+      "Ground the large language model (LLM) with account data to contextualize the response"
+    ],
+    "explanation": "Grounding with specific record data (like Account info) is critical to ensuring the LLM generates relevant, personalized responses."
+  },
+  {
+    "id": "86a809ed",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "An Agentforce Specialist needs to enable the use of templates that have already been created. Which permission step is required?",
+    "image_url": "",
+    "options": [
+      "Assign the Prompt Template User permission set",
+      "Assign the Prompt Template Manager permission set",
+      "Assign the Data Cloud Admin permissions"
+    ],
+    "correct": [
+      "Assign the Prompt Template User permission set"
+    ],
+    "explanation": "The 'Prompt Template User' permission set allows end-users to execute/run templates. 'Manager' is for building them."
+  },
+  {
+    "id": "75dfe119",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers has PDF maintenance guides in an external folder and wants the Service Agent to use them. Which approach should be implemented?",
+    "image_url": "",
+    "options": [
+      "Upload the PDFs as File source in the Agentforce Data Library",
+      "Configure Data Cloud to ingest file attachments and create a search index",
+      "Paste external PDF links into topic instructions"
+    ],
+    "correct": [
+      "Configure Data Cloud to ingest file attachments and create a search index"
+    ],
+    "explanation": "For external unstructured data, best practice is to ingest it into Data Cloud (UDLO), chunk/vectorize it, and create a search index for retrieval."
+  },
+  {
+    "id": "adc241c0",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers' service team wants to customize the standard case summary. What should the Agentforce Specialist do?",
+    "image_url": "",
+    "options": [
+      "Create a custom Record Summary prompt template for the Case object",
+      "Summarize the Case with a standard agent action",
+      "Customize the standard Record Summary template for the Case object"
+    ],
+    "correct": [
+      "Create a custom Record Summary prompt template for the Case object"
+    ],
+    "explanation": "Standard prompt templates are read-only. To customize the output, you must create a new (custom) template, often by cloning the standard one."
+  },
+  {
+    "id": "d91fe9e1",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) has a new AI project. What should UC consider when adding a related list on the Account object to be used in a prompt?",
+    "image_url": "",
+    "options": [
+      "Prompt Builder must be used to assign the fields",
+      "The fields for the related list are based on the default page layout",
+      "After selecting a related list from the Account, use the field picker to select fields"
+    ],
+    "correct": [
+      "After selecting a related list from the Account, use the field picker to select fields"
+    ],
+    "explanation": "Due to context window limits, Prompt Builder requires explicitly selecting specific fields from related lists using the field picker."
+  },
+  {
+    "id": "af_2025_01",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Which two specific fields does the Agentforce Reasoning Engine primarily evaluate to determine which Topic to select for a user's request? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Topic Name",
+      "Classification Description",
+      "Scope",
+      "Instructions",
+      "User Permission Set"
+    ],
+    "correct": [
+      "Classification Description",
+      "Scope"
+    ],
+    "explanation": "The Reasoning Engine uses the Classification Description to understand the intent/purpose of the topic and the Scope to understand the operational boundaries. Topic Name is primarily for organization."
+  },
+  {
+    "id": "af_2025_02",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers has created a custom action referencing a Flow, but the Agent repeatedly fails to select it even when the user asks specifically for it. What is the most likely root cause?",
+    "image_url": "",
+    "options": [
+      "The Flow is not active.",
+      "The Action Instructions are ambiguous or overlap with another action.",
+      "The User does not have the 'Run Flows' permission.",
+      "The Agentforce Trust Layer is blocking the request."
+    ],
+    "correct": [
+      "The Action Instructions are ambiguous or overlap with another action."
+    ],
+    "explanation": "The Semantic Planner relies heavily on clear, distinct instructions to map user utterances to actions. Ambiguity or overlap with other instructions often causes selection failure."
+  },
+  {
+    "id": "af_2025_03",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Which Prompt Builder template type is best suited for a scenario where you need to populate a single 'Case Summary' rich text field on a record page using generative AI?",
+    "image_url": "",
+    "options": [
+      "Flex Template",
+      "Field Generation Template",
+      "Record Summary Template",
+      "Email Generation Template"
+    ],
+    "correct": [
+      "Field Generation Template"
+    ],
+    "explanation": "Field Generation templates are specifically designed to output data into a single field on a Lightning Record Page."
+  },
+  {
+    "id": "af_2025_04",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "An Agentforce Specialist needs to ground an agent's responses using a library of PDF product manuals and unstructured policy documents. Which feature should be used?",
+    "image_url": "",
+    "options": [
+      "Data Cloud Retriever",
+      "Agentforce Data Library",
+      "Knowledge Article Actions",
+      "Prompt Builder Flex Template"
+    ],
+    "correct": [
+      "Agentforce Data Library"
+    ],
+    "explanation": "Agentforce Data Libraries allow you to index and search unstructured files (like PDFs) to ground the agent's responses."
+  },
+  {
+    "id": "af_2025_05",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "What are the three core stages of the Atlas Reasoning Engine's loop when processing a user request?",
+    "image_url": "",
+    "options": [
+      "Input, Process, Output",
+      "Plan, Evaluate, Refine",
+      "Search, Retrieve, Generate",
+      "Identify, Classify, Execute"
+    ],
+    "correct": [
+      "Plan, Evaluate, Refine"
+    ],
+    "explanation": "The Atlas Reasoning Engine creates a plan based on available tools, evaluates its effectiveness, and refines the plan if necessary before execution."
+  },
+  {
+    "id": "af_2025_06",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "When configuring an Agent, what is the primary function of 'Instructions' at the Topic level?",
+    "image_url": "",
+    "options": [
+      "To define the security permissions for the agent.",
+      "To providing natural language rules and guidelines on how to handle business logic within that topic.",
+      "To list the specific Flows that can be launched.",
+      "To restrict which users can see the topic."
+    ],
+    "correct": [
+      "To providing natural language rules and guidelines on how to handle business logic within that topic."
+    ],
+    "explanation": "Instructions at the Topic level guide the LLM on policy, tone, and logical steps to take when operating within that specific topic."
+  },
+  {
+    "id": "af_2025_07",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "A developer wants to ensure that a custom action is only triggered when a user's account status is 'Active'. How should this be enforced deterministically?",
+    "image_url": "",
+    "options": [
+      "Add a natural language instruction: 'Only run this if active'.",
+      "Use a Conditional Filter on the Action utilizing a Context Variable.",
+      "Hide the action from the Agent's topic.",
+      "Rely on the LLM to check the field value."
+    ],
+    "correct": [
+      "Use a Conditional Filter on the Action utilizing a Context Variable."
+    ],
+    "explanation": "For deterministic (100% reliable) enforcement of rules like record status, Conditional Filters on the action are preferred over natural language instructions."
+  },
+  {
+    "id": "af_2025_08",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Which Salesforce feature ensures that sensitive data (PII) is masked before being sent to an external LLM?",
+    "image_url": "",
+    "options": [
+      "Data Cloud",
+      "Einstein Trust Layer",
+      "Shield Platform Encryption",
+      "Agentforce Firewall"
+    ],
+    "correct": [
+      "Einstein Trust Layer"
+    ],
+    "explanation": "The Einstein Trust Layer handles data masking, zero data retention, and toxicity detection before and after the LLM request."
+  },
+  {
+    "id": "af_2025_09",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "What is the primary role of the 'Agent User' in Salesforce Agentforce?",
+    "image_url": "",
+    "options": [
+      "It is a virtual user that defines the permission set and field access levels for the Agent's actions.",
+      "It is the admin user who configures the agent.",
+      "It is the end-customer chatting with the agent.",
+      "It is a placeholder for the LLM provider."
+    ],
+    "correct": [
+      "It is a virtual user that defines the permission set and field access levels for the Agent's actions."
+    ],
+    "explanation": "The Agent User (often 'Platform Integration User' or a specific assigned user) determines what data the Agent can read or edit via FLS and Sharing Rules."
+  },
+  {
+    "id": "af_2025_10",
+    "set_id": 12,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "In Prompt Builder, which resource is used to dynamically insert record data into a prompt template?",
+    "image_url": "",
+    "options": [
+      "Merge Fields",
+      "Apex Classes",
+      "Flow Variables",
+      "Static Text"
+    ],
+    "correct": [
+      "Merge Fields"
+    ],
+    "explanation": "Merge fields (e.g., {!$Input:Record.Name}) are used to ground the prompt with live data from Salesforce records."
+  },
+  {
+    "id": "af_2025_11",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "What is the purpose of the 'Agentforce Testing Center'?",
+    "image_url": "",
+    "options": [
+      "To train the LLM on your company data.",
+      "To batch test utterances against expected topics and actions to verify accuracy.",
+      "To monitor live production conversations.",
+      "To deploy agents from Sandbox to Production."
+    ],
+    "correct": [
+      "To batch test utterances against expected topics and actions to verify accuracy."
+    ],
+    "explanation": "The Testing Center allows specialists to run batch tests of utterances to see if the correct topics and actions are triggered, ensuring regression testing reliability."
+  },
+  {
+    "id": "af_2025_12",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "When debugging an Agent interaction that provided an incorrect answer, where should the specialist look to see the internal 'Chain of Thought'?",
+    "image_url": "",
+    "options": [
+      "Setup Audit Trail",
+      "Conversation History / Event Logs",
+      "Flow Debugger",
+      "Apex Logs"
+    ],
+    "correct": [
+      "Conversation History / Event Logs"
+    ],
+    "explanation": "The Conversation History (and associated Event Logs) in the Agent Builder provides the 'Dynamic Debugging' view showing the plan, reasoning, and action outputs."
+  },
+  {
+    "id": "af_2025_13",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Which Prompt Builder template type allows you to generate content based on multiple inputs, unrelated to a specific single record?",
+    "image_url": "",
+    "options": [
+      "Record Summary",
+      "Field Generation",
+      "Flex Template",
+      "Sales Email"
+    ],
+    "correct": [
+      "Flex Template"
+    ],
+    "explanation": "Flex Templates are the most versatile, accepting multiple inputs and defined resources without being tied to a specific page context like Field Generation."
+  },
+  {
+    "id": "af_2025_14",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "True or False: Standard Agent Actions (like 'Identify Record') require you to manually create a Flow.",
+    "image_url": "",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct": [
+      "False"
+    ],
+    "explanation": "Standard Actions are out-of-the-box capabilities provided by Salesforce that do not require manual Flow creation."
+  },
+  {
+    "id": "af_2025_15",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Which element acts as the 'container' for a group of related actions and instructions that an Agent can perform?",
+    "image_url": "",
+    "options": [
+      "Topic",
+      "Scope",
+      "Planner",
+      "Copilot"
+    ],
+    "correct": [
+      "Topic"
+    ],
+    "explanation": "A Topic is the container that groups specific business capabilities (Actions) and the rules for using them (Instructions)."
+  },
+  {
+    "id": "4b314731",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) stores case details and updates in several custom objects and would like its Agentforce Service Agent to be able to provide information based on them to its customers. Which best practice should UC follow to grant access to this information?",
+    "image_url": "",
+    "options": [
+      "Create a new permission set with the necessary object permissions and assign it to the Agentforce Service Agent user.",
+      "Update the Object and Field access in the Einstein Agent profile to always get the necessary access.",
+      "Update the Object and Field access in the standard permission set assigned to the Agentforce Service Agent user."
+    ],
+    "correct": [
+      "Create a new permission set with the necessary object permissions and assign it to the Agentforce Service Agent user."
+    ],
+    "explanation": "Standard permission sets for Agentforce are often locked or should not be modified. The best practice is to create a new, additive permission set with the specific custom object access required and assign it to the Agentforce user."
+  },
+  {
+    "id": "cf023659",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "When is the Agent-to-Agent (A2A) protocol an appropriate communication choice?",
+    "image_url": "",
+    "options": [
+      "When agents need to collaborate",
+      "When agents need to access tools",
+      "When agents need to invoke third-party API"
+    ],
+    "correct": [
+      "When agents need to collaborate"
+    ],
+    "explanation": "The Agent-to-Agent (A2A) protocol is designed for delegation and collaboration between agents. Tool access and API invocations are typically handled by the Model Context Protocol (MCP)."
+  },
+  {
+    "id": "8af782aa",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Universal Containers (UC) is setting up a new Agentforce Service Agent. The company has sensitive data stored internally and wants to ensure the agent cannot access it. What should UC do?",
+    "image_url": "",
+    "options": [
+      "Disable the Agentforce Service Agent's ability to use any Salesforce tools.",
+      "Assign the Agentforce Service Agent user the lowest possible role in the hierarchy.",
+      "Follow the principle of least privilege and avoid granting permissions to sensitive fields."
+    ],
+    "correct": [
+      "Follow the principle of least privilege and avoid granting permissions to sensitive fields."
+    ],
+    "explanation": "To prevent an agent from accessing sensitive data, you must restrict access at the Field-Level Security (FLS) level for the user the agent operates as."
+  },
+  {
+    "id": "98c0c6db",
+    "set_id": 13,
+    "category": "Salesforce Agentforce",
+    "tag": "SALESFORCE",
+    "description": "Nov 2025 Salesforce certified agentforce specialist practice questions.",
+    "question": "Cloud Kicks (CK) recently finished the development of a new prompt template. After deploying a prompt template from a sandbox to a production org, CK is getting an error related to the LLM used in the prompt template. What is the cause of the error?",
+    "image_url": "",
+    "options": [
+      "BYOLLM is not yet supported for prompt templates in production.",
+      "The name of the LLM does not match in sandbox and production.",
+      "The prompt does not specify that it is a custom LLM."
+    ],
+    "correct": [
+      "The name of the LLM does not match in sandbox and production."
+    ],
+    "explanation": "The Prompt Template metadata references the API Name of the LLM. If the LLM configuration in Production has a different API Name than in Sandbox, the deployment will fail or the template will error."
   }
 ]
