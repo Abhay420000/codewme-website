@@ -4817,5 +4817,768 @@
       "Data Mapper Extract"
     ],
     "explanation": "Data Mapper Extract is needed to get the data to populate the event. Data Mapper Post is needed to save the event record in Salesforce."
+  },
+  {
+    "id": "osc_1a2b3",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant is working with a client who wants to transfer and transform data between Salesforce and the Omniscripts, Flexcards, and Integration Procedures tools. Which Omnistudio tool should the consultant recommend for this requirement?",
+    "image_url": "",
+    "options": [
+      "Integration Procedures",
+      "Omniscripts",
+      "Data Mappers",
+      "Flexcards"
+    ],
+    "correct": [
+      "Data Mappers"
+    ],
+    "explanation": "Data Mappers (formerly DataRaptors) are specifically designed to read, write, and transform data between Salesforce and OmniStudio components."
+  },
+  {
+    "id": "osc_4c5d6",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "An insurance company decides to use Expression Sets and Decision Matrices to calculate premium costs for new insurance policies. Prices change very frequently, resulting in multiple copies of the rating or pricing tables. What is an advantage of Expression Sets that the consultant should highlight in this scenario?",
+    "image_url": "",
+    "options": [
+      "Allows aggregate functions",
+      "Allows AI integration to calculate next best offer using policy attributes",
+      "Allows multiple versions that will execute based on when the request is made",
+      "Allows text concatenation using algebraic operators"
+    ],
+    "correct": [
+      "Allows multiple versions that will execute based on when the request is made"
+    ],
+    "explanation": "Expression Sets support versioning with Start/End dates (Effective Dating), allowing the system to automatically select the correct pricing logic based on the transaction date."
+  },
+  {
+    "id": "osc_7e8f9",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "How should a consultant design the Omniscript solution to allow the user to stop and resume a process at a later time?",
+    "image_url": "",
+    "options": [
+      "Configure a Resume Step",
+      "Use a Data Mapper Post Action",
+      "Use an Integration Procedure",
+      "Configure the save properties"
+    ],
+    "correct": [
+      "Configure the save properties"
+    ],
+    "explanation": "Enabling 'Allow Save For Later' in the Script Configuration properties provides built-in functionality for users to save their progress and resume via a generated URL."
+  },
+  {
+    "id": "osc_0g1h2",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company needs to create an Omniscript with three steps. Step 1: Enter customer details. Step 2: Select a product. Step 3: Display a price retrieved from a REST API. The product's price should automatically display in Step 3. What should the consultant add to the design of the Omniscript to meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Integration Procedure Action inside Step 3",
+      "Integration Procedure Action between Step 2 and Step 3",
+      "Data Mapper Post Action between Step 2 and Step 3",
+      "Data Mapper Post Action inside Step 2"
+    ],
+    "correct": [
+      "Integration Procedure Action between Step 2 and Step 3"
+    ],
+    "explanation": "The Integration Procedure should run after Step 2 (Product Selection) but before Step 3 (Display) to ensure the price is retrieved and available to display immediately when Step 3 loads."
+  },
+  {
+    "id": "osc_3i4j5",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Service agents must confirm customer contact information in the first step of a payment Omniscript... On the last step, after taking payment, the agent can optionally email the receipt. If the agent selects the box but the email address field is empty, the process must require the user to return to the first step and enter the customer's email address. What should the consultant recommend?",
+    "image_url": "",
+    "options": [
+      "Add a Data Mapper to retrieve the email address",
+      "Add a Set Errors element",
+      "Add a Conditional View to the last step",
+      "Add a Validation Rule to the Contact object"
+    ],
+    "correct": [
+      "Add a Set Errors element"
+    ],
+    "explanation": "A Set Errors element can be configured with a conditional view (e.g., Checkbox=True AND Email=Null) to block submission and enforce validation logic."
+  },
+  {
+    "id": "osc_6k7l8",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Company has a legacy application using custom CSS/HTML... also provides access to more than 25 processes. Recently, a new project was started to build a 360° view using Flexcards to replace the legacy application. Which three Flexcard features should the consultant recommend? (Select 3)",
+    "image_url": "",
+    "options": [
+      "Custom Styles",
+      "SLDS/LWC",
+      "Datatables",
+      "Menu elements",
+      "Actions"
+    ],
+    "correct": [
+      "Custom Styles",
+      "Menu elements",
+      "Actions"
+    ],
+    "explanation": "Custom Styles meet the branding requirement; Menu elements organize the 25+ processes; Actions provide the functionality to launch those processes."
+  },
+  {
+    "id": "osc_9m0n1",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business implements several Omniscripts... the consultant notices that each Omniscript needs to update address data, but each Omniscript collects the information differently using different labels and input elements. What should the consultant recommend to improve these Omniscripts?",
+    "image_url": "",
+    "options": [
+      "Create a reusable Omniscript to update address information",
+      "Use a Data Mapper Transform to standardize the data format",
+      "Create new versions of the Omniscripts to collect the address information",
+      "Add an address Type Ahead Block element to all the Omniscripts"
+    ],
+    "correct": [
+      "Create a reusable Omniscript to update address information"
+    ],
+    "explanation": "Creating a single Reusable Omniscript for address updates allows it to be embedded in multiple parent scripts, ensuring consistency and simplified maintenance."
+  },
+  {
+    "id": "osc_2o3p4",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Which Omniscript element can be used to retrieve data from more than one source?",
+    "image_url": "",
+    "options": [
+      "Calculation Action",
+      "Data Mapper Extract Action",
+      "Integration Procedure Action",
+      "Matrix Action"
+    ],
+    "correct": [
+      "Integration Procedure Action"
+    ],
+    "explanation": "An Integration Procedure is the only tool listed capable of orchestrating calls to multiple disparate sources (Salesforce, External APIs, etc.) in a single transaction."
+  },
+  {
+    "id": "osc_5q6r7",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business is creating an agent console with Flexcards to provide a 360° view... Account information, Active opportunities, Active contracts, and the ability to view and renew contracts. How should the consultant design the Flexcards to meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Parent Flexcard with multiple Child and different Card States",
+      "Parent Flexcard with multiple Child and Card Actions",
+      "Parent Flexcard with single Child and multiple Card States",
+      "Parent Flexcard with single Child and Card Actions"
+    ],
+    "correct": [
+      "Parent Flexcard with multiple Child and Card Actions"
+    ],
+    "explanation": "Multiple Child cards are needed for the different schemas (Opportunities vs Contracts), and Card Actions are required to fulfill the 'Renew' functionality."
+  },
+  {
+    "id": "osc_8s9t0",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company needs to create a quoting process... The process should use the grade and size to look up a discount factor, then multiply the unit price by that discount to return the quote. Which two tools should the consultant recommend? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Data Mapper Transform",
+      "Decision Matrix",
+      "Data Mapper Extract",
+      "Expression Set"
+    ],
+    "correct": [
+      "Decision Matrix",
+      "Expression Set"
+    ],
+    "explanation": "The Decision Matrix handles the lookup logic (Grade/Size to Factor), and the Expression Set handles the mathematical calculation (Price * Factor)."
+  },
+  {
+    "id": "osc_1u2v3",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company needs to create a new quote estimation process... the user needs to enter a variable number of rows of data... Service category, Number of hours, Hourly rate... calculate the total for each row. Which two Omniscript elements should the consultant recommend? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Multi-select",
+      "Input Block",
+      "Formula",
+      "Radio Button"
+    ],
+    "correct": [
+      "Input Block",
+      "Formula"
+    ],
+    "explanation": "The Input Block (specifically Edit Block) allows for variable row entry (arrays), and the Formula element performs the multiplication calculation per row."
+  },
+  {
+    "id": "osc_4w5x6",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business needs to display installed products... on a mobile device. The information must be summarized so the technician can see key details at a glance. However, the technician also needs to sometimes access a list of past service dates for each product. Which two Flexcards features should the consultant recommend? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Enable the Responsive property",
+      "Use card states",
+      "Customize the styling",
+      "Use flyouts"
+    ],
+    "correct": [
+      "Enable the Responsive property",
+      "Use flyouts"
+    ],
+    "explanation": "Responsive property ensures the summary looks good on mobile; Flyouts provide on-demand access to the detailed service history list."
+  },
+  {
+    "id": "osc_7y8z9",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business wants to add typeahead functionality... begin entering the name of a contact in Salesforce... allow the user to select the contact... retrieve the contact's email address. Which data source is needed when using the Type Ahead Block element?",
+    "image_url": "",
+    "options": [
+      "Navigate Action",
+      "Data Mapper Extract Action",
+      "Data Mapper Post Action",
+      "Expression Set Action"
+    ],
+    "correct": [
+      "Data Mapper Extract Action"
+    ],
+    "explanation": "A Data Mapper Extract is required to query Salesforce for the matching records and retrieve the email field based on the user's input key."
+  },
+  {
+    "id": "osc_0a1b2",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant is working on a project... considering using Decision Matrices and Expression Sets. What is the primary benefit of using Decision Matrices and Expression Sets in Omnistudio?",
+    "image_url": "",
+    "options": [
+      "They facilitate the creation of custom objects.",
+      "They allow for calculations on matrix lookups and variables.",
+      "They enable the creation of custom code.",
+      "They allow for the creation of custom fields."
+    ],
+    "correct": [
+      "They allow for calculations on matrix lookups and variables."
+    ],
+    "explanation": "Their core purpose is to function as a Business Rules Engine, performing calculations based on variables and static lookup tables (matrices) without code."
+  },
+  {
+    "id": "osc_3c4d5",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company needs to create a process that allows call center admins to retrieve all open cases that have a case type of network issue and submit the case data 'as is' to a back office system for validation in batch on a daily basis. Once the cases have been submitted, the process should trigger an email to the supervisor. Which three Omnistudio tools should the consultant recommend? (Select 3)",
+    "image_url": "",
+    "options": [
+      "Flexcard",
+      "Data Mapper Turbo Extract",
+      "Integration Procedure",
+      "Omniscript",
+      "Data Mapper Load"
+    ],
+    "correct": [
+      "Data Mapper Turbo Extract",
+      "Integration Procedure",
+      "Omniscript"
+    ],
+    "explanation": "Omniscript for the admin UI; Integration Procedure for the batch orchestration/email; Data Mapper Turbo Extract for efficient retrieval of the single case object list."
+  },
+  {
+    "id": "osc_6e7f8",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company has a process that requires minimum age to purchase... If the user is younger than 18 years, then the Omniscript needs to display a message stating 'You must be 18 years or older...' and also prevent users from continuing. Which two Omniscript components should the consultant recommend? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Messaging",
+      "Formula",
+      "Calculation",
+      "Alert"
+    ],
+    "correct": [
+      "Messaging",
+      "Formula"
+    ],
+    "explanation": "A Formula element is needed to calculate the age from the birthdate, and the Messaging element is used to display the error and block the 'Next' step based on the formula result."
+  },
+  {
+    "id": "osc_9g0h1",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Agents for an insurance company need to know the current and past weather conditions... The Flexcard needs to provide fields extracted from a weather API and account fields from Salesforce. According to best practice, which data source should be used?",
+    "image_url": "",
+    "options": [
+      "Streaming API",
+      "Integration Procedure",
+      "Data Mapper Extract",
+      "REST"
+    ],
+    "correct": [
+      "Integration Procedure"
+    ],
+    "explanation": "An Integration Procedure is best for retrieving and merging data from multiple disparate sources (Salesforce + External API) in a single server-side call."
+  },
+  {
+    "id": "osc_2i3j4",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Omniscript has multiple steps that allow the user to review lists of cases, contacts, quotes... reaching performance limitations... development team warns that they may begin hitting Governor limits. Which two suggestions should the consultant propose? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Add Limit filter in Data Mapper Extract.",
+      "Combine the Data Mappers into an Integration Procedure.",
+      "Replace the Data Mapper Extracts with Data Mapper Turbo Extracts.",
+      "Add Order By filter in Data Mapper Extract."
+    ],
+    "correct": [
+      "Combine the Data Mappers into an Integration Procedure.",
+      "Replace the Data Mapper Extracts with Data Mapper Turbo Extracts."
+    ],
+    "explanation": "IPs allow for server-side processing and response pruning (reducing payload), while Turbo Extracts are optimized for high-performance reading of single objects, reducing CPU limits."
+  },
+  {
+    "id": "osc_5k6l7",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company has a requirement to create a 360° view of their customers using Flexcards... customer data is stored in Salesforce but also in external legacy systems... parent Flexcard that contains multiple child cards... What is the advantage of embedding multiple child cards in this scenario?",
+    "image_url": "",
+    "options": [
+      "Allows conditional views with the Toggle element on each child card",
+      "Enables the Flexcard to be used on a Community page",
+      "Allows multiple data sources to be used",
+      "Enables easier global styling changes"
+    ],
+    "correct": [
+      "Allows multiple data sources to be used"
+    ],
+    "explanation": "Each Child Flexcard can be configured with its own independent data source, allowing one view to aggregate data from Salesforce and multiple external systems concurrently."
+  },
+  {
+    "id": "osc_8m9n0",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business needs a 360° view... identified 20 different data elements and 10 actions... Once all of the elements are collected together on the Flexcard, it looks cluttered. Which two Flexcard features should the consultant recommend? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Put specific fields in a collapsible block.",
+      "Use a flyout action to display additional information.",
+      "Use a condition to hide data unless specific criteria are met.",
+      "Use a table or chart to display data."
+    ],
+    "correct": [
+      "Put specific fields in a collapsible block.",
+      "Use a flyout action to display additional information."
+    ],
+    "explanation": "Flyouts and Collapsible Blocks allow the consultant to hide less critical information initially, decluttering the main view while keeping details accessible."
+  },
+  {
+    "id": "osc_1o2p3",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company needs to implement new verification processes for contacts... Recruiter, Candidate, and Trainer... verification process is different for each type of contact. Which Omnistudio tools should the consultant recommend?",
+    "image_url": "",
+    "options": [
+      "Multiple Omnistudio Actions that invoke separate Omniscripts",
+      "Specific Flexcards with Actions for each type of Contact",
+      "Single Omnistudio Action that invokes separate Omniscripts",
+      "Single Flexcard with an Action to invoke an Omniscript"
+    ],
+    "correct": [
+      "Single Flexcard with an Action to invoke an Omniscript"
+    ],
+    "explanation": "Using a Single Flexcard creates a unified entry point; the Action invokes a 'Dispatcher' Omniscript that internally handles the logic to route the user to the correct process based on Record Type."
+  },
+  {
+    "id": "osc_4q5r6",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Omniscript that allows call center agents to schedule field service appointments... retrieve available appointment dates from an external system via a REST API... display them to the user for selection in a dropdown list. Once the user selects a date, a confirmation should display with rich text and images. Which three Omniscript elements should be used? (Select 3)",
+    "image_url": "",
+    "options": [
+      "HTTP Action",
+      "Text Block",
+      "Select",
+      "Text Area",
+      "Multi select"
+    ],
+    "correct": [
+      "HTTP Action",
+      "Text Block",
+      "Select"
+    ],
+    "explanation": "HTTP Action calls the API; Select element creates the dropdown list; Text Block displays the rich text/image confirmation."
+  },
+  {
+    "id": "osc_7s8t9",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Which Omnistudio tool creates a Chatter post and sends to a Chatter feed?",
+    "image_url": "",
+    "options": [
+      "Data Mapper Load",
+      "Chatter Envelope",
+      "Calculation Procedure",
+      "Integration Procedure"
+    ],
+    "correct": [
+      "Data Mapper Load"
+    ],
+    "explanation": "Data Mapper Load is used to insert records into Salesforce objects, including the 'FeedItem' object which represents a Chatter post."
+  },
+  {
+    "id": "osc_0u1v2",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "An insurance agency... find out total insurance premiums paid as well as the difference year over year... send them a summary report by email. Which three Omniscript elements should be used? (Select 3)",
+    "image_url": "",
+    "options": [
+      "Email Action",
+      "Messaging Element",
+      "Data Mapper Post Action",
+      "Data Mapper Extract Action",
+      "Calculation Action"
+    ],
+    "correct": [
+      "Email Action",
+      "Data Mapper Extract Action",
+      "Calculation Action"
+    ],
+    "explanation": "Extract retrieves the data, Calculation Action performs the math (year over year diff), and Email Action sends the report."
+  },
+  {
+    "id": "osc_3w4x5",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant needs to design an Omniscript to capture... Select one payment method... Enter the address information with autocomplete... Enter a phone number. Which Omniscript elements should be used?",
+    "image_url": "",
+    "options": [
+      "Checkbox, Geolocation, and Number",
+      "Multi Select, Address, and Telephone",
+      "Radio, TypeAhead, and Telephone",
+      "Select, TypeAhead, and Number"
+    ],
+    "correct": [
+      "Radio, TypeAhead, and Telephone"
+    ],
+    "explanation": "Radio allows single selection, TypeAhead enables autocomplete for addresses, and Telephone handles formatted phone inputs."
+  },
+  {
+    "id": "osc_6y7z8",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "An insurance company decides to implement a sales console... determines that Flexcards would be the best solution to display part of the required information. Which two pieces of data should the consultant recommend displaying using Flexcards? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Policies including type, issue date, amount",
+      "Terms and conditions for each policy",
+      "Guided troubleshooting process",
+      "Customer name, title, phone, email"
+    ],
+    "correct": [
+      "Policies including type, issue date, amount",
+      "Customer name, title, phone, email"
+    ],
+    "explanation": "Flexcards are best suited for 'at-a-glance' profile data (Customer info) and summary lists of related records (Policies)."
+  },
+  {
+    "id": "osc_9a0b1",
+    "set_id": 5,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company plans to rebuild a process... functionality that was originally written in APEX... process retrieves data from an external system. In this scenario, which Omnistudio data tool should the consultant recommend?",
+    "image_url": "",
+    "options": [
+      "Integration Procedure",
+      "Data Mapper Extract",
+      "Calculation Procedure",
+      "Data Mapper Turbo"
+    ],
+    "correct": [
+      "Integration Procedure"
+    ],
+    "explanation": "Integration Procedures are the declarative replacement for Apex code and the only tool in the list capable of making external API calls."
+  },
+  {
+    "id": "osc_2c3d4",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business process needs to perform a multi step calculation on each contact record in a list. Using an Integration Procedure to process the list, which feature can be used to meet this requirement?",
+    "image_url": "",
+    "options": [
+      "Batch Action",
+      "Data Mapper Transform Action",
+      "Loop Block",
+      "Conditional Block"
+    ],
+    "correct": [
+      "Loop Block"
+    ],
+    "explanation": "The Loop Block enables the Integration Procedure to iterate through a list of records and perform a sequence of actions on each item."
+  },
+  {
+    "id": "osc_5e6f7",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant has a project with the following requirement: Agents need to follow a standard customer greeting script in order to ensure brand consistency. Which Omniscript element should the consultant recommend to ensure the agents can see and follow these standard scripts?",
+    "image_url": "",
+    "options": [
+      "Headline",
+      "Line Break",
+      "Action",
+      "Text Area"
+    ],
+    "correct": [
+      "Headline"
+    ],
+    "explanation": "While 'Text Block' is the ideal element, among the choices provided, 'Headline' is the only display-only element capable of showing read-only text to the user."
+  },
+  {
+    "id": "osc_8g9h0",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business plans to implement new tools... requirements: 'At a glance' dashboards... Lists of customer bills (external). Which two Flexcard benefits should the consultant highlight? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Display different actions based on context.",
+      "Allow customers to enter bill payment information.",
+      "Display a 360° view of the customer.",
+      "Guide users through complex processes."
+    ],
+    "correct": [
+      "Display different actions based on context.",
+      "Display a 360° view of the customer."
+    ],
+    "explanation": "Flexcards provide a 360° view by aggregating internal and external data, and context-aware actions improve efficiency."
+  },
+  {
+    "id": "osc_1i2j3",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "The client wants to include account status, priority level, creation date, and company logo. They also want to include actions such as closing a case... What is the best approach for the consultant to meet the client's requirements?",
+    "image_url": "",
+    "options": [
+      "Use Data Mappers to transfer and transform the necessary data.",
+      "Use Omniscripts to create a script that displays the required information.",
+      "Use the Flexcard Designer to create a Flexcard, adding the necessary fields and actions.",
+      "Use Integration Procedures to integrate the necessary data."
+    ],
+    "correct": [
+      "Use the Flexcard Designer to create a Flexcard, adding the necessary fields and actions."
+    ],
+    "explanation": "The Flexcard Designer is the UI tool used to layout fields, images, and action buttons for a dashboard-style component."
+  },
+  {
+    "id": "osc_4k5l6",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A telecommunications company wants to create a 360° view... installed products can have 4 different statuses... Agents complete different processes, depending on status. Which two Flexcard features should the consultant use? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Omnistudio Action",
+      "Flyout",
+      "States",
+      "Custom Style"
+    ],
+    "correct": [
+      "Omnistudio Action",
+      "States"
+    ],
+    "explanation": "States allow the card to change layout/buttons based on the 'Status' field, and Omnistudio Actions are used to configure the specific buttons for each process."
+  },
+  {
+    "id": "osc_7m8n9",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Salesforce Omnistudio Consultant is creating an Omniscript... wants to enhance the performance and usability. What is one best practice the consultant can follow?",
+    "image_url": "",
+    "options": [
+      "Use the Salesforce Lightning App Builder.",
+      "Use custom Lightning web components with LWC Omniscripts.",
+      "Use the Classic Omniscript Designer.",
+      "Use Angular Omniscripts."
+    ],
+    "correct": [
+      "Use custom Lightning web components with LWC Omniscripts."
+    ],
+    "explanation": "LWC Omniscripts offer superior performance over legacy Angular scripts and allow for extension via custom Lightning Web Components."
+  },
+  {
+    "id": "osc_0o1p2",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Which two functions can be performed by Data Mappers? (Select 2)",
+    "image_url": "",
+    "options": [
+      "Read and write data to external systems",
+      "Transform data",
+      "Read and write data to Salesforce",
+      "Combine requests into a single response"
+    ],
+    "correct": [
+      "Transform data",
+      "Read and write data to Salesforce"
+    ],
+    "explanation": "Data Mappers are dedicated to Salesforce I/O (Extract/Load) and data transformation (Transform). They cannot access external systems directly."
+  },
+  {
+    "id": "osc_3q4r5",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Which Omnistudio tool can be used to invoke scheduled jobs?",
+    "image_url": "",
+    "options": [
+      "Data Mapper Extract",
+      "Integration Procedure",
+      "Data Mapper Transform",
+      "Data Mapper Load"
+    ],
+    "correct": [
+      "Integration Procedure"
+    ],
+    "explanation": "Integration Procedures can be scheduled to run as background batch jobs (via Apex or Vlocity Scheduled Jobs) to perform complex logic."
+  },
+  {
+    "id": "osc_6s7t8",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Many processes need to update contact data at different points in the process. Which solution should the consultant recommend to efficiently meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Create an Integration Procedure to update contact data with 'Chain On Step' enabled.",
+      "Create an Omniscript to update contact data and invoke it when other Omniscripts complete.",
+      "Create an Omniscript that uses the reusable property to update contact data and embed it in other Omniscripts",
+      "Create a Flexcard for contacts, and add an Update Contact Details Omniscript as an action."
+    ],
+    "correct": [
+      "Create an Omniscript that uses the reusable property to update contact data and embed it in other Omniscripts"
+    ],
+    "explanation": "A Reusable Omniscript allows the 'Update Contact' logic and UI to be defined once and embedded into any other parent Omniscript that needs it."
+  },
+  {
+    "id": "osc_9u0v1",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant is tasked with migrating Calculation Matrices and Procedures... What is a key consideration when migrating Calculation Matrices and Procedures?",
+    "image_url": "",
+    "options": [
+      "Matrices can be migrated without considerations.",
+      "Procedures can be migrated without considerations.",
+      "Matrices can be migrated with minimal considerations.",
+      "Looping procedures cannot be migrated as expression sets."
+    ],
+    "correct": [
+      "Looping procedures cannot be migrated as expression sets."
+    ],
+    "explanation": "Expression Sets do not support the same native looping configuration as legacy Calculation Procedures, requiring an architectural redesign (e.g., looping in an IP)."
+  },
+  {
+    "id": "osc_2w3x4",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Agent enters the new contact information using an Omniscript and then needs to generate a PDF with the contact information pre-filled. What should the consultant recommend to generate the pre filled PDF?",
+    "image_url": "",
+    "options": [
+      "Integration Procedure",
+      "Flexcard Action",
+      "Omnistudio Action",
+      "Data Mapper"
+    ],
+    "correct": [
+      "Data Mapper"
+    ],
+    "explanation": "A Data Mapper Transform is required to map the Omniscript JSON data to the specific fields (tokens) inside the PDF template for pre-filling."
+  },
+  {
+    "id": "osc_5y6z7",
+    "set_id": 6,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company has a requirement to create a 360° view... parent Flexcard that contains five child Flexcards... Based on the Flexcard capabilities, how many different data sources can be configured for the Flexcards in this scenario?",
+    "image_url": "",
+    "options": [
+      "6",
+      "2",
+      "5",
+      "1"
+    ],
+    "correct": [
+      "6"
+    ],
+    "explanation": "Each of the 5 Child Flexcards plus the 1 Parent Flexcard can have its own independent data source."
   }
 ]
