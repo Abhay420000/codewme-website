@@ -4,6 +4,21 @@
 
 {% block custom_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/practice_mcqs.css') }}">
+<style>
+    /* Simple animation for new items loaded via JS */
+    .fade-in {
+        animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Hide button if needed */
+    .hidden {
+        display: none !important;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -18,11 +33,11 @@
     <div class="section-underline"></div>
 </div>
 
-<div class="practice-grid">
+<div class="practice-grid" id="setsGrid">
     
-    {% if all_sets %}
-        {% for s in all_sets %}
-        <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" class="card set-card-item" style="text-decoration: none; padding: 0; display: none;">
+    {% if initial_sets %}
+        {% for s in initial_sets %}
+        <a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}" class="card set-card-item">
             <div class="set-card-icon">
                 <span>☁️</span>
             </div>
@@ -40,62 +55,85 @@
     {% else %}
         <div class="card" style="padding: 2rem; opacity: 0.6; grid-column: 1 / -1; text-align: center;">
             <h3 class="card-title">No Questions Found</h3>
-            <p class="card-desc">Please generate mcqs.json first.</p>
+            <p class="card-desc">The database is empty. Please use the Builder to add questions.</p>
         </div>
     {% endif %}
 
 </div>
 
 <div class="load-more-container" style="text-align: center; padding: 2rem 0 4rem 0;">
-    <button id="loadMoreBtn" class="btn-load-more" style="background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem 2.5rem; border-radius: 2rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Load More Sets</button>
+    <button id="loadMoreBtn" 
+            class="btn-load-more" 
+            style="background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem 2.5rem; border-radius: 2rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; {% if initial_sets|length < 6 %}display:none;{% endif %}">
+        Load More Sets
+    </button>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const cards = document.querySelectorAll('.set-card-item');
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        let visibleCount = 6;
+        let currentPage = 1;
+        const loadBtn = document.getElementById('loadMoreBtn');
+        const grid = document.getElementById('setsGrid');
 
-        // 1. Initially show the first 6 cards
-        for(let i=0; i<visibleCount && i<cards.length; i++) {
-            cards[i].style.display = 'flex';
+        if(loadBtn) {
+            loadBtn.addEventListener('click', function() {
+                // 1. Prepare UI
+                const nextPage = currentPage + 1;
+                const originalText = loadBtn.innerText;
+                loadBtn.innerText = "Loading...";
+                loadBtn.disabled = true;
+
+                // 2. Call the API
+                fetch(`/api/load-sets?page=${nextPage}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success && data.sets.length > 0) {
+                            
+                            // 3. Render New Cards
+                            data.sets.forEach(s => {
+                                // Create HTML String for Card
+                                const cardHtml = `
+                                    <a href="/mcqs/${s.url_slug}/set-${s.set_num}" class="card set-card-item fade-in" style="text-decoration: none; display: flex;">
+                                        <div class="set-card-icon">
+                                            <span>☁️</span>
+                                        </div>
+                                        <div class="card-body" style="text-align: left;">
+                                            <div class="card-meta">
+                                                <span class="card-tag">${s.tag.toUpperCase()}</span>
+                                                <span>Set ${s.set_num}</span>
+                                            </div>
+                                            <h3 class="card-title">${s.category}</h3>
+                                            <p class="card-desc">${s.description}</p>
+                                        </div>
+                                    </a>
+                                `;
+                                grid.insertAdjacentHTML('beforeend', cardHtml);
+                            });
+
+                            // 4. Update State
+                            currentPage = nextPage;
+                            
+                            // 5. Hide button if no more data (API tells us 'has_more')
+                            if (!data.has_more) {
+                                loadBtn.style.display = 'none';
+                            }
+
+                        } else {
+                            // No data returned
+                            loadBtn.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading sets:', error);
+                        alert('Error loading more sets. Please try again.');
+                    })
+                    .finally(() => {
+                        // 6. Reset Button
+                        loadBtn.innerText = originalText;
+                        loadBtn.disabled = false;
+                    });
+            });
         }
-
-        // 2. Hide button if total sets are less than or equal to 6
-        if(cards.length <= visibleCount) {
-            loadMoreBtn.style.display = 'none';
-        }
-
-        // 3. Handle Click
-        loadMoreBtn.addEventListener('click', function() {
-            const nextCount = visibleCount + 6;
-            
-            // Show next batch
-            for(let i=visibleCount; i<nextCount && i<cards.length; i++) {
-                cards[i].style.display = 'flex';
-                cards[i].style.animation = "fadeIn 0.5s ease";
-            }
-            
-            visibleCount = nextCount;
-
-            // Hide button if we have shown all cards
-            if(visibleCount >= cards.length) {
-                loadMoreBtn.style.display = 'none';
-            }
-        });
     });
 </script>
-
-<style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.btn-load-more:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
-}
-</style>
 {% endblock %}

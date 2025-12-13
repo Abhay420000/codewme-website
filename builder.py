@@ -5,11 +5,12 @@ import os
 import re
 import shutil
 import uuid
+import sqlite3 # <--- ADDED for Database Support
 from datetime import datetime
 
 # --- CONFIGURATION ---
 ARTICLES_DB = 'articles.json'
-MCQS_DB = 'mcqs.json'
+MCQS_DB = 'mcqs.db' # <--- UPDATED to Database File
 TEMPLATE_DIR = os.path.join('templates', 'articles')
 
 # --- TOOLTIP CLASS ---
@@ -611,25 +612,23 @@ class ArticleAutomator:
         self.load_articles_list()
 
     # ==========================================
-    # LOGIC METHODS (MCQ) - UPDATED FOR MULTIPLE CORRECT, IMAGES, TAGS & DESCRIPTION
+    # LOGIC METHODS (MCQ) - UPDATED FOR DB
     # ==========================================
     def load_mcq_list(self):
         for row in self.tree_mcq.get_children(): self.tree_mcq.delete(row)
         if not os.path.exists(MCQS_DB): return
         
+        # --- DB CHANGE: Read from SQLite ---
         try:
-            with open(MCQS_DB, 'r', encoding='utf-8') as f:
-                mcqs = json.load(f)
-        except: return
-
-        # Sort by Category, then Set, then ID
-        mcqs.sort(key=lambda x: (x.get('category', ''), x.get('set_id', 0)))
-
-        for q in mcqs:
-            # Display Set, Tag, Title(Category), Question
-            tag = q.get('tag', 'General')
-            cat = q.get('category', 'Uncategorized')
-            self.tree_mcq.insert("", tk.END, iid=q.get('id'), values=(q.get('set_id'), tag, cat, q.get('question')))
+            conn = sqlite3.connect(MCQS_DB)
+            conn.row_factory = sqlite3.Row
+            # Fetch all questions sorted by category and set
+            cursor = conn.execute("SELECT id, set_id, category, tag, question FROM questions ORDER BY category, set_id")
+            for q in cursor:
+                self.tree_mcq.insert("", tk.END, iid=q['id'], values=(q['set_id'], q['tag'], q['category'], q['question']))
+            conn.close()
+        except Exception as e:
+            print(f"Error loading MCQs: {e}")
 
     # Only resets specific fields (keeps Category, Tag, Set & Description)
     def clear_question_fields_only(self):
@@ -685,87 +684,93 @@ class ArticleAutomator:
         current_tag = self.mcq_var_tag.get().strip()
         current_desc = self.mcq_var_desc.get().strip()
 
-        data = {
-            "id": q_id,
-            "set_id": current_set,
-            "category": current_cat, # Title
-            "tag": current_tag,       # Tag
-            "description": current_desc, # Description (Set level)
-            "question": q_text,
-            "image_url": self.mcq_var_image_url.get().strip(),
-            "options": options,
-            "correct": correct_list,
-            "explanation": self.txt_mcq_expl.get("1.0", tk.END).strip()
-        }
+        # --- DB CHANGE: Write to SQLite ---
+        try:
+            # Serialize lists to JSON strings for SQLite
+            options_json = json.dumps(options)
+            correct_json = json.dumps(correct_list)
+            
+            conn = sqlite3.connect(MCQS_DB)
+            cursor = conn.cursor()
+            
+            # Insert or Replace the question
+            cursor.execute('''
+                INSERT OR REPLACE INTO questions 
+                (id, set_id, category, tag, description, question, image_url, options, correct, explanation)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                q_id, 
+                current_set, 
+                current_cat, 
+                current_tag, 
+                current_desc, 
+                q_text, 
+                self.mcq_var_image_url.get().strip(),
+                options_json, 
+                correct_json, 
+                self.txt_mcq_expl.get("1.0", tk.END).strip()
+            ))
+            
+            # SYNC: Update all other questions in the same set with new Tag/Description
+            cursor.execute('''
+                UPDATE questions 
+                SET tag = ?, description = ? 
+                WHERE set_id = ? AND category = ?
+            ''', (current_tag, current_desc, current_set, current_cat))
+            
+            conn.commit()
+            conn.close()
 
-        # 4. Load & Update JSON
-        if os.path.exists(MCQS_DB):
-            try:
-                with open(MCQS_DB, 'r', encoding='utf-8') as f:
-                    mcqs = json.load(f)
-            except: mcqs = []
-        else:
-            mcqs = []
-
-        idx = next((i for i, item in enumerate(mcqs) if item["id"] == q_id), -1)
-        if idx >= 0:
-            mcqs[idx] = data
-        else:
-            mcqs.append(data)
-
-        # SYNC: Update all other questions in the same set with new Tag/Description
-        for q in mcqs:
-            if q.get('set_id') == current_set and q.get('category') == current_cat:
-                q['tag'] = current_tag
-                q['description'] = current_desc
-
-        with open(MCQS_DB, 'w', encoding='utf-8') as f:
-            json.dump(mcqs, f, indent=2)
-
-        # 5. UI Updates
-        self.load_mcq_list()
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        self.lbl_mcq_status.config(text=f"✅ Saved & Synced! ({timestamp})", fg=self.BTN_SUCCESS)
-        self.clear_question_fields_only()
-        self.txt_mcq_question.focus_set()
+            # 5. UI Updates
+            self.load_mcq_list()
+            timestamp = datetime.now().strftime("%H:%M:%S")
+            self.lbl_mcq_status.config(text=f"✅ Saved to DB! ({timestamp})", fg=self.BTN_SUCCESS)
+            self.clear_question_fields_only()
+            self.txt_mcq_question.focus_set()
+            
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Could not save question: {e}")
 
     def edit_mcq(self):
         sel = self.tree_mcq.selection()
         if not sel: return
         q_id = sel[0]
 
-        with open(MCQS_DB, 'r', encoding='utf-8') as f:
-            mcqs = json.load(f)
+        # --- DB CHANGE: Read single row from SQLite ---
+        try:
+            conn = sqlite3.connect(MCQS_DB)
+            conn.row_factory = sqlite3.Row
+            found = conn.execute("SELECT * FROM questions WHERE id = ?", (q_id,)).fetchone()
+            conn.close()
             
-        found = next((q for q in mcqs if q['id'] == q_id), None)
-        if not found: return
+            if not found: return
 
-        # Populate Form
-        self.clear_question_fields_only()
-        self.mcq_var_id.set(found['id'])
-        self.mcq_var_cat.set(found.get('category', ''))
-        self.mcq_var_tag.set(found.get('tag', 'Salesforce')) 
-        self.mcq_var_desc.set(found.get('description', 'Practice questions...'))
-        self.mcq_var_set.set(found['set_id'])
-        self.mcq_var_image_url.set(found.get('image_url', ''))
-        self.txt_mcq_question.insert("1.0", found['question'])
-        self.txt_mcq_expl.insert("1.0", found.get('explanation', ''))
+            # Populate Form
+            self.clear_question_fields_only()
+            self.mcq_var_id.set(found['id'])
+            self.mcq_var_cat.set(found['category'])
+            self.mcq_var_tag.set(found['tag']) 
+            self.mcq_var_desc.set(found['description'])
+            self.mcq_var_set.set(found['set_id'])
+            self.mcq_var_image_url.set(found['image_url'])
+            self.txt_mcq_question.insert("1.0", found['question'])
+            self.txt_mcq_expl.insert("1.0", found['explanation'])
 
-        opts = found['options']
-        for i, txt in enumerate(opts):
-            if i < 5: self.mcq_opts[i].set(txt)
-        
-        # Handle correct checkboxes
-        correct_data = found.get('correct')
-        if isinstance(correct_data, str):
-            correct_data = [correct_data]
-        
-        if correct_data:
+            # Deserialize JSON strings back to lists
+            opts = json.loads(found['options'])
             for i, txt in enumerate(opts):
-                if txt in correct_data:
-                    self.mcq_var_correct_flags[i].set(True)
+                if i < 5: self.mcq_opts[i].set(txt)
             
-        self.lbl_mcq_status.config(text="Editing Question...", fg="blue")
+            correct_data = json.loads(found['correct'])
+            if correct_data:
+                for i, txt in enumerate(opts):
+                    if txt in correct_data:
+                        self.mcq_var_correct_flags[i].set(True)
+                
+            self.lbl_mcq_status.config(text="Editing Question...", fg="blue")
+            
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Could not load question: {e}")
 
     def delete_mcq(self):
         sel = self.tree_mcq.selection()
@@ -774,17 +779,18 @@ class ArticleAutomator:
 
         if not messagebox.askyesno("Confirm", "Delete this question?"): return
 
-        with open(MCQS_DB, 'r', encoding='utf-8') as f:
-            mcqs = json.load(f)
-        
-        new_mcqs = [q for q in mcqs if q['id'] != q_id]
-        
-        with open(MCQS_DB, 'w', encoding='utf-8') as f:
-            json.dump(new_mcqs, f, indent=2)
-            
-        self.load_mcq_list()
-        self.clear_question_fields_only()
-        self.lbl_mcq_status.config(text="Question Deleted.", fg="red")
+        # --- DB CHANGE: Delete from SQLite ---
+        try:
+            conn = sqlite3.connect(MCQS_DB)
+            conn.execute("DELETE FROM questions WHERE id = ?", (q_id,))
+            conn.commit()
+            conn.close()
+                
+            self.load_mcq_list()
+            self.clear_question_fields_only()
+            self.lbl_mcq_status.config(text="Question Deleted from DB.", fg="red")
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Could not delete question: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()

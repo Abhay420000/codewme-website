@@ -8,6 +8,7 @@ import os
 import time
 import uuid
 import re
+import sqlite3  # <--- ADDED: Database support
 
 # --- BACKEND LOGIC ---
 
@@ -26,9 +27,7 @@ def get_available_models():
     """
     
     # --- PRIORITY 1: SUPPORTED MODELS (Vision, PDF, Long Context) ---
-    # These are capable of handling the file uploads and generating JSON.
     supported_models = [
-        # Latest Experimental & High Performance
         "models/gemini-2.0-flash-exp",
         "models/gemini-2.0-flash",
         "models/gemini-2.0-flash-001",
@@ -38,46 +37,31 @@ def get_available_models():
         "models/gemini-2.0-flash-lite-001",
         "models/gemini-exp-1206",
         "models/deep-research-pro-preview-12-2025",
-        
-        # Gemini 2.5 Series
         "models/gemini-2.5-flash",
         "models/gemini-2.5-pro",
         "models/gemini-2.5-flash-lite",
         "models/gemini-2.5-flash-preview-09-2025",
         "models/gemini-2.5-flash-lite-preview-09-2025",
         "models/gemini-2.5-computer-use-preview-10-2025",
-        
-        # Gemini 3 Preview (Future Proofing)
         "models/gemini-3-pro-preview",
-        
-        # Latest Aliases
         "models/gemini-flash-latest",
         "models/gemini-flash-lite-latest",
         "models/gemini-pro-latest",
-        
-        # Standard Pro/Flash/Legacy
         "models/gemini-1.5-pro",
         "models/gemini-1.5-flash",
         "models/gemini-1.5-flash-8b",
-        
-        # Robotics/Specialized (Might work for logic)
         "models/gemini-robotics-er-1.5-preview",
         "models/nano-banana-pro-preview",
     ]
 
     # --- PRIORITY 2: UNSUPPORTED / WRONG MODALITY MODELS ---
-    # These are included as requested, but placed last because they will likely 
-    # fail on PDF extraction (Gemma = text only, Imagen = image gen, Embedding = vectors).
     unsupported_models = [
-        # Gemma (Text Only - Often fails file upload headers)
         "models/gemma-3-1b-it",
         "models/gemma-3-4b-it",
         "models/gemma-3-12b-it",
         "models/gemma-3-27b-it",
         "models/gemma-3n-e4b-it",
         "models/gemma-3n-e2b-it",
-        
-        # Image/Video Generation (Will not output Text/JSON)
         "models/gemini-2.0-flash-exp-image-generation",
         "models/gemini-2.5-flash-image-preview",
         "models/gemini-2.5-flash-image",
@@ -92,28 +76,20 @@ def get_available_models():
         "models/veo-3.0-fast-generate-001",
         "models/veo-3.1-generate-preview",
         "models/veo-3.1-fast-generate-preview",
-        
-        # Audio / TTS Specific (Wrong modality for PDF reading)
         "models/gemini-2.5-flash-preview-tts",
         "models/gemini-2.5-pro-preview-tts",
         "models/gemini-2.5-flash-native-audio-latest",
         "models/gemini-2.5-flash-native-audio-preview-09-2025",
-        
-        # Embeddings (Cannot generate text)
         "models/embedding-gecko-001",
         "models/embedding-001",
         "models/text-embedding-004",
         "models/gemini-embedding-exp-03-07",
         "models/gemini-embedding-exp",
         "models/gemini-embedding-001",
-        
-        # Other
         "models/aqa"
     ]
     
-    # Combine lists: Supported first, Unsupported last
     all_models = supported_models + unsupported_models
-            
     return all_models
 
 def build_model_queue(available_models):
@@ -122,10 +98,8 @@ def build_model_queue(available_models):
     """
     queue = []
     for m in available_models:
-        # Determine strict JSON mode support (Gemini usually supports it, Gemma/Imagen do not)
         is_gemini = "gemini" in m.lower() and "image" not in m.lower() and "audio" not in m.lower()
         
-        # Sleep logic: Flash is fast (2s), Pro is slow (10s), Others (2s)
         if "flash" in m or "gemma" in m:
             sleep_time = 2
         else:
@@ -153,14 +127,10 @@ def clean_json_text(text):
 def extract_chunk(file_path, model_queue, log_func):
     """
     Uploads file and cycles through models.
-    Catches '400 Modality' errors (for Gemma/Imagen) and moves to next.
     """
-    
-    # 1. Upload File (Required for Image PDFs)
     file_ref = None
     try:
         file_ref = genai.upload_file(file_path)
-        # Wait for ACTIVE
         for _ in range(30):
             check = genai.get_file(file_ref.name)
             if check.state.name == "ACTIVE": break
@@ -172,7 +142,6 @@ def extract_chunk(file_path, model_queue, log_func):
         log_func(f"Upload error: {e}")
         return []
 
-    # 2. Try Models
     for config in model_queue:
         try:
             generation_config = {}
@@ -206,16 +175,10 @@ def extract_chunk(file_path, model_queue, log_func):
             if not config["json_mode"]:
                 prompt += "\nReturn ONLY raw JSON. No markdown."
 
-            # Attempt to generate content with the FILE
-            # This will naturally fail for text-only models (Gemma) or image-gen models (Imagen)
-            # The Try/Except block will catch it and move to the next model.
             response = model.generate_content([file_ref, prompt])
-            
-            # Parse Response
             text_resp = clean_json_text(response.text) if not config["json_mode"] else response.text
             data = json.loads(text_resp)
             
-            # Success! Delete file and return
             try: genai.delete_file(file_ref.name)
             except: pass
             
@@ -224,27 +187,16 @@ def extract_chunk(file_path, model_queue, log_func):
 
         except Exception as e:
             err_msg = str(e).lower()
-            
-            # --- ERROR HANDLING ---
-            # 1. Modality Error (Gemma/Imagen vs PDF)
             if "400" in err_msg and ("modality" in err_msg or "multimodal" in err_msg):
-                 # Skip quietly (expected for unsupported models)
                  continue
-            
-            # 2. Method Not Found (Embeddings don't have generateContent)
             elif "attributeerror" in err_msg or "not found" in err_msg:
                 continue
-
-            # 3. Quota Error (Run out of free tier)
             elif "429" in err_msg or "quota" in err_msg:
                 log_func(f"⚠️ Quota hit on {config['name']}, switching...")
                 continue 
-            
-            # 4. Other Errors
             else:
                 log_func(f"⚠️ Error on {config['name']}: {e}")
                 
-    # If all models fail
     try: genai.delete_file(file_ref.name)
     except: pass
     return []
@@ -254,11 +206,11 @@ def extract_chunk(file_path, model_queue, log_func):
 class MCQExtractorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Auto PDF to MCQ Extractor (Max Quota)")
+        self.root.title("Auto PDF to MCQ Extractor (Database Edition)")
         self.root.geometry("750x800")
         
         self.pdf_path = tk.StringVar()
-        self.json_path = tk.StringVar(value="mcqs.json")
+        self.db_path = tk.StringVar(value="mcqs.db") # <--- CHANGED: Default to .db
         
         self.start_set_id = tk.IntVar(value=1)
         self.category = tk.StringVar(value="General Knowledge")
@@ -281,7 +233,7 @@ class MCQExtractorApp:
     def _build_ui(self):
         frame_top = ttk.Frame(self.root, padding=10)
         frame_top.pack(fill="x")
-        ttk.Label(frame_top, text="PDF to MCQ Automator", font=("Arial", 16, "bold")).pack(side="left")
+        ttk.Label(frame_top, text="PDF to Database Automator", font=("Arial", 16, "bold")).pack(side="left")
         self.lbl_api_status = ttk.Label(frame_top, text="Checking API Key...", foreground="gray")
         self.lbl_api_status.pack(side="right")
 
@@ -291,8 +243,9 @@ class MCQExtractorApp:
         ttk.Button(frame_files, text="Select PDF Input", command=self.browse_pdf).grid(row=0, column=0, pady=5, sticky="w")
         ttk.Entry(frame_files, textvariable=self.pdf_path, state="readonly", width=50).grid(row=0, column=1, padx=5, sticky="ew")
         
-        ttk.Button(frame_files, text="Select JSON Output", command=self.browse_json).grid(row=1, column=0, pady=5, sticky="w")
-        ttk.Entry(frame_files, textvariable=self.json_path, width=50).grid(row=1, column=1, padx=5, sticky="ew")
+        # <--- CHANGED: Label and Command for Database
+        ttk.Button(frame_files, text="Select Database Output", command=self.browse_db).grid(row=1, column=0, pady=5, sticky="w")
+        ttk.Entry(frame_files, textvariable=self.db_path, width=50).grid(row=1, column=1, padx=5, sticky="ew")
         frame_files.columnconfigure(1, weight=1)
 
         frame_meta = ttk.LabelFrame(self.root, text="Metadata Configuration", padding=10)
@@ -332,9 +285,10 @@ class MCQExtractorApp:
         f = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
         if f: self.pdf_path.set(f)
 
-    def browse_json(self):
-        f = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("JSON Files", "*.json")], initialfile="mcqs.json")
-        if f: self.json_path.set(f)
+    # <--- CHANGED: Logic for selecting .db files
+    def browse_db(self):
+        f = filedialog.asksaveasfilename(defaultextension=".db", filetypes=[("SQLite DB", "*.db")], initialfile="mcqs.db")
+        if f: self.db_path.set(f)
 
     def start_thread(self):
         if not self.pdf_path.get():
@@ -345,12 +299,36 @@ class MCQExtractorApp:
         threading.Thread(target=self.run_process, daemon=True).start()
 
     def run_process(self):
+        conn = None
         try:
             genai.configure(api_key=self.env_api_key)
             self.log("Initializing Model Registry...")
             models = get_available_models()
             model_queue = build_model_queue(models)
             self.log(f"Queued {len(model_queue)} models (Vision First, Unsupported Last).")
+
+            # <--- ADDED: Database Connection Logic
+            db_file = self.db_path.get()
+            self.log(f"Connecting to database: {db_file}")
+            conn = sqlite3.connect(db_file)
+            cursor = conn.cursor()
+            
+            # Ensure Table Exists
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS questions (
+                    id TEXT PRIMARY KEY,
+                    set_id INTEGER,
+                    category TEXT,
+                    tag TEXT,
+                    description TEXT,
+                    question TEXT,
+                    image_url TEXT,
+                    options TEXT,
+                    correct TEXT,
+                    explanation TEXT
+                )
+            ''')
+            conn.commit()
 
             self.log("Chunking PDF...")
             reader = PdfReader(self.pdf_path.get())
@@ -368,14 +346,6 @@ class MCQExtractorApp:
             
             self.progress["maximum"] = len(chunk_files)
             
-            out_file = self.json_path.get()
-            final_data = []
-            if os.path.exists(out_file):
-                try:
-                    with open(out_file, "r", encoding="utf-8") as f: final_data = json.load(f)
-                    self.log(f"Loaded {len(final_data)} previous questions.")
-                except: pass
-            
             new_q_count = 0
             
             for i, chunk_path in enumerate(chunk_files):
@@ -383,26 +353,40 @@ class MCQExtractorApp:
                 extracted_list = extract_chunk(chunk_path, model_queue, self.log)
                 
                 if extracted_list:
-                    self.log(f"  > Success! {len(extracted_list)} questions found.")
+                    self.log(f"  > Success! {len(extracted_list)} questions found. Inserting into DB...")
+                    
                     for q in extracted_list:
                         set_offset = new_q_count // 20
                         current_set_id = self.start_set_id.get() + set_offset
-                        formatted_q = {
-                            "id": str(uuid.uuid4())[:8],
-                            "set_id": current_set_id,
-                            "category": self.category.get(),
-                            "tag": self.tag.get(),
-                            "description": self.description.get(),
-                            "question": q.get("question", "Unknown"),
-                            "options": q.get("options", []),
-                            "correct": q.get("correct", []),
-                            "explanation": q.get("explanation", "")
-                        }
-                        final_data.append(formatted_q)
-                        new_q_count += 1
-                
-                with open(out_file, "w", encoding="utf-8") as f:
-                    json.dump(final_data, f, indent=2, ensure_ascii=False)
+                        
+                        # Prepare Data for SQLite
+                        q_id = str(uuid.uuid4())[:8]
+                        q_options = json.dumps(q.get("options", [])) # Serialize List
+                        q_correct = json.dumps(q.get("correct", [])) # Serialize List
+                        
+                        try:
+                            # <--- CHANGED: Insert into SQLite
+                            cursor.execute('''
+                                INSERT INTO questions 
+                                (id, set_id, category, tag, description, question, image_url, options, correct, explanation)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            ''', (
+                                q_id,
+                                current_set_id,
+                                self.category.get(),
+                                self.tag.get(),
+                                self.description.get(),
+                                q.get("question", "Unknown"),
+                                "", # image_url
+                                q_options,
+                                q_correct,
+                                q.get("explanation", "")
+                            ))
+                            new_q_count += 1
+                        except Exception as insert_err:
+                            self.log(f"  ⚠️ Insert Error: {insert_err}")
+                    
+                    conn.commit() # Commit after every chunk
                 
                 try: os.remove(chunk_path)
                 except: pass
@@ -411,13 +395,14 @@ class MCQExtractorApp:
                 self.root.update_idletasks()
 
             self.log("--------------------------------")
-            self.log(f"COMPLETE. Total: {len(final_data)} questions.")
-            messagebox.showinfo("Success", f"Extraction Complete!\nSaved to: {out_file}")
+            self.log(f"COMPLETE. Total: {new_q_count} questions added to database.")
+            messagebox.showinfo("Success", f"Extraction Complete!\nDatabase: {db_file}")
 
         except Exception as e:
             self.log(f"CRITICAL ERROR: {e}")
             messagebox.showerror("Error", str(e))
         finally:
+            if conn: conn.close() # Close DB connection
             self.start_btn.config(state="normal", text="▶ START EXTRACTION")
             self.is_running = False
 
