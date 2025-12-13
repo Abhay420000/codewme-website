@@ -4560,5 +4560,262 @@
       "Integration Procedure Action"
     ],
     "explanation": null
+  },
+  {
+    "id": "ud5i2vqa",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company has a requirement to create a 360\u00b0 view of their customers using Flexcards. At this company, customer data is stored in Salesforce but also in external legacy systems, so it's required to obtain certain information from this system. A consultant reviews the use cases needed and recommends a parent Flexcard that contains five child Flexcards inside the state of the parent Flexcard. Based on the Flexcard capabilities, how many different data sources can be configured for the Flexcards in this scenario?",
+    "image_url": "",
+    "options": [
+      "6",
+      "2",
+      "5",
+      "1"
+    ],
+    "correct": [
+      "6"
+    ],
+    "explanation": "Every individual Flexcard component has the ability to configure its own unique data source. With 1 Parent and 5 Children, there are 6 total cards, each capable of having a distinct data source."
+  },
+  {
+    "id": "4qheia8g",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A Salesforce Omnistudio Consultant is tasked with creating an Omniscript for a client's customer service prices. The consultant wants to integrate Salesforce Knowledge into the Omniscript. What is one way the consultant can configure an Omniscript to search for Salesforce Knowledge articles?",
+    "image_url": "",
+    "options": [
+      "Based on static values set up during configuration",
+      "Using a simple search bar",
+      "Using a complex search algorithm",
+      "Based on dynamic inputs from Omniscript fields"
+    ],
+    "correct": [
+      "Based on dynamic inputs from Omniscript fields"
+    ],
+    "explanation": "The Knowledge component can be configured to use merge fields (dynamic inputs) from the Omniscript data JSON to automatically filter or search for articles based on context."
+  },
+  {
+    "id": "mpn5tcmw",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Company has an existing Omniscript running in production. The business decides additional customer information is needed and wants to add more questions to the process. What is the most efficient approach that the consultant can recommend to the business to meet this requirement?",
+    "image_url": "",
+    "options": [
+      "Add a new Step element with Input elements.",
+      "Add an embedded Flexcard.",
+      "Add a Lightning web component.",
+      "Add an Input Action to a Step."
+    ],
+    "correct": [
+      "Add a new Step element with Input elements."
+    ],
+    "explanation": "The standard, low-code method to collect data in an Omniscript is to use a Step element containing Input elements."
+  },
+  {
+    "id": "d035xx2j",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A consultant is working with a client who wants to use a Flexcard to display data from a specific Salesforce object. The client is unsure which data source to use. What advice should the consultant give to the client?",
+    "image_url": "",
+    "options": [
+      "The client should choose a data source that can retrieve data from the specific Salesforce object.",
+      "The client should choose a data source based on the speed of data retrieval.",
+      "The client should choose the data source that retrieves the most data.",
+      "The client should choose a data source based on the number of records it can retrieve."
+    ],
+    "correct": [
+      "The client should choose a data source that can retrieve data from the specific Salesforce object."
+    ],
+    "explanation": "The primary criteria for data source selection is functionality: it must be able to access the required schema (Salesforce Object). Performance and volume are secondary to capability."
+  },
+  {
+    "id": "j4617tjd",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A customer needs to create an Omniscript to capture payment information. In the first step of the process, the user selects a payment type such as credit card, debit card, or direct bank account payment. Each payment type should display with a different icon. The process should check to see if the customer has any saved payment information of that type, and if there is, no further action is required. If there is no saved payment information, then the user should be allowed to enter the information, and the process should save it. Which three Omniscript elements should be used to meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Data Mapper Post Action",
+      "Select",
+      "Data Mapper Transform Action",
+      "Radio",
+      "Data Mapper Extract Action"
+    ],
+    "correct": [
+      "Data Mapper Post Action",
+      "Radio",
+      "Data Mapper Extract Action"
+    ],
+    "explanation": "Radio elements support images (icons). Data Mapper Extract is used to check for existing records. Data Mapper Post is used to save new records."
+  },
+  {
+    "id": "x9lo31bd",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business has a requirement to display an account and all of the associated contacts on a page. The number of contacts will vary for each account. For each contact, the page should display first name, last name, email, and phone number with options to edit the contact information or send a message. The primary contact for an account should be highlighted with a blue border. Which two Flexcards features could the consultant recommend to meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Datatable",
+      "Repeat Block",
+      "Collapsible Block",
+      "Flyouts"
+    ],
+    "correct": [
+      "Repeat Block",
+      "Flyouts"
+    ],
+    "explanation": "Repeat Blocks allow for flexible styling (like borders based on data) for variable lists. Flyouts allow actions like Edit/Send Message to occur without navigating away."
+  },
+  {
+    "id": "n2qhxwu9",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business is creating a new Omniscript that will allow agents to launch a guided selling process from an account detail page. The consultant reviews the initial design proposed for the Omniscript and sees that the process has the following steps: Step 1: Enter account name to retrieve account information; Step 2: Review and edit account information; Step 3: Select products; Step 4: Enter payment information. Following best practices, which suggestion should the consultant make to improve the design?",
+    "image_url": "",
+    "options": [
+      "Use Multi-select elements in Step 3 for the product list.",
+      "Divide Step 2 into two steps, so each task is distinct.",
+      "Use an Edit Block in Step 4 to enter payment information.",
+      "Remove Step 1 and prefill the account information automatically."
+    ],
+    "correct": [
+      "Remove Step 1 and prefill the account information automatically."
+    ],
+    "explanation": "Since the process launches from the Account page, the ContextId is available. Best practice is to use this ID to fetch data automatically, removing the redundant manual entry step."
+  },
+  {
+    "id": "nygvruyd",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "What is the purpose of Step elements in an Omniscript?",
+    "image_url": "",
+    "options": [
+      "Allows the user to input data",
+      "Groups elements that extract data",
+      "Enables the use of repeatable blocks",
+      "Organizes the script into one or more pages"
+    ],
+    "correct": [
+      "Organizes the script into one or more pages"
+    ],
+    "explanation": "The Step element acts as the container for a single page or screen in the Omniscript flow."
+  },
+  {
+    "id": "9v9uw23s",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business needs to create a Flexcard to display open cases for an account. The cases should display differently depending on their priority. Low or Medium priority cases should display case data and an Update Account Info action. High priority cases should include a red border, an alert notification, and an Escalate action. What is the most efficient way to meet these requirements?",
+    "image_url": "",
+    "options": [
+      "Create a Flexcard with one card state. Use conditions on the fields and actions to filter for priority.",
+      "Create two Flexcards, one for Low or Medium priority cases and another for High priority cases.",
+      "Create two Flexcards with one card state each. Use conditions on the states to filter for priority.",
+      "Create a Flexcard with two card states. Use conditions on the state to filter for priority."
+    ],
+    "correct": [
+      "Create a Flexcard with two card states. Use conditions on the state to filter for priority."
+    ],
+    "explanation": "Using multiple Card States allows for completely different layouts (styles, actions, alerts) within a single component, controlled by data conditions."
+  },
+  {
+    "id": "sb8wshqe",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A Salesforce Omnistudio Consultant is validating an Omniscript they have developed for a client. The client has specific business requirements that the script must meet. What is the best way for the consultant to ensure that the Omniscript meets the client's business requirements?",
+    "image_url": "",
+    "options": [
+      "Implement the Omniscript without comparing it with the client's business requirements.",
+      "Assume that the Omniscript meets the client's business requirements without conducting a review.",
+      "Conduct a thorough review of the Omniscript, comparing each step with the client's business requirements.",
+      "Ask the client to review the Omniscript with their internal team."
+    ],
+    "correct": [
+      "Conduct a thorough review of the Omniscript, comparing each step with the client's business requirements."
+    ],
+    "explanation": "Consultants must verify their own work against the requirements (traceability) before handing it over for client UAT."
+  },
+  {
+    "id": "ao5c4dgt",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A company has an existing Omniscript that gathers customer information. User feedback suggests that the current process requires too much typing because all the data is entered into input text fields. The users also are concerned because there is no validation in the data that is entered, and users can sometimes enter data that contains errors. The required inputs are first name, last name, age, and email. Users are also presented a brief questionnaire regarding customer satisfaction. Which three input elements can the consultant recommend to improve usability and to provide validation?",
+    "image_url": "",
+    "options": [
+      "Headline",
+      "Text Area",
+      "Number",
+      "Radio Group",
+      "Email"
+    ],
+    "correct": [
+      "Number",
+      "Radio Group",
+      "Email"
+    ],
+    "explanation": "Number validates age. Radio Group simplifies the questionnaire (less typing). Email validates the address format."
+  },
+  {
+    "id": "drcjq8p7",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "Creating a Flexcard for agents to respond to account inquiries. The company has decided based on user analysis that High Frequency and High Importance tasks should be on the card. Based on a user analysis exhibit (not shown but implying Payment, Statements, and Credit Score are priority), which three actions should appear on the card?",
+    "image_url": "",
+    "options": [
+      "Make a payment",
+      "Change payment method",
+      "View statements",
+      "View credit score history"
+    ],
+    "correct": [
+      "Make a payment",
+      "View statements",
+      "View credit score history"
+    ],
+    "explanation": "High priority/frequency tasks (Payment, Statements, Credit Score) belong on the card. Low frequency tasks (Change payment method) belong in a menu."
+  },
+  {
+    "id": "3vvdeovp",
+    "set_id": 4,
+    "category": "Salesforce",
+    "tag": "Salesforce Omnistudio Consultant",
+    "description": "New Dec 2025 Salesforce Certified Omnistudio Consultant Practice questions.",
+    "question": "A business requires a solution to generate an event record that is sent to the customer and is stored in Salesforce. Using an Integration Procedure, which two actions are necessary?",
+    "image_url": "",
+    "options": [
+      "Response",
+      "Data Mapper Post",
+      "Data Mapper Extract",
+      "HTTP"
+    ],
+    "correct": [
+      "Data Mapper Post",
+      "Data Mapper Extract"
+    ],
+    "explanation": "Data Mapper Extract is needed to get the data to populate the event. Data Mapper Post is needed to save the event record in Salesforce."
   }
 ]
