@@ -202,6 +202,11 @@ def confirm_payment():
     return jsonify({'success': True})
 """
 
+@app.route('/ads.txt')
+def ads_txt():
+    # Serves the ads.txt file from the root directory
+    return send_from_directory(app.root_path, 'ads.txt')
+
 @app.route('/sitemap.xml')
 def sitemap():
     host = "https://codewme.dev"
