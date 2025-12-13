@@ -98,13 +98,13 @@ def get_mcq_set_data(category, set_num):
     ''', (set_num + 1, clean_cat)).fetchone()
     has_next = next_check is not None
 
-    # 3. Sidebar Data (Other sets in this category)
-    # Sidebar usually keeps 1-10 order so users can navigate logically
+    # 3. Sidebar Data (Latest 5 sets in this category)
     sb_rows = conn.execute('''
         SELECT DISTINCT set_id 
         FROM questions 
         WHERE category = ? COLLATE NOCASE 
-        ORDER BY set_id ASC
+        ORDER BY set_id DESC
+        LIMIT 5
     ''', (clean_cat,)).fetchall()
     
     sidebar_sets = [

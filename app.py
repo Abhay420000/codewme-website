@@ -37,13 +37,22 @@ def home():
     articles = utils.get_all_articles()
     return render_template('home.html', articles=articles)
 
+# ==========================================
+# CONTEST PAGE ROUTE (TOGGLE BELOW)
+# ==========================================
+
+# --- OPTION 1: TEMPORARY COMING SOON PAGE (ACTIVE) ---
 @app.route('/contest')
 def page_contest():
-    # Fetch contests using Utils (JSON)
-    live, expired = utils.get_contests_data()
-    return render_template('contest.html', live_contests=live, expired_contests=expired)
+   return render_template('contest_coming_soon.html')
 
-# --- NEW: PAGINATED PRACTICE PAGE ---
+# --- OPTION 2: REAL CONTEST PAGE (COMMENTED OUT) ---
+# @app.route('/contest')
+# def page_contest():
+#     # Fetch contests using Utils (JSON)
+#     live, expired = utils.get_contests_data()
+#     return render_template('contest.html', live_contests=live, expired_contests=expired)
+
 @app.route('/practice-mcqs')
 def page_practice_mcqs():
     # Only fetch the first 6 sets (Page 1)
@@ -126,14 +135,10 @@ def page_privacy():
 def page_terms():
     return render_template('legal/terms.html')
 
-@app.route('/ads.txt')
-def ads_txt():
-    return send_from_directory('static', 'ads.txt')
-
 # ==========================================
 # 3. REGISTRATION API (OTPs)
 # ==========================================
-
+"""
 @app.route('/register/<contest_id>')
 def registration_page(contest_id):
     live, _ = utils.get_contests_data()
@@ -195,6 +200,6 @@ def confirm_payment():
     session.pop('is_verified', None)
     
     return jsonify({'success': True})
-
+"""
 if __name__ == '__main__':
     app.run(debug=False)

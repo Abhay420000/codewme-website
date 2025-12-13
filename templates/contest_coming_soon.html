@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Coming Soon - CodeWme{% endblock %}
+
+{% block content %}
+<div class="coming-soon-container">
+    <div class="content-wrapper">
+        <div class="icon">🚀</div>
+        <h1>Contest Coming Soon</h1>
+        <p class="subtitle">Get ready to code! The next challenge begins in:</p>
+        
+        <div id="countdown-timer" class="timer">
+            <div><span id="days">00</span><small>Days</small></div>
+            <span class="colon">:</span>
+            <div><span id="hours">00</span><small>Hours</small></div>
+            <span class="colon">:</span>
+            <div><span id="minutes">00</span><small>Minutes</small></div>
+            <span class="colon">:</span>
+            <div><span id="seconds">00</span><small>Seconds</small></div>
+        </div>
+
+        <p class="target-date">Mark your calendar: January 1, 2026</p>
+        <a href="/" class="btn-home">Back to Home</a>
+    </div>
+</div>
+
+<style>
+    .coming-soon-container {
+        min-height: 70vh; /* Occupy most of the screen */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+    }
+    .content-wrapper {
+        max-width: 600px;
+    }
+    .icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: float 3s ease-in-out infinite;
+    }
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-header);
+    }
+    .subtitle {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+    }
+    .timer {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem;
+        font-family: monospace;
+        font-weight: bold;
+        color: var(--primary);
+        margin-bottom: 2rem;
+    }
+    .timer div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .timer span {
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+    .timer small {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: normal;
+        margin-top: 0.2rem;
+    }
+    .timer .colon {
+        font-size: 2rem;
+        margin-top: 0.2rem;
+        color: var(--text-muted);
+    }
+    .target-date {
+        margin-bottom: 2rem;
+        font-weight: 500;
+    }
+    .btn-home {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background-color: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+    .btn-home:hover {
+        opacity: 0.9;
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    @media (max-width: 600px) {
+        h1 { font-size: 2rem; }
+        .timer span { font-size: 1.5rem; }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set the date we're counting down to
+        const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime();
+
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown-timer").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    });
+</script>
+{% endblock %}

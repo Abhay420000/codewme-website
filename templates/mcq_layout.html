@@ -131,15 +131,13 @@
             <h3 class="sidebar-title">Browse Sets</h3>
             <ul class="sidebar-list">
                 <li><a href="/practice-mcqs">← Back to All Sets</a></li>
-                <!-- Ideally dynamic, but keeping structure as is -->
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-1">Set 1</a></li>
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-2">Set 2</a></li>
-                <li><a href="/mcqs/{{ category | replace(' ', '-') | lower }}/set-3">Set 3</a></li>
+                {% for s in sidebar_sets %}
+                <li><a href="/mcqs/{{ s.url_slug }}/set-{{ s.set_num }}">Set {{ s.set_num }}</a></li>
+                {% endfor %}
             </ul>
         </div>
         
-        <div class="ad-slot ad-sidebar" style="margin-top: 2rem;">MCQ Sidebar Ad</div>
-    </aside>
+        </aside>
 
 </div>
 
@@ -242,7 +240,6 @@
     }
 </script>
 
-<!-- GOOGLE SCHEMA MARKUP (Safe for Null Values) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
