@@ -153,3 +153,26 @@ def get_contests_data():
     expired.sort(key=lambda x: x['end_date'], reverse=True)
     
     return live, expired
+
+# In utils.py
+
+def get_all_sitemap_urls():
+    """Returns a list of all dynamic URLs for the sitemap."""
+    urls = []
+    
+    # 1. Get Article Slugs
+    articles = get_all_articles()
+    for article in articles:
+        urls.append(f"/{article['slug']}")
+        
+    # 2. Get All MCQ Sets (Categories + Set Numbers)
+    conn = get_db_connection()
+    if conn:
+        rows = conn.execute('SELECT DISTINCT category, set_id FROM questions').fetchall()
+        conn.close()
+        for r in rows:
+            # Create the URL structure: /mcqs/category-slug/set-N
+            cat_slug = r['category'].replace(' ', '-').lower()
+            urls.append(f"/mcqs/{cat_slug}/set-{r['set_id']}")
+            
+    return urls

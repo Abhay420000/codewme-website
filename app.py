@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, send_from_directory, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, abort, send_from_directory, request, jsonify, session, redirect, url_for, make_response
 from flask_mail import Mail, Message
 import os
 import random
@@ -201,5 +201,44 @@ def confirm_payment():
     
     return jsonify({'success': True})
 """
+
+@app.route('/sitemap.xml')
+def sitemap():
+    host = "https://www.codewme.dev"  # REPLACE with your actual domain name
+    
+    # 1. Static pages
+    static_urls = [
+        "/",
+        "/practice-mcqs",
+        "/contest",
+        "/online-compiler",
+        "/about",
+        "/contact",
+        "/privacy-policy",
+        "/terms-of-service"
+    ]
+    
+    # 2. Dynamic pages from Utils
+    dynamic_urls = utils.get_all_sitemap_urls()
+    
+    all_urls = static_urls + dynamic_urls
+    
+    # 3. Generate XML
+    xml_sitemap = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml_sitemap.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    
+    for url in all_urls:
+        xml_sitemap.append('<url>')
+        xml_sitemap.append(f'<loc>{host}{url}</loc>')
+        xml_sitemap.append('<changefreq>weekly</changefreq>')
+        xml_sitemap.append('<priority>0.8</priority>')
+        xml_sitemap.append('</url>')
+        
+    xml_sitemap.append('</urlset>')
+    
+    response = make_response('\n'.join(xml_sitemap))
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
 if __name__ == '__main__':
     app.run(debug=False)
